@@ -1,11 +1,11 @@
 created: 20260412133426730
-modified: 20260412133833874
+modified: 20260416193221775
 title: $:/languages/en-GB/Home
 type: text/vnd.tiddlywiki
 
 !! Welcome:
 
-<<twks-image "Bebop-20251009-3840x2160.png" width:"300px" align:"right">>
+<<twks-image "InspiratiosFlowLikeTheWind" width:"250px" align:"right">>
 
 Welcome to my `tiddlywiki` plugin workshop. This site is used to package and publish a collection of small TiddlyWiki plugins that I’ve developed myself, most of which originate from my [[wikispace|https://uzvg.site]].
 

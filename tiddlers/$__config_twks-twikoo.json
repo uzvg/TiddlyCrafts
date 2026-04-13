@@ -1,0 +1,6 @@
+{
+    "envId": "https://twikoo-vercel-red-kappa.vercel.app",
+    "lang": "en-gb",
+    "region": "",
+    "user-filter": "[all[current]!is[missing]!is[system]!is[image]has[text]] [all[current]prefix[$:/plugins/uzvg/]author[uzvg]]"
+}

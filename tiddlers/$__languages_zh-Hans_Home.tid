@@ -1,11 +1,11 @@
 created: 20260412131804672
-modified: 20260412133525962
+modified: 20260416193232136
 title: $:/languages/zh-Hans/Home
 type: text/vnd.tiddlywiki
 
 !! 欢迎：
 
-<<twks-image "Bebop-20251009-3840x2160.png" width:"300px" align:"right">>
+<<twks-image "InspiratiosFlowLikeTheWind" width:"250px" align:"right">>
 
 欢迎大家来到我的 `tiddlywiki` 插件工坊，该网站用于打包并发布一些我自己写的tiddlywiki小插件，它们大多来自我的[[wikispace|https://uzvg.site]]站点。
 

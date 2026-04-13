@@ -1,0 +1,38 @@
+caption: Credit
+created: 20260416191348776
+modified: 20260416192809989
+order: 3
+parent: Home
+tags: 
+title: credits
+type: text/vnd.tiddlywiki
+
+!! Thanks [[ひだかま|https://bsky.app/profile/deccazilla.bsky.social]] for extra palettes:
+
+<table class="tc-max-width">
+<thead style="font-family:serif;font-weight:bold;">
+	<td>Name</td>
+	<td>Description</td>
+	<td>Color Scheme</td>
+</thead>
+
+<$list filter="[all[tiddlers]tag[$:/tags/Palette]has[list]!is[draft]]">
+	<$let
+		name={{{ [<currentTiddler>get[name]] }}}
+		description={{{ [<currentTiddler>get[description]] }}}
+		colorscheme={{{ [<currentTiddler>get[color-scheme]] }}}>
+		<tr>
+			<td>
+				<$link to=<<currentTiddler>>>
+					<strong><<name>></strong>
+				</$link>
+			</td>
+			<td><<description>></td>
+			<td><<colorscheme>></td>
+		</tr>
+	</$let>
+</$list>
+</table>
+
+* [[Palettes Site|https://yatagarasu.tiddlyhost.com/]]
+* [[All Palettes|https://agedofu.notion.site/16050bd06704806a8026c0adb50f8eca]]

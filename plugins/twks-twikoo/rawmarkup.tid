@@ -1,5 +1,6 @@
 title: $:/plugins/uzvg/twks-twikoo/rawmarkup
 tags: $:/tags/RawMarkup
+code-body: yes
 
 <script>
 window.twikooLoader = (function(d, s, id) {

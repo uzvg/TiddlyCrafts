@@ -1,105 +1,90 @@
 /*\
-title: $:/plugins/uzvg/twks-twikoo/widget.js
+title: $:/plugins/uzvg/twks-twikoo/twikoo.js
 type: application/javascript
 module-type: widget
 
-Twikoo widget
-
+Twikoo comment system widget for TiddlyWiki
 \*/
 
-"use strict";
+(function () {
+  /*jslint node: true, browser: true */
+  /*global $tw: false */
+  "use strict";
 
-var Widget = require("$:/core/modules/widgets/widget.js").widget;
+  var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var TwikooWidget = function (parseTreeNode, options) {
-  this.initialise(parseTreeNode, options);
-};
+  var TwikooWidget = function (parseTreeNode, options) {
+    this.initialise(parseTreeNode, options);
+  };
 
-TwikooWidget.prototype = new Widget();
+  TwikooWidget.prototype = new Widget();
 
-/*
-支持的属性（注意：不包含 el）
-*/
-var attributes = ["envId", "region", "path", "lang"];
+  TwikooWidget.prototype.render = function (parent, nextSibling) {
+    this.parentDomNode = parent;
+    this.computeAttributes();
+    this.execute();
 
-/*
-Render
-*/
-TwikooWidget.prototype.render = function (parent, nextSibling) {
-  var self = this;
+    // Create the comment container
+    var commentId = this.getAttribute("commentId");
+    var containerElement = document.createElement("div");
+    containerElement.id = commentId;
 
-  this.parentDomNode = parent;
-  this.computeAttributes();
+    // Insert the element into the DOM
+    parent.insertBefore(containerElement, nextSibling);
+    this.domNodes.push(containerElement);
 
-  // ✅ 唯一容器（也是挂载点）
-  var container = this.document.createElement("div");
-  container.className = "twks-twikoo";
+    // Get twikoo widget parameters
+    var envId = this.getAttribute("envId", "");
+    var region = this.getAttribute("region", "ap-shanghai");
+    var path = this.getAttribute("path", this.currentTiddler);
+    var lang = this.getAttribute("lang", "zh-CN");
 
-  parent.insertBefore(container, nextSibling);
-  this.domNodes.push(container);
+    if (window.twikooLoader) {
+      window.twikooLoader.ready(function (twikoo) {
+        // 防止重复初始化
+        if (containerElement._twikooLoaded) return;
+        containerElement._twikooLoaded = true;
 
-  // SSR 直接退出
-  if (this.document.isTiddlyWikiFakeDom) {
-    return;
-  }
-
-  // 收集参数
-  var options = {};
-  attributes.forEach(function (attr) {
-    var value = self.getAttribute(attr);
-    if (value) {
-      options[attr] = value;
+        try {
+          twikoo.init({
+            // Use the element directly to avoid invalid CSS selectors
+            el: containerElement,
+            envId: envId,
+            region: region,
+            path: path,
+            lang: lang,
+          });
+          console.log("twikoo inited")
+        } catch (e) {
+          console.error("Twikoo init error:", e);
+        }
+      });
+    } else {
+      containerElement.appendChild(
+        document.createTextNode("Twikoo loader not found"),
+      );
     }
-  });
+  };
 
-  // ✅ 强制使用 container 作为挂载点
-  options.el = container;
+  TwikooWidget.prototype.execute = function () {
+    this.currentTiddler = this.getVariable("currentTiddler");
+  };
 
-  // ❗默认 path（非常建议）
-  if (!options.path) {
-    options.path = this.getVariable("currentTiddler");
-  }
+  TwikooWidget.prototype.refresh = function (changedTiddlers) {
+    var changedAttributes = this.computeAttributes();
 
-  // 使用 loader
-  if (window.twikooLoader) {
-    console.log("TwikooWidget render");
-    window.twikooLoader.ready(function (twikoo) {
-      // 防重复初始化
-      if (container._twikooLoaded) return;
-      container._twikooLoaded = true;
-      console.log("Twikoo ready");
+    // 任意属性变化 → 重渲染
+    var attributes = ["commentId", "envId", "region", "path", "lang"];
+    if (
+      attributes.find(function (attr) {
+        return $tw.utils.hop(changedAttributes, attr);
+      })
+    ) {
+      this.refreshSelf();
+      return true;
+    }
 
-      console.log("container:", container);
-      console.log("isInDOM:", document.body.contains(container));
-      try {
-        twikoo.init(options);
-      } catch (e) {
-        console.error("Twikoo init error:", e);
-      }
-    });
-  } else {
-    container.appendChild(
-      this.document.createTextNode("Twikoo loader not found"),
-    );
-  }
-};
-
-/*
-refresh
-*/
-TwikooWidget.prototype.refresh = function (changedTiddlers) {
-  var changedAttributes = this.computeAttributes();
-
-  if (
-    attributes.find(function (attr) {
-      return $tw.utils.hop(changedAttributes, attr);
-    })
-  ) {
-    this.refreshSelf();
-    return true;
-  }
-
-  return false;
-};
-
-exports.twikoo = TwikooWidget;
+    return false;
+  };
+  exports.twikoo = TwikooWidget;
+})();

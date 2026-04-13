@@ -1,0 +1,108 @@
+primary: #668A90
+alert-background: <<colour notification-background>>
+alert-border: <<colour notification-border>>
+alert-highlight: #fd4845
+alert-muted-foreground: #737372
+background: #373735
+blockquote-bar: <<colour pre-background>>
+button-foreground: <<colour muted-foreground>>
+code-background: rgb(237 237 236 / .1)
+code-border: <<colour code-background>>
+code-foreground: <<colour foreground>>
+dirty-indicator: #fd4845
+download-background: #9F663C
+download-foreground: <<colour foreground>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: #323230
+dropdown-tab-background-selected: <<colour dropdown-background>>
+dropdown-tab-background: <<colour tab-background>>
+dropzone-background: #9F663C
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: #fbf76f
+external-link-foreground-visited: #fcdb47
+external-link-foreground: #add16a
+foreground: #fff5ce
+highlight-background: #e85d41
+highlight-foreground: <<colour foreground>>
+message-background: <<colour tiddler-background>>
+message-border: <<colour table-border>>
+message-foreground: <<colour foreground>>
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour tiddler-background>>
+modal-border: <<colour modal-background>>
+modal-footer-background: <<colour table-header-background>>
+modal-footer-border: <<colour modal-header-border>>
+modal-header-border: <<colour table-border>>
+muted-foreground: #c9c4b8
+network-activity-foreground: #00a0b3
+notification-background: <<colour background>>
+notification-border: #323230
+page-background: #373735
+pre-background: <<colour table-header-background>>
+pre-border: <<colour pre-background>>
+selection-background: 
+selection-foreground: 
+select-tag-background: 
+select-tag-foreground: <<colour button-foreground>>
+sidebar-button-foreground: <<colour button-foreground>>
+sidebar-controls-foreground-hover: <<colour tiddler-controls-foreground-hover>>
+sidebar-controls-foreground: <<colour tiddler-controls-foreground>>
+sidebar-foreground-shadow: transparent
+sidebar-foreground: #edeaec
+sidebar-muted-foreground-hover: #EDEEEE
+sidebar-muted-foreground: #cccfce
+sidebar-tab-background-selected: #F4AC3B
+sidebar-tab-background: <<colour primary>>
+sidebar-tab-border-selected: <<colour sidebar-tab-background-selected>>
+sidebar-tab-border: <<colour sidebar-tab-background>>
+sidebar-tab-divider: <<colour sidebar-tab-border>>
+sidebar-tab-foreground-selected: <<colour background>>
+sidebar-tab-foreground: <<colour foreground>>
+sidebar-tiddler-link-foreground-hover: #9CB3B7
+sidebar-tiddler-link-foreground: <<colour primary>>
+site-title-foreground: #F4AC3B
+static-alert-foreground: <<colour muted-foreground>>
+tab-background-selected: <<colour tiddler-background>>
+tab-background: <<colour table-header-background>>
+tab-border-selected: <<colour tab-border>>
+tab-border: <<colour table-border>>
+tab-divider: <<colour table-footer-background>>
+tab-foreground-selected: <<colour foreground>>
+tab-foreground: <<colour foreground>>
+table-border: #80807D
+table-footer-background: #6D6E6A
+table-header-background: #5B5C58
+tag-background: #9F663C
+tag-foreground: <<colour foreground>>
+tiddler-background: #494A45
+tiddler-border: <<colour tiddler-background>>
+tiddler-controls-foreground-hover: #9F663C
+tiddler-controls-foreground-selected: #272725
+tiddler-controls-foreground: #C19C80
+tiddler-editor-background: <<colour background>>
+tiddler-editor-border-image: #FFFFFF
+tiddler-editor-border: <<colour table-header-background>>
+tiddler-editor-fields-even: <<colour table-header-background>>
+tiddler-editor-fields-odd: 
+tiddler-info-background: <<colour background>>
+tiddler-info-border: #323230
+tiddler-info-tab-background: <<colour tab-background-selected>>
+tiddler-link-background: transparent
+tiddler-link-foreground: #F4AC3B
+tiddler-subtitle-foreground: #A4A5A2
+tiddler-title-foreground: #668A90
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+toolbar-info-button: 
+toolbar-edit-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-cancel-button: 
+toolbar-done-button: 
+untagged-background: #898986
+very-muted-foreground: #010001

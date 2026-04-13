@@ -1,0 +1,65 @@
+tags: $:/tags/Stylesheet
+title: $:/uzvg/Stylesheets/System.css
+type: text/vnd.tiddlywiki
+
+\procedure serif-font() serif, "宋体", "Noto Serif CJK SC"
+
+<!-- The current file mainly contains changes to the system style -->
+
+<!-- Disable font ligature feature globally -->
+<!--
+body {
+  font-feature-settings: "liga" 0, "clig" 0;
+}
+
+-->
+
+<!-- Gradient heading within tiddler body -->
+.tc-tiddler-frame :is(h1, h2, h3):not(.tc-title) {
+  font-weight: bold;
+  font-family: <<serif-font>>;
+  background-image: linear-gradient(
+    to right,
+    <<color muted-foreground>>,
+    transparent);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  padding-bottom: 0.2em;
+}
+
+<!-- Don't apply gradient heading for plugin info page -->
+.tc-plugin-info :is(h1, h2, h3) {
+  background: none;
+  font-family: inherit;
+}
+
+<!-- Make titlebar buttons autohide -->
+.tc-tiddler-controls button {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.tc-tiddler-frame:hover .tc-tiddler-controls button,
+.tc-tiddler-frame:focus-within .tc-tiddler-controls button {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+<!-- Use Serif font for blockquote -->
+.tc-tiddler-body blockquote {
+  font-family: <<serif-font>>;
+  line-height: 1.6;
+}
+
+<!-- Use bold Serif for tiddler title -->
+.tc-tiddler-title .tc-title {
+  font-family: <<serif-font>>;
+  font-weight: 600;
+}
+
+<!-- Reduce spacing between heading and tabs widget -->
+.tc-tiddler-body h2 + .tc-tab-set {
+  margin-top: 0em;
+}

@@ -1,0 +1,59 @@
+caption: Plugins
+created: 20260412113329503
+creator: uzvg
+modified: 20260412114913903
+modifier: uzvg
+order: 1
+parent: Home
+title: plugins list
+type: text/vnd.tiddlywiki
+
+<table class="tc-max-width tiddlycrafts-table">
+<thead>
+<tr>
+	<td>No</td>
+	<td>Plugins</td>
+	<td>Description</td>
+	<td>Version</td>
+	<td>Source</td>
+</tr>
+</thead>
+	<$list filter="[prefix[$:/plugins/uzvg/]]" counter="counter">
+		<$let
+			name={{{ [<currentTiddler>get[name]] }}}
+			version={{{ [<currentTiddler>get[version]] }}}
+			desc={{{ [<currentTiddler>get[description]] }}}
+			source={{{ [<currentTiddler>get[source]] }}}>
+			<tr>
+				<td> <strong> <<counter>> </strong></td>
+				<td>
+					<$link to=<<currentTiddler>>> <<name>> </$link>
+				</td>
+				<td> <<desc>> </td>
+				<td> <<version>> </td>
+				<td>
+					<a href=<<source>>>GitHub</a>
+				</td>
+			</tr>
+		</$let>
+	</$list>
+</table>
+
+<style>
+	.tiddlycrafts-table > thead td {
+		text-align: center;
+		font-weight: bold;
+		font-family: serif;
+	}
+
+	.tiddlycrafts-table td:first-child {
+		text-align: center;
+	}
+	.tiddlycrafts-table td:nth-child(2) {
+		text-wrap-mode: nowrap
+	}
+
+	.tiddlycrafts-table > tr > td:nth-child(3) {
+		width: -webkit-fill-available;
+	}
+</style>

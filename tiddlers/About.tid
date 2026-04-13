@@ -1,0 +1,17 @@
+caption: About
+creator: uzvg
+modifier: uzvg
+order: 3
+parent: Home
+tags: 
+title: About
+type: text/vnd.tiddlywiki
+
+!! Credit:
+
+* ''TiddlyCrafts'' is developed and built using [[Modern.TiddlyDev|https://github.com/tiddly-gittly/Modern.TiddlyDev]], a modern development environment for TiddlyWiki plugins. Special thanks to the developers.
+
+!! Links:
+
+* [[Github Repo|https://github.com/uzvg/TiddlyCrafts]]
+* [[Source Site|https://uzvg.site]]

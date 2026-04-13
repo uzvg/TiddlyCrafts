@@ -1,0 +1,13 @@
+created: 20260412141400762
+modified: 20260412141400762
+title: Home
+type: text/vnd.tiddlywiki
+
+\function lingo-base()
+	[[$:/language]get[text]]
+	+[match[$:/languages/zh-Hans]]
+	~[[$:/languages/en-GB]]
+	+[addsuffix[/]]
+\end
+
+<<lingo "Home">>

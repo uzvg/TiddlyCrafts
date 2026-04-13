@@ -1,0 +1,33 @@
+created: 20260412133426730
+modified: 20260412133833874
+title: $:/languages/en-GB/Home
+type: text/vnd.tiddlywiki
+
+!! Welcome:
+
+<<twks-image "Bebop-20251009-3840x2160.png" width:"300px" align:"right">>
+
+Welcome to my `tiddlywiki` plugin workshop. This site is used to package and publish a collection of small TiddlyWiki plugins that I’ve developed myself, most of which originate from my [[wikispace|https://uzvg.site]].
+
+TiddlyWiki is a highly flexible and open-source note-taking system with an extraordinary degree of freedom. What it offers is not just a tool for writing text, but rather a box of Lego bricks waiting to be assembled. From basic text editing to complex knowledge graph construction, from simple to-do lists to fully-featured personal knowledge management systems, TiddlyWiki can satisfy nearly all of my creative expectations.
+
+For me, customizing my own workflow with TiddlyWiki is a creative journey full of enjoyment. Every adjustment of the interface layout, every custom macro I write, and every unique tagging system I design represents a deep integration between my way of thinking and the tool itself. From organizing notes, to generating published HTML pages using custom build scripts, to automated scheduled publishing—this sense of control, of truly making the tool work for me, is something that closed-ecosystem note-taking apps can hardly match.
+
+I hope more people will join this vibrant community—showcasing their carefully crafted workflows, sharing challenges encountered during use, and exchanging solutions. Let’s explore the endless possibilities of TiddlyWiki together, and discover more of the joy and value of knowledge management through collaboration and sharing.
+
+!! Design Principles:
+
+''TiddlyCrafts'' plugins follow these core principles:
+
+; Native-first architecture:
+* Unless absolutely necessary to introduce third-party JavaScript libraries, the vast majority of TiddlyCrafts plugins are built using TiddlyWiki’s native components. This not only ensures visual consistency with the native UI, but also enables deep compatibility with theme switching—most plugins automatically adapt their styles according to the current TiddlyWiki theme, maintaining a cohesive visual experience.
+
+; Sustainable maintenance commitment:
+* TiddlyCrafts plugins originated from the practical needs of my personal site [[wikispace|https://uzvg.site]] and were later organized and published. Since TiddlyWiki is my primary tool for daily creation, these plugins will continue to receive long-term maintenance and updates for the foreseeable future.
+
+; Low barrier to customization and onboarding:
+* Thanks to the simplicity of native `Wikitext` syntax, users can easily read and modify plugin source code once they grasp the basics, allowing for flexible, personalized customization. At the same time, these real-world, battle-tested Wikitext examples serve as intuitive learning materials for newcomers, helping them quickly understand practical use cases of filters and syntax features.
+
+<<tabs
+tabsList:"[parent[Home]!is[draft]sort[order]]"
+default:"plugins list">>

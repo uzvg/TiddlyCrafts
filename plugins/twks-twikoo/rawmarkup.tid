@@ -1,0 +1,55 @@
+title: $:/plugins/uzvg/twks-twikoo/rawmarkup
+tags: $:/tags/RawMarkup
+
+<script>
+window.twikooLoader = (function(d, s, id) {
+  var js, firstScript = d.getElementsByTagName(s)[0];
+  var loader = window.twikooLoader || {};
+
+  // ✅ 已存在 script
+  if (d.getElementById(id)) {
+    // 👉 如果已经加载完成，标记状态
+    if (window.twikoo) {
+      loader._loaded = true;
+    }
+    return loader;
+  }
+
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://registry.npmmirror.com/twikoo/1.7.7/files/dist/twikoo.min.js";
+  js.integrity = "sha384-CXhXF3hh7LQyBPKnwgq/KgbcvoQcedpFyE4YuV8GLc+pKO1vCqQpuyNQ60/UblNE";
+  js.crossOrigin = "anonymous";
+
+  loader._queue = [];
+  loader._loaded = false;
+
+  // ✅ 修复点：ready 支持“立即执行”
+  loader.ready = function(fn) {
+    if (loader._loaded && window.twikoo) {
+      fn(window.twikoo);
+    } else {
+      loader._queue.push(fn);
+    }
+  };
+
+  js.onload = function() {
+    loader._loaded = true;
+
+    loader._queue.forEach(function(fn) {
+      try {
+        fn(window.twikoo);
+      } catch (e) {
+        console.error(e);
+      }
+    });
+
+    loader._queue = [];
+  };
+
+  firstScript.parentNode.insertBefore(js, firstScript);
+
+  return loader;
+
+}(document, "script", "twikoo-js"));
+</script>

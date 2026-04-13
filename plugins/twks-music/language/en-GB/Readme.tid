@@ -1,0 +1,95 @@
+title: $:/languages/en-GB/plugins/uzvg/twks-music/readme
+
+!! 1. Introduce:
+
+''`twks-music`'' is a TiddlyWiki widget that allows you to easily embed external music players from:
+
+* Spotify
+* NetEase Cloud Music
+
+It provides a unified syntax to insert playable music cards into your TiddlyWiki, with support for:
+
+* Automatic theme adaptation (light/dark for Spotify)
+* Configurable width
+* Optional autoplay (NetEase only)
+
+!! 2. Syntax:
+
+```
+<<twks-music provider:"<provider>" sid:"<id>" autoplay:"<0|1>" width:"<size>" theme:"<light|dark>">>
+```
+
+!! 3. Parameters:
+
+| !Parameter  | !Required | !Default     | !Description |
+|`provider` |✅ Yes    |`"spotify"` |Music platform. Supported values: `spotify`, `netease`                                   |
+|`sid`      |✅ Yes    |—           |Track ID from the platform                                                               |
+|`auto` |❌ No     |`"1"`       |Autoplay setting (only effective for NetEase). `1` = autoplay, `0` = disabled            |
+|`width`    |❌ No     |`"80%"`     |Width of the embedded player (e.g. `300px`, `100%`)                                      |
+|`theme`    |❌ No     |Auto        |Theme for Spotify player: `light` or `dark`. If not set, follows TiddlyWiki system theme |
+
+!! 4. Usage Examples:
+
+!!! 🎧 Spotify Example
+
+```tid
+# The spotify player will auto follow tiddlywiki's palette
+<<twks-music provider:"spotify" sid:"6norVbAE14clVMEyDuRw1m">>
+```
+
+With custom width and dark theme:
+
+```tid
+<<twks-music provider:"spotify" sid:"6norVbAE14clVMEyDuRw1m" width:"100%" theme:"dark">>
+<<twks-music provider:"spotify" sid:"6norVbAE14clVMEyDuRw1m" width:"80%" theme:"light">>
+```
+
+!!! 🎶 NetEase Music Example
+
+```tid
+<<twks-music provider:"netease" sid:"448274120">>
+```
+
+Disable autoplay:
+
+```tid
+<<twks-music provider:"netease" sid:"448274120" autoplay:"0">>
+```
+
+!! 5. Notes & Caveats:
+
+!!! Platform Differences
+
+; ''Spotify'':
+* Supports theme switching (`light` / `dark`)
+* Does ''NOT'' support autoplay (restricted by browser policies)
+
+; ''NetEase'':
+* Supports autoplay via `auto` parameter
+* No theme customization
+
+!!! Theme Behavior (Spotify)
+
+* If `theme` is not specified:
+** The plugin automatically detects the current TiddlyWiki color scheme (`$:/palette`)
+** Light mode → Spotify light theme
+** Dark mode → Spotify dark theme
+
+!!! Invalid Input Handling
+
+* If `provider` is not `spotify` or `netease`, the widget will render:
+
+```
+⚠️ Invalid Source
+```
+
+!!! ID Format
+
+* `sid` must be the ''track ID'', not the full URL
+
+; Examples:
+
+|tc-max-width|k
+| !Platform | !URL                                                     | !Correct `sid`            |
+| !Spotify  |`https://open.spotify.com/track/6norVbAE14clVMEyDuRw1m` |`6norVbAE14clVMEyDuRw1m` |
+| !NetEase  |`https://music.163.com/#/song?id=448274120`             |`448274120`              |

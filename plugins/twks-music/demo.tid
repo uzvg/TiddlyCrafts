@@ -1,0 +1,4 @@
+title: $:/plugins/uzvg/twks-music/demo
+
+<<twks-music provider:"netease" sid:"448274120">>
+<<twks-music provider:"spotify" sid:"6norVbAE14clVMEyDuRw1m">>

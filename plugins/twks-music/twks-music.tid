@@ -1,0 +1,55 @@
+title: $:/plugins/uzvg/twks-music/procedures/twks-music
+tags: $:/tags/Global
+code-body: yes
+
+\procedure twks-music(provider:"spotify", sid, auto:"1", width:"80%", theme)
+<!--
+* 如果theme为dark，则返回1
+* 如果theme为light，则返回0
+* 如果不设定theme，则跟踪系统
+-->
+\function get-spotify-theme()
+	[<theme>match[light]then[1]]
+	[<theme>match[dark]then[0]]
+	[[$:/palette]get[text]get[color-scheme]match[light]then[1]else[0]]
+\end get-spotify-theme
+\procedure netease-src-template() https://music.163.com/outchain/player?type=2&id=$(sid)$&auto=$(auto)$&height=66
+\procedure spotify-src-template() https://open.spotify.com/embed/track/$(sid)$?theme=$(theme)$
+\function get-music-source()
+	[<provider>match[spotify]then<spotify-src-template>substitute[]]
+	[<provider>match[netease]then<netease-src-template>substitute[]]
+\end get-music-source
+
+<div align="center">
+<$let
+	theme=<<get-spotify-theme>>
+	src=<<get-music-source>>>
+	<% if [<src>!is[blank]] %>
+		<% if [<provider>match[spotify]] %>
+			<iframe
+				style="border-radius:15px"
+				src=<<src>>
+				width=<<width>>
+				height="152"
+				frameborder="0"
+				allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+				loading="lazy">
+			</iframe>
+		<% elseif [<provider>match[netease]] %>
+			<iframe
+				frameborder="no"
+				border="0"
+				marginwidth="0"
+				marginheight="0"
+				width=<<width>>
+				height="86"
+				src=<<src>>>
+			</iframe>
+		<% endif %>
+	<% else %>
+		@@text-align:center;font-weight:bold;color:red;⚠️ Invalid Source@@
+	<% endif %>
+</$let>
+
+</div>
+\end

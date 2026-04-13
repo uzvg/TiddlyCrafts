@@ -1,0 +1,95 @@
+title: $:/languages/zh-Hans/plugins/uzvg/twks-music/readme
+
+!! 1. 简介：
+
+''`twks-music`'' 是一个 TiddlyWiki 微件，让你能够轻松嵌入以下外部音乐播放器：
+
+* Spotify
+* 网易云音乐
+
+它提供了统一的语法，可在你的 TiddlyWiki 中插入可播放的音乐卡片，并支持：
+
+* 自动主题适配（Spotify 支持亮色/暗色主题）
+* 可配置的宽度
+* 可选的自动播放（仅网易云音乐）
+
+!! 2. 语法：
+
+```
+<<twks-music provider:"<provider>" sid:"<id>" autoplay:"<0|1>" width:"<size>" theme:"<light|dark>">>
+```
+
+!! 3. 参数：
+
+| !参数 | !必需 | !默认值 | !说明 |
+|`provider` |✅ 是 |`"spotify"` |音乐平台。支持值：`spotify`（Spotify）、`netease`（网易云音乐）|
+|`sid` |✅ 是 |— |平台对应的歌曲 ID |
+|`auto` |❌ 否 |`"1"` |自动播放设置（仅对网易云音乐有效）。`1` = 开启自动播放，`0` = 关闭 |
+|`width` |❌ 否 |`"80%"` |嵌入播放器的宽度（如 `300px`、`100%`）|
+|`theme` |❌ 否 |自动 |Spotify 播放器主题：`light`（亮色）或 `dark`（暗色）。未设置时跟随 TiddlyWiki 系统主题 |
+
+!! 4. 使用示例：
+
+!!! 🎧 Spotify 示例
+
+```tid
+# Spotify 播放器将自动跟随 TiddlyWiki 的配色方案
+<<twks-music provider:"spotify" sid:"6norVbAE14clVMEyDuRw1m">>
+```
+
+自定义宽度和暗色主题：
+
+```tid
+<<twks-music provider:"spotify" sid:"6norVbAE14clVMEyDuRw1m" width:"100%" theme:"dark">>
+<<twks-music provider:"spotify" sid:"6norVbAE14clVMEyDuRw1m" width:"80%" theme:"light">>
+```
+
+!!! 🎶 网易云音乐示例
+
+```tid
+<<twks-music provider:"netease" sid:"448274120">>
+```
+
+关闭自动播放：
+
+```tid
+<<twks-music provider:"netease" sid:"448274120" autoplay:"0">>
+```
+
+!! 5. 注意事项：
+
+!!! 平台差异
+
+; ''Spotify''：
+* 支持主题切换（`light` / `dark`）
+* ''不''支持自动播放（受浏览器策略限制）
+
+; ''网易云音乐''：
+* 支持通过 `auto` 参数开启自动播放
+* 不支持主题自定义
+
+!!! 主题行为（Spotify）
+
+* 若未指定 `theme` 参数：
+** 插件会自动检测当前 TiddlyWiki 的配色方案（`$:/palette`）
+** 亮色模式 → Spotify 亮色主题
+** 暗色模式 → Spotify 暗色主题
+
+!!! 无效输入处理
+
+* 如果 `provider` 不是 `spotify` 或 `netease`，微件将渲染为：
+
+```
+⚠️ Invalid Source
+```
+
+!!! ID 格式
+
+* `sid` 必须是''歌曲 ID''，而非完整 URL
+
+; 示例：
+
+|tc-max-width|k
+| !平台 | !URL | !正确的 `sid` |
+| !Spotify |`https://open.spotify.com/track/6norVbAE14clVMEyDuRw1m ` |`6norVbAE14clVMEyDuRw1m` |
+| !网易云音乐 |`https://music.163.com/#/song?id=448274120 ` |`448274120` |

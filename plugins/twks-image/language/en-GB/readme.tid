@@ -1,0 +1,99 @@
+title: $:/languages/en-GB/plugins/uzvg/twks-image/readme
+
+!! Introduce:
+
+A TiddlyWiki procedure for displaying images in a styled card layout, supporting both external image URLs and internal image tiddlers. It renders an image inside a `<figure>` element with optional caption, configurable width, and alignment.
+
+!! Usage:
+
+```
+# Insert image from image tidder into content:
+# (photo.jpg is a image tiddler within your tiddlywiki)
+<<twks-image img:"photo.jpg" caption:"A beautiful photo" width:"50%" align:"left">>
+
+# Insert image from image url into content:
+<<twks-image img:"https://example.com/photo.jpg" caption:"A beautiful photo" width:"50%" align:"left">>
+```
+
+!! Parameters:
+
+|tc-max-width|k
+| !Parameter | !Type | !Default | !Required | !Description |
+|`img` |tiddler title or URL | — | ✅ |The image source. Accepts an external URL (jpg, jpeg, png, gif, svg, webp) or the title of an internal image tiddler. |
+|`caption` |string | — | ❌ |Caption text displayed below the image. If omitted, falls back to the `caption` field of the `img` tiddler. If neither is available, no caption is rendered. |
+|`description` |string | — | ❌ |Used as the image `tooltip` and `alt` attribute for accessibility. If omitted, falls back to the `description` field of the `img` tiddler. |
+|`width` |CSS value | `"62%"` | ❌ |Controls the width of the image card. Accepts any valid CSS width value, e.g. `"300px"`, `"50%"`, `"100%"`. |
+|`align` |`left` / `center` / `right` | `"center"` | ❌ |Controls the alignment of the image card. `left` and `right` apply float layout so surrounding text wraps around the image. `center` uses `margin: 0 auto`. |
+
+!! Parameter Logic:
+
+!!! 1. `img`
+
+The procedure detects the type of the `img` value automatically:
+
+* ''Internal tiddler'' — if `img` is an existing tiddler, the image is rendered and wrapped in a link that navigates to that tiddler.
+* ''External URL'' — if `img` matches the pattern `https?://....(jpg|jpeg|png|gif|svg|webp)` (case-insensitive, query strings supported), the image is rendered directly with no link.
+* ''Neither'' — Show invalid image warning.
+
+!!! 2. `caption`
+
+Caption resolution follows this priority:
+
+# The `caption` field of the tiddler referenced by `img`.
+# The `caption` parameter passed directly to the procedure.
+# If neither exists, the `<figcaption>` element is not rendered at all.
+
+!!! 3. `description`
+
+Description resolution follows this priority:
+
+# The `description` field of the tiddler referenced by `img`.
+# The `description` parameter passed directly to the procedure.
+# If neither exists, `tooltip` and `alt` are left empty.
+
+!!! 4. `align`
+
+|tc-max-width|k
+| !Value | !Behaviour |
+|`left` |Floats the card to the left. Text wraps around the right side. Adds `margin: 0 1em 1em 0`. |
+|`center` |Centers the card horizontally with `margin: 0 auto`. No float. |
+|`right` |Floats the card to the right. Text wraps around the left side. Adds `margin: 0 0 1em 1em`. |
+
+!! Examples:
+
+!!! 1. Internal image tiddler, centered
+
+```
+<<twks-image img:"MyPhoto.png" width:"40%">>
+```
+
+!!! 2. External image, centered
+
+```
+<<twks-image img:"https://example.com/photo.jpg" caption:"Sunset over the mountains" width:"80%">>
+```
+
+!!! 3. Internal image tiddler, floated left
+
+```
+<<twks-image img:"MyPhoto.png" align:"left" width:"40%">>
+```
+
+Clicking the image navigates to the `MyPhoto.png` tiddler. Caption and description are read automatically from the tiddler's `caption` and `description` fields if they exist.
+
+!!! 4. Overriding tiddler fields inline
+
+If you want to use the same image tiddler in mulitiple place with different caption & description, you could set inline parameters in procedure, Inline parameters take priority over the tiddler's own fields:
+
+```
+<<twks-image img:"MyPhoto.png" caption:"A custom caption" description:"A scenic view" width:"50%" align:"right">>
+```
+
+!! Notes:
+
+* For floated images (`align:"left"` or `align:"right"`), if a list follows immediately after the image in the tiddler body, list markers may overlap with the floated card. The bundled CSS handles this automatically by switching to `list-style-position: inside`.
+* For nodejs tiddlywiki, to start TiddlyWiki with lazy loading for image tiddlers use this command:
+
+```
+tiddlywiki --listen root-tiddler=$:/core/save/lazy-images port=8080
+```

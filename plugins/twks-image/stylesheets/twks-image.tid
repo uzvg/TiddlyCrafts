@@ -1,0 +1,66 @@
+title: $:/plugins/uzvg/twks-image/stylesheets/twks-image.css
+tags: $:/tags/Stylesheet
+
+.twks-image-container {
+	display: flex;
+	flex-direction: column;
+	max-width: 720px;
+	border-radius: 5px 5px 0 0;
+	border: 1px solid <<colour page-background>>;
+	margin: 0;
+	gap: 0;
+}
+
+.twks-image-wrapper {
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.twks-image-wrapper img {
+	height: auto;
+	width: 100%;
+	display: block;
+	transition: transform 0.3s ease;
+}
+
+.twks-image-wrapper:hover img{
+	transform: scale(1.05);
+}
+
+.twks-image-caption::before {
+    content: "▶ ";
+}
+
+.twks-image-caption {
+	padding: 0.5em 1em;
+	text-align: center;
+	font-size: 0.9em;
+	color: <<colour muted-foreground>>;
+	background: <<colour page-background>>;
+	line-height: 1;
+}
+
+.twks-image-align-left {
+	float: left;
+	margin: 0 1em 1em 0;
+}
+
+.twks-image-align-center {
+	margin: 0 auto;
+}
+
+.twks-image-align-right {
+	float: right;
+	margin: 0 0 1em 1em;
+}
+
+/* 让容易被浮动覆盖的块级结构元素主动清除浮动 */
+.tc-tiddler-body :is(table, pre, blockquote, hr, h1, h2, h3, h4, h5, h6, figure) {
+	clear: both;
+}
+
+/* 浮动图片紧邻列表时，列表项改为内部编号以防环绕错位 */
+.tc-tiddler-body p:has(> .twks-image-align-left) + :is(ol, ul) li {
+	list-style-position: inside;
+}

@@ -1,0 +1,99 @@
+title: $:/languages/zh-Hans/plugins/uzvg/twks-image/readme
+
+!! 简介：
+
+一个用于在 TiddlyWiki 中以样式化卡片布局展示图片的宏（procedure），支持外部图片 URL 和内部图片 tiddler。它会在 `<figure>` 元素中渲染图片，并支持可选的标题、可配置的宽度和对齐方式。
+
+!! 使用方法：
+
+```
+# 从内部图片 tiddler 插入图片到内容中：
+# （photo.jpg 是您 TiddlyWiki 中的一个图片 tiddler）
+<<twks-image img:"photo.jpg" caption:"一张美丽的照片" width:"50%" align:"left">>
+
+# 从外部 URL 插入图片到内容中：
+<<twks-image img:"https://example.com/photo.jpg" caption:"一张美丽的照片" width:"50%" align:"left">>
+```
+
+!! 参数说明：
+
+|tc-max-width|k
+| !参数 | !类型 | !默认值 | !是否必填 | !描述 |
+|`img` |tiddler 标题或 URL | — | ✅ |图片源。支持外部 URL（jpg、jpeg、png、gif、svg、webp 格式）或内部图片 tiddler 的标题。|
+|`caption` |字符串 | — | ❌ |显示在图片下方的标题文字。如果省略，则回退使用 `img` tiddler 的 `caption` 字段。如果两者都不存在，则不渲染标题。|
+|`description` |字符串 | — | ❌ |用作图片的 `tooltip`（工具提示）和 `alt`（替代文本）属性，用于无障碍访问。如果省略，则回退使用 `img` tiddler 的 `description` 字段。|
+|`width` |CSS 值 | `"62%"` | ❌ |控制图片卡片的宽度。接受任何有效的 CSS 宽度值，例如 `"300px"`、`"50%"`、`"100%"`。|
+|`align` |`left` / `center` / `right` | `"center"` | ❌ |控制图片卡片的对齐方式。`left` 和 `right` 使用浮动布局，使周围文字环绕图片；`center` 使用 `margin: 0 auto` 居中。|
+
+!! 参数逻辑：
+
+!!! 1. `img` 参数
+
+宏会自动检测 `img` 值的类型：
+
+* 内部 tiddler — 如果 `img` 是一个已存在的 tiddler，图片将被渲染并包裹在一个链接中，点击可跳转到该 tiddler。
+* 外部 URL — 如果 `img` 匹配模式 `https?://....(jpg|jpeg|png|gif|svg|webp)`（不区分大小写，支持查询字符串），图片将直接渲染，不带链接。
+* 两者都不是 — 显示无效图片警告。
+
+!!! 2. `caption` 参数
+
+标题的解析遵循以下优先级：
+
+# `img` 所引用的 tiddler 的 `caption` 字段。
+# 直接传递给宏的 `caption` 参数。
+# 如果两者都不存在，则完全不渲染 `<figcaption>` 元素。
+
+!!! 3. `description` 参数
+
+描述的解析遵循以下优先级：
+
+# `img` 所引用的 tiddler 的 `description` 字段。
+# 直接传递给宏的 `description` 参数。
+# 如果两者都不存在，则 `tooltip` 和 `alt` 属性留空。
+
+!!! 4. `align` 参数
+
+|tc-max-width|k
+| !值 | !行为 |
+|`left` |将卡片向左浮动。文字在右侧环绕。添加 `margin: 0 1em 1em 0`。|
+|`center` |使用 `margin: 0 auto` 水平居中卡片。不使用浮动。|
+|`right` |将卡片向右浮动。文字在左侧环绕。添加 `margin: 0 0 1em 1em`。|
+
+!! 示例：
+
+!!! 1. 内部图片 tiddler，居中显示
+
+```
+<<twks-image img:"MyPhoto.png" width:"40%">>
+```
+
+!!! 2. 外部图片，居中显示
+
+```
+<<twks-image img:"https://example.com/photo.jpg" caption:"山间日落" width:"80%">>
+```
+
+!!! 3. 内部图片 tiddler，左浮动
+
+```
+<<twks-image img:"MyPhoto.png" align:"left" width:"40%">>
+```
+
+点击图片可跳转到 `MyPhoto.png` tiddler。如果该 tiddler 存在 `caption` 和 `description` 字段，会自动读取并显示。
+
+!!! 4. 内联覆盖 tiddler 字段
+
+如果您想在多个地方使用同一个图片 tiddler，但希望显示不同的标题和描述，可以在宏中设置内联参数。内联参数的优先级高于 tiddler 自身的字段：
+
+```
+<<twks-image img:"MyPhoto.png" caption:"自定义标题" description:"风景视图" width:"50%" align:"right">>
+```
+
+!! 注意事项：
+
+* 对于浮动的图片（`align:"left"` 或 `align:"right"`），如果列表紧随图片之后出现在 tiddler 正文中，列表标记可能会与浮动卡片重叠。 bundled CSS 会自动通过将 `list-style-position` 设置为 `inside` 来处理此问题。
+* 对于 Node.js 版本的 TiddlyWiki，若要启用图片 tiddler 的懒加载功能启动，请使用以下命令启动你的tiddlywiki：
+
+```
+tiddlywiki --listen root-tiddler=$:/core/save/lazy-images port=8080
+```

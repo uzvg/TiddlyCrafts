@@ -1,0 +1,27 @@
+title: $:/plugins/uzvg/twks-image/procedures/twks-image
+tags: $:/tags/Global
+code-body: yes
+
+\procedure twks-image(img,caption,description,alt,width:"62%",align:"center")
+<$let
+		caption={{{ [<caption>!is[blank]] :else[<img>get[caption]] }}}
+		desc={{{ [<description>!is[blank]] :else[<img>get[description]] }}}
+		alt={{{ [<alt>!is[blank]] :else[<desc>] }}}>
+
+	<figure class=`twks-image-container twks-image-align-$(align)$` style=`width:$(width)$;`>
+		<$link to=<<img>> class="twks-image-wrapper">
+			<$image source=<<img>>
+				tooltip=<<desc>>
+				alt=<<alt>>/>
+		</$link>
+
+		<!-- caption part -->
+		<% if [<caption>!is[blank]] %>
+			<figcaption class="twks-image-caption">
+				<<caption>>
+			</figcaption>
+		<% endif %>
+	</figure>
+
+</$let>
+\end

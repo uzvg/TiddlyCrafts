@@ -1,0 +1,10 @@
+title: $:/plugins/uzvg/twks-image/readme
+
+\function lingo-base()
+	[[$:/language]get[text]]
+	+[match[$:/languages/zh-Hans]]
+	~[[$:/languages/en-GB]]
+	+[addsuffix[/]]
+\end
+
+<<lingo "plugins/uzvg/twks-image/readme">>

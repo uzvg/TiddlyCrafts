@@ -1,0 +1,124 @@
+title: $:/languages/en-GB/plugins/uzvg/twks-details/readme
+
+!! 1. Introduction:
+
+`twks.details` is a `details-like` collapsible panel component implemented using WikiText. It supports custom ''titles'', ''icons'', and CSS class names, and is suitable for scenarios where you need to ''collapse/expand content sections''.
+
+The component uses a `state` tiddler to track whether it is expanded or collapsed, and supports specifying the default state via `initialState`. The trigger area and content area are independent, and the content is only rendered when expanded.
+
+!! 2. Parameters:
+
+| !Parameter | !Type | !Default | !Description |
+|`summary`             |string        |`"Summary:"`                 |Title text displayed when collapsed |
+|`collapsedSummary`    |string        |''(inherits summary)''       |Title text displayed when expanded; falls back to `summary` if not set |
+|`expandIcon`          |Tiddler title |`$:/core/images/right-arrow` |Icon shown when collapsed (right-pointing arrow) |
+|`collapseIcon`        |Tiddler title |`$:/core/images/down-arrow`  |Icon shown when expanded (downward arrow) |
+|`initialState`        |string        |`"collapsed"`                |Initial state, either `"collapsed"` or `"expanded"` |
+|`state`               |Tiddler title |`"$:/state/twks/details"`    |Tiddler used to store the current state |
+|`triggerClass`        |CSS class     |`"twks-details-trigger"`     |CSS class for the trigger button (header) |
+|`triggerWrapperClass` |CSS class     |''(none)''                   |CSS class for the outer wrapper of the trigger |
+|`contentClass`        |CSS class     |`"twks-details-body"`        |CSS class for the content area |
+
+!! 3. Usage Examples:
+
+1. ''Basic usage:''
+
+```wikitext
+<$twks.details summary="Click to expand">
+Content goes here.
+</$twks.details>
+```
+
+<$twks.details summary="Click to expand">
+Content goes here.
+</$twks.details>
+
+2. ''Custom title and icons:''
+
+```wikitext
+<$twks.details
+  summary="Click to expand:"
+  collapsedSummary="Click to collapse:"
+  expandIcon="$:/core/images/chevron-right"
+  collapseIcon="$:/core/images/chevron-down">
+Here is the detailed content.
+</$twks.details>
+```
+
+<$twks.details
+  summary="View details:"
+  collapsedSummary="Click to collapse:"
+  expandIcon="$:/core/images/chevron-right"
+  collapseIcon="$:/core/images/chevron-down">
+Here is the detailed content.
+</$twks.details>
+
+3. ''Expanded by default:''
+
+```wikitext
+<$twks.details summary="Panel expanded by default" initialState="expanded">
+This content is visible by default.
+</$twks.details>
+```
+
+<$twks.details summary="Panel expanded by default" initialState="expanded">
+This content is visible by default.
+</$twks.details>
+
+4. ''Using separate state tiddlers (recommended for multiple instances on the same page):''
+
+```wikitext
+<$twks.details summary="Panel A" state="$:/state/twks/details/panel-a">
+Content of Panel A.
+</$twks.details>
+
+<$twks.details summary="Panel B" state="$:/state/twks/details/panel-b">
+Content of Panel B.
+</$twks.details>
+```
+
+<$twks.details summary="Panel A" state="$:/state/twks/details/panel-a">
+Content of Panel A.
+</$twks.details>
+
+<$twks.details summary="Panel B" state="$:/state/twks/details/panel-b">
+Content of Panel B.
+</$twks.details>
+
+5. ''Wrapping codeblock to fold and unfold code snippets:''
+
+```wikitext
+<$twks.details
+  summary="Display Code:"
+  state="$:/state/twks/details/1"
+  collapsedSummary="Fold Code:"
+  initialState="expanded">
+  <$codeblock
+    code="""SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false"""
+    language="sql"/>
+</$twks.details>
+```
+
+<$twks.details
+  summary="Display Code:"
+  state="$:/state/twks/details/1"
+  collapsedSummary="Fold Code:"
+  initialState="expanded">
+  <$codeblock
+    code="""SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false"""
+    language="sql"/>
+</$twks.details>

@@ -1,0 +1,124 @@
+title: $:/languages/zh-Hans/plugins/uzvg/twks-details/readme
+
+!! 1. 简介：
+
+`twks.details` 是一个使用 WikiText 实现的 `details-like` 可折叠面板组件。它支持自定义''标题''、''图标''和 CSS 类名，适用于需要''折叠/展开内容区块''的场景。
+
+该组件使用 `state` 条目（tiddler）来跟踪展开或折叠状态，并支持通过 `initialState` 指定默认状态。触发区域和内容区域相互独立，内容仅在展开时才会被渲染。
+
+!! 2. 参数说明：
+
+| !参数 | !类型 | !默认值 | !说明 |
+|`summary`             |字符串        |`"Summary:"`                 |折叠时显示的标题文本 |
+|`collapsedSummary`    |字符串        |''（继承 summary）''         |展开时显示的标题文本；若未设置则回退到 `summary` |
+|`expandIcon`          |条目标题      |`$:/core/images/right-arrow` |折叠时显示的图标（向右箭头） |
+|`collapseIcon`        |条目标题      |`$:/core/images/down-arrow`  |展开时显示的图标（向下箭头） |
+|`initialState`        |字符串        |`"collapsed"`                |初始状态，可选 `"collapsed"`（折叠）或 `"expanded"`（展开） |
+|`state`               |条目标题      |`"$:/state/twks/details"`    |用于存储当前状态的条目 |
+|`triggerClass`        |CSS 类名      |`"twks-details-trigger"`     |触发按钮（头部）的 CSS 类 |
+|`triggerWrapperClass` |CSS 类名      |''（无）''                   |触发按钮外层容器的 CSS 类 |
+|`contentClass`        |CSS 类名      |`"twks-details-body"`        |内容区域的 CSS 类 |
+
+!! 3. 使用示例：
+
+1. ''基础用法：''
+
+```wikitext
+<$twks.details summary="点击展开">
+内容放在这里。
+</$twks.details>
+```
+
+<$twks.details summary="点击展开">
+内容放在这里。
+</$twks.details>
+
+2. ''自定义标题和图标：''
+
+```wikitext
+<$twks.details
+  summary="点击展开："
+  collapsedSummary="点击折叠："
+  expandIcon="$:/core/images/chevron-right"
+  collapseIcon="$:/core/images/chevron-down">
+这里是详细内容。
+</$twks.details>
+```
+
+<$twks.details
+  summary="查看详情："
+  collapsedSummary="点击折叠："
+  expandIcon="$:/core/images/chevron-right"
+  collapseIcon="$:/core/images/chevron-down">
+这里是详细内容。
+</$twks.details>
+
+3. ''默认展开：''
+
+```wikitext
+<$twks.details summary="默认展开的面板" initialState="expanded">
+此内容默认可见。
+</$twks.details>
+```
+
+<$twks.details summary="默认展开的面板" initialState="expanded">
+此内容默认可见。
+</$twks.details>
+
+4. ''使用独立的state Tiddler（推荐在同一页面使用多个实例时）：''
+
+```wikitext
+<$twks.details summary="面板 A" state="$:/state/twks/details/panel-a">
+面板 A 的内容。
+</$twks.details>
+
+<$twks.details summary="面板 B" state="$:/state/twks/details/panel-b">
+面板 B 的内容。
+</$twks.details>
+```
+
+<$twks.details summary="面板 A" state="$:/state/twks/details/panel-a">
+面板 A 的内容。
+</$twks.details>
+
+<$twks.details summary="面板 B" state="$:/state/twks/details/panel-b">
+面板 B 的内容。
+</$twks.details>
+
+5. ''包裹代码块以折叠和展开代码片段：''
+
+```wikitext
+<$twks.details
+  summary="显示代码："
+  state="$:/state/twks/details/1"
+  collapsedSummary="折叠代码："
+  initialState="expanded">
+  <$codeblock
+    code="""SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false"""
+    language="sql"/>
+</$twks.details>
+```
+
+<$twks.details
+  summary="显示代码："
+  state="$:/state/twks/details/1"
+  collapsedSummary="折叠代码："
+  initialState="expanded">
+  <$codeblock
+    code="""SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false
+SELECT * FROM users WHERE deleted = false"""
+    language="sql"/>
+</$twks.details>

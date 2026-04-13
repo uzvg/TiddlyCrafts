@@ -1,0 +1,42 @@
+title: $:/plugins/uzvg/twks-details/widgets/twks-details
+tags: $:/tags/Global
+code-body: yes
+
+\widget $twks.details(
+	summary:"Summary:",
+	collapsedSummary,
+	expandIcon,
+	collapseIcon,
+	initialState:"collapsed",
+	state:"$:/state/twks/details",
+	triggerClass:"twks-details-trigger",
+	triggerWrapperClass,
+	contentClass:"twks-details-body")
+\whitespace trim
+
+<$qualify name="stateTiddler" title=<<state>>>
+	<div class=<<triggerWrapperClass>>>
+		<$reveal type="match" default=<<initialState>> state=<<stateTiddler>> text="collapsed" animate="yes">
+			<$button set=<<stateTiddler>> setTo="expanded" class=<<triggerClass>>>
+				&nbsp;
+				<$transclude $tiddler={{{ [<expandIcon>!is[blank]else[$:/core/images/right-arrow]] }}} $mode="inline"/>
+				&nbsp;
+				<<summary>>
+			</$button>
+		</$reveal>
+		<$reveal type="match" default=<<initialState>> state=<<stateTiddler>> text="expanded" animate="yes">
+			<$button set=<<stateTiddler>> setTo="collapsed" class=<<triggerClass>>>
+				&nbsp;
+				<$transclude $tiddler={{{ [<collapseIcon>!is[blank]else[$:/core/images/down-arrow]] }}} $mode="inline"/>
+				&nbsp;
+				<$text text={{{ [<collapsedSummary>!is[blank]else<summary>] }}} />
+			</$button>
+		</$reveal>
+	</div>
+	<$reveal type="match" default=<<initialState>> state=<<stateTiddler>> text="expanded" animate="yes">
+		<div class=<<contentClass>>>
+			<$slot $name="ts-raw" />
+		</div>
+	</$reveal>
+</$qualify>
+\end

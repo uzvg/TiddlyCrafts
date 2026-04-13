@@ -1,0 +1,16 @@
+title: $:/plugins/uzvg/twks-details/stylesheets/twks-details.css
+tags: $:/tags/Stylesheet
+
+.twks-details-trigger {
+	width: 100%;
+	text-align: left;
+	border: none;
+	line-height: 1.25rem;
+}
+
+.twks-details-body {
+	overflow: auto;
+	margin: 0;
+	padding: 0 1em 0;
+	background: <<color page-background>>;
+}

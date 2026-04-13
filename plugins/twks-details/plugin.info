@@ -1,0 +1,11 @@
+{
+  "title": "$:/plugins/uzvg/twks-details",
+  "name": "twks-details",
+  "author": "uzvg",
+  "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-details",
+  "description": "A lightweight toggle (collapsible/expandable) widget write in pure wikitext",
+  "plugin-type": "plugin",
+  "version": "1.0.5",
+  "core-version": ">=5.3.8",
+  "list": "readme license tree contents"
+}

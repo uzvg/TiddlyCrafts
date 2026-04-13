@@ -1,0 +1,87 @@
+title: $:/languages/en-GB/plugins/uzvg/twks-alerter/readme
+
+!! 1. Introduction:
+
+`twks-alerter` is used to create structured alert blocks with icons and titles within pages. It supports multiple preset types (such as warning, note, tip, etc.) to highlight critical information, provide supplementary explanations, or offer operational guidance, thereby enhancing the content's hierarchy and readability.
+
+!! 2. Usage Syntax:
+
+This plugin is invoked as a `procedure`. You can use TiddlyWiki's standard macro call syntax:
+
+```
+<<twks-alerter type:"type" text:"content body" title:"custom title (optional)">>
+```
+
+!! 3. Parameter Reference:
+
+The component accepts three core parameters, detailed as follows:
+
+| !Parameter | !Required | !Description |
+|`type` | Yes | Specifies the type of the alert block, determining the icon, default title, and styling color. |
+|`text` | Yes | The detailed content displayed within the alert block. Supports Wikitext. |
+|`title` | No | Overrides the default title. If omitted, the default name for the corresponding type is displayed. |
+
+The plugin includes 5 preset types, each with a corresponding icon:
+
+| !Type | !Default Title | !Corresponding Icon (Core Icon) |
+|`note` |''Note:'' |`$:/core/images/info-button` |
+|`tip` |''Tip:'' |`$:/core/images/tip` |
+|`important` |''Important:'' |`$:/core/images/info-button` |
+|`warning` |''Warning:'' |`$:/core/images/warning` |
+|`caution` |''Caution:'' |`$:/core/images/warning` |
+
+!! 4. Usage Examples:
+
+!!! A. Using Default Titles:
+
+```
+<<twks-alerter type:"note" text:"This is a basic note explanation.">>
+
+<<twks-alerter type:"warning" text:"Be sure to back up your Wiki file before proceeding!">>
+```
+
+<<twks-alerter type:"note" text:"This is a basic note explanation.">>
+
+<<twks-alerter type:"warning" text:"Be sure to back up your Wiki file before proceeding!">>
+
+!!! B. Custom Titles:
+
+If you find the default "Note:" or "Tip:" too rigid, you can manually pass the `title` parameter:
+
+```tw
+<<twks-alerter
+  type:"tip"
+  title:"Pro Tip"
+  text:"You can press `Ctrl+Enter` to quickly save the current tiddler."
+>>
+```
+
+<<twks-alerter
+  type:"tip"
+  title:"Pro Tip"
+  text:"You can press `Ctrl+Enter` to quickly save the current tiddler."
+>>
+
+!!! C. Containing Wikitext:
+
+You can include lists, bold text, or other TiddlyWiki syntax within the `text` parameter:
+
+```
+<<twks-alerter type:"important" text:"
+Please ensure your TiddlyWiki version is ''v5.3.0'' or above, otherwise you may encounter:
+
+* Failure to parse Procedures correctly
+* Abnormal style rendering">>
+```
+
+<<twks-alerter type:"important" text:"
+Please ensure your TiddlyWiki version is ''v5.3.0'' or above, otherwise you may encounter:
+
+* Failure to parse Procedures correctly
+* Abnormal style rendering">>
+
+!!! D: Automatic Theme Switching:
+
+<<twks-alerter tip "
+
+* The plugin automatically detects the system's ''Color Scheme'' (dark or light mode) based on the palette (`$:/palette`) you are currently using.">>

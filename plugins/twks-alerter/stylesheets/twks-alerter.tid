@@ -1,0 +1,137 @@
+title: $:/plugins/uzvg/twks-alerter/stylesheets/twks-alerter.css
+tags: $:/tags/Stylesheet
+type: text/css
+
+/* ================================================================
+   twks-alerter — 通知提示块组件
+   依赖: data-alerter-type (warning|caution|note|tip|important)
+         data-color-scheme (light|dark) — 由调色板自动注入
+   ================================================================ */
+
+.twks-alerter {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "icon title"
+    "content content";
+  /* icon 行与 content 行之间的纵向间距 */
+  row-gap: 0.5em;
+  /* icon 与 title 之间的横向间距 */
+  column-gap: 0.75em;
+  padding: 0.9em 1em;
+
+  /* 样式一：单侧边框，不使用 border-radius（有意为之：圆角需四边均有边框）*/
+  /*border-left: 4px solid var(--alerter-border);
+  border-radius: 0px 4px 4px 0px; */
+
+	/*样式二：四边圆角，没有左侧指示条*/
+  border-radius: 4px;
+
+  background-color: var(--alerter-bg);
+  color: var(--alerter-fg);
+}
+
+/* 浅色模式阴影 */
+.twks-alerter[data-color-scheme="light"] {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* 深色模式改用内描边替代阴影 */
+.twks-alerter[data-color-scheme="dark"] {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* ---- 图标 -------------------------------------------- */
+.twks-alerter-icon {
+  grid-area: icon;
+  align-self: center;       /* 与标题文字垂直居中对齐 */
+  line-height: 0;           /* 消除 SVG 下方的 inline gap */
+  fill: currentColor;
+  opacity: 0.85;
+}
+
+.twks-alerter-icon > svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* ---- 标题 -------------------------------------------- */
+.twks-alerter-title {
+  grid-area: title;
+  align-self: center;       /* 与图标垂直居中对齐 */
+  font-weight: 600;
+  font-size: 1em;
+  font-family: serif, "Noto Serif CJK SC", "宋体";
+  line-height: 1.3;
+}
+
+/* ---- 内容 -------------------------------------------- */
+.twks-alerter-content {
+  grid-area: content;
+  font-size: 0.95em;
+  line-height: 1.65;
+}
+
+/* 消除内容区首尾元素的多余外边距，避免与容器 padding 叠加 */
+.twks-alerter-content > :first-child { margin-top: 0; }
+.twks-alerter-content > :last-child  { margin-bottom: 0; }
+
+/* ================================================================
+   各 type 配色 — 浅色模式
+   ================================================================ */
+
+.twks-alerter[data-alerter-type="warning"][data-color-scheme="light"] {
+  --alerter-bg:     #fff3e0;
+  --alerter-border: #ffab40;
+  --alerter-fg:     #663c00;
+}
+.twks-alerter[data-alerter-type="caution"][data-color-scheme="light"] {
+  --alerter-bg:     #ffebee;
+  --alerter-border: #e57373;
+  --alerter-fg:     #5f2120;
+}
+.twks-alerter[data-alerter-type="tip"][data-color-scheme="light"] {
+  --alerter-bg:     #e8f5e9;
+  --alerter-border: #81c784;
+  --alerter-fg:     #1b5e20;
+}
+.twks-alerter[data-alerter-type="note"][data-color-scheme="light"] {
+  --alerter-bg:     #e3f2fd;
+  --alerter-border: #64b5f6;
+  --alerter-fg:     #0d47a1;
+}
+.twks-alerter[data-alerter-type="important"][data-color-scheme="light"] {
+  --alerter-bg:     #f3e5f5;
+  --alerter-border: #9575cd;
+  --alerter-fg:     #311b92;
+}
+
+/* ================================================================
+   各 type 配色 — 深色模式
+   ================================================================ */
+
+.twks-alerter[data-alerter-type="warning"][data-color-scheme="dark"] {
+  --alerter-bg:     rgba(78, 52, 46, 0.25);
+  --alerter-border: #ffab40;
+  --alerter-fg:     #ffcc80;
+}
+.twks-alerter[data-alerter-type="caution"][data-color-scheme="dark"] {
+  --alerter-bg:     rgba(183, 28, 28, 0.2);
+  --alerter-border: #e57373;
+  --alerter-fg:     #ffcdd2;
+}
+.twks-alerter[data-alerter-type="tip"][data-color-scheme="dark"] {
+  --alerter-bg:     rgba(46, 125, 50, 0.2);
+  --alerter-border: #81c784;
+  --alerter-fg:     #c8e6c9;
+}
+.twks-alerter[data-alerter-type="note"][data-color-scheme="dark"] {
+  --alerter-bg:     rgba(21, 101, 192, 0.2);
+  --alerter-border: #64b5f6;
+  --alerter-fg:     #bbdefb;
+}
+.twks-alerter[data-alerter-type="important"][data-color-scheme="dark"] {
+  --alerter-bg:     rgba(69, 39, 160, 0.2);
+  --alerter-border: #9575cd;
+  --alerter-fg:     #d1c4e9;
+}

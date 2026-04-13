@@ -1,0 +1,36 @@
+title: $:/plugins/uzvg/twks-alerter/procedures/twks-alerter
+tags: $:/tags/Global
+code-body: yes
+
+\procedure twks-alerter(type,text,title)
+\function get-color-scheme() [[$:/palette]get[text]get[color-scheme]]
+\function get-alerter-icon()
+	[<type>match[warning]then[$:/core/images/warning]]
+	[<type>match[caution]then[$:/core/images/warning]]
+	[<type>match[note]then[$:/core/images/info-button]]
+	[<type>match[tip]then[$:/core/images/tip]]
+	[<type>match[important]then[$:/core/images/info-button]]
+\end get-alerter-icon
+
+\function get-default-title()
+	[<type>match[warning]then[Warning:]]
+	[<type>match[caution]then[Caution:]]
+	[<type>match[note]then[Note:]]
+	[<type>match[tip]then[Tip:]]
+	[<type>match[important]then[Important:]]
+\end get-default-title
+
+\function get-alerter-title() [<title>!is[blank]else<get-default-title>]
+
+<div class="twks-alerter" data-alerter-type=<<type>> data-color-scheme=<<get-color-scheme>>>
+	<div class="twks-alerter-icon">
+		<$transclude $tiddler=<<get-alerter-icon>>/>
+	</div>
+  <div class="twks-alerter-title">
+		<<get-alerter-title>>
+	</div>
+  <div class="twks-alerter-content">
+		<$transclude $variable="text" $mode="block"/>
+	</div>
+</div>
+\end

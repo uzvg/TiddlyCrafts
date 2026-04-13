@@ -1,0 +1,87 @@
+title: $:/languages/zh-Hans/plugins/uzvg/twks-alerter/readme
+
+!! 1. 介绍：
+
+`twks-alerter` 用于在页面中创建带有图标与标题的结构化提示信息块。它支持多种预设类型（如 warning、note、tip 等），可用于突出关键信息、补充说明或提供操作提示，从而提升内容的层次感与可读性。
+
+!! 2. 使用语法：
+
+该插件作为一个 `procedure` 调用，你可以使用 TiddlyWiki 标准的宏调用语法：
+
+```
+<<twks-alerter type:"类型" text:"内容正文" title:"自定义标题(可选)">>
+```
+
+!! 3. 参数介绍：
+
+该组件接受三个核心参数，详细说明如下：
+
+| !参数名 | !是否必填 | !描述 |
+|`type` | 是 |指定警示块的类型，决定了图标、默认标题和样式颜色。 |
+|`text` | 是 |警示块内显示的详细内容。支持 Wikitext。 |
+|`title` | 否 |覆盖默认标题。如果不填，则显示对应类型的默认名称。 |
+
+插件内置了 5 种预设类型，每种类型都有对应的图标：
+
+| !类型 (Type) | !默认标题 | !对应图标 (Core Icon) |
+|`note` |''Note:'' |`$:/core/images/info-button` |
+|`tip` |''Tip:'' |`$:/core/images/tip` |
+|`important` |''Important:'' |`$:/core/images/info-button` |
+|`warning` |''Warning:'' |`$:/core/images/warning` |
+|`caution` |''Caution:'' |`$:/core/images/warning` |
+
+!! 4. 使用示例：
+
+!!! A. 使用默认标题：
+
+```
+<<twks-alerter type:"note" text:"这是一个基础的笔记说明。">>
+
+<<twks-alerter type:"warning" text:"操作前请务必备份你的 Wiki 文件！">>
+```
+
+<<twks-alerter type:"note" text:"这是一个基础的笔记说明。">>
+
+<<twks-alerter type:"warning" text:"操作前请务必备份你的 Wiki 文件！">>
+
+!!! B. 自定义标题：
+
+如果你觉得默认的 "Note:" 或 "Tip:" 太死板，可以手动传入 `title` 参数：
+
+```tw
+<<twks-alerter
+  type:"tip"
+  title:"小技巧"
+  text:"你可以按 `Ctrl+Enter` 快速保存当前条目。"
+>>
+```
+
+<<twks-alerter
+  type:"tip"
+  title:"小技巧"
+  text:"你可以按 `Ctrl+Enter` 快速保存当前条目。"
+>>
+
+!!! C. 包含wikitext：
+
+你可以在`text`参数中加入列表、加粗或其他 TiddlyWiki 语法：
+
+```
+<<twks-alerter type:"important" text:"
+请确保你的 TiddlyWiki 版本在 ''v5.3.0'' 以上，否则可能：
+
+* 无法正常解析 Procedure
+* 样式渲染异常">>
+```
+
+<<twks-alerter type:"important" text:"
+请确保你的 TiddlyWiki 版本在 ''v5.3.0'' 以上，否则可能：
+
+* 无法正常解析 Procedure
+* 样式渲染异常">>
+
+!!! D: 自动切换主题：
+
+<<twks-alerter tip "
+
+* 该插件会根据你当前使用的调色板（`$:/palette`）自动识别系统的 ''Color Scheme''（深色或浅色模式）。">>

@@ -26,6 +26,9 @@
         "tiddlywiki/vanilla",
         "tiddlywiki/snowwhite"
    ],
+   "languages": [
+        "zh-Hans"
+   ],
     "_disabled_themes": [
         "tiddlywiki/readonly"
     ],

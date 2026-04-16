@@ -37,7 +37,7 @@ Twikoo comment system widget for TiddlyWiki
     var envId = this.getAttribute("envId", "");
     var region = this.getAttribute("region", "ap-shanghai");
     var path = this.getAttribute("path", this.currentTiddler);
-    var lang = this.getAttribute("lang", "zh-CN");
+    var lang = this.getAttribute("lang", "en-gb");
 
     if (window.twikooLoader) {
       window.twikooLoader.ready(function (twikoo) {

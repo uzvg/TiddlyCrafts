@@ -1,2 +1,16 @@
 title: $:/plugins/uzvg/twks-twikoo/stylesheets/twks-twikoo.css
 tags: $:/tags/Stylesheet
+
+.twks-twikoo-settings-table td:nth-child(3) {
+    min-width: 18em;
+}
+
+.twks-twikoo-btn-wrapper {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.twks-twikoo-body {
+    background: inherit;
+}

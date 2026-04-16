@@ -1,0 +1,42 @@
+title: $:/plugins/uzvg/twks-twikoo/viewtemplate
+tags: $:/tags/ViewTemplate
+
+\function get-twikoo-filter()
+	[<userFilter>!is[blank]else<defaultFilter>]
+	[<twikooHideSubfilter>]
+	+[join[ ]]
+\end
+
+<$let
+	configTiddler="$:/config/twks-twikoo"
+	envId={{{ [<configTiddler>getindex[envId]] }}}
+	language={{{ [<configTiddler>getindex[lang]] }}}
+	region={{{ [<configTiddler>getindex[region]] }}}
+	pathFilter={{{ [<configTiddler>get[path-filter]] }}}
+	path={{{ [subfilter<pathFilter>!is[blank]] :else[<storyTiddler>get[created]] }}}
+	userFilter={{{ [<configTiddler>getindex[user-filter]] }}}
+	defaultFilter="[all[current]!is[missing]!is[system]]"
+	twikooHideSubfilter="+[!has[twikoo-hide]]"
+	twikooFilter=<<get-twikoo-filter>>>
+
+	<$list filter=<<twikooFilter>>>
+		<$twks.details
+			summary="Open Comments"
+			collapsedSummary="Close Comments"
+			expandIcon="$:/plugins/uzvg/twks-twikoo/icons/comment_on"
+			collapseIcon="$:/plugins/uzvg/twks-twikoo/icons/comment_off"
+			initialState="collapsed"
+			state="$:/state/twks-twikoo"
+			triggerClass=""
+			triggerWrapperClass="twks-twikoo-btn-wrapper"
+			contentClass="twks-twikoo-body">
+
+			<$twikoo
+				envId=<<envId>>
+				region=<<region>>
+				path=<<path>>
+				lang=<<language>>/>
+
+		</$twks.details>
+	</$list>
+</$let>

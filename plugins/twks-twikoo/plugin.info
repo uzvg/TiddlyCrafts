@@ -5,7 +5,7 @@
   "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-twikoo",
   "description": "Displaying images in a styled card layout, supporting both internal image tiddlers and external image URLs",
   "plugin-type": "plugin",
-  "version": "0.8.4",
+  "version": "0.8.6",
   "core-version": ">=5.3.8",
-  "list": "readme license tree contents"
+  "list": "readme license tree settings contents"
 }

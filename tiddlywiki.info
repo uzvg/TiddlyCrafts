@@ -17,11 +17,6 @@
         "thirdparty/relink-titles",
         "thirdparty/relink-variables"
     ],
-    "_disabled_plugins:": [
-        "tiddlywiki/ai-tools",
-        "tiddlywiki/twitter",
-        "tiddlywiki/internals"
-    ],
     "themes": [
         "tiddlywiki/vanilla",
         "tiddlywiki/snowwhite"
@@ -29,54 +24,11 @@
    "languages": [
         "zh-Hans"
    ],
-    "_disabled_themes": [
-        "tiddlywiki/readonly"
-    ],
     "build": {
-        "public": [
-            "--output","backup",
-            "--setfield","[[$:/config/SaverFilter]]","text","", "text/plain",
-            "--save","[is[system]]","[removeprefix[$:/]addprefix[Public/tiddlers/_System/]]",
-            "--save","[!is[system]visibility[Public]]","[addprefix[Public/tiddlers/]]",
-            "--render",".","Public/output/index.html","text/plain","$:/core/save/all","publishFilter","-[title[$:/core/ui/SideBar/Recent]] -[prefix[$:/plugins/]] -[prefix[$:/state/]] -[prefix[$:/temp/]] -[visibility[Private]] -[tag[Journal]] -[tag[密码(Passwords)]]",
-            "--deletetiddlers","[[$:/config/SaverFilter]]"
-        ],
-        "test": [
-            "--output","backup/public",
-            "--save","[all[tiddlers]!visibility[Private]!tag[Journal]!tag[密码(Passwords)]!prefix[$:/state/]!prefix[$:/temp/]]","[encodeuricomponent[]addprefix[tiddlers/]]"
-        ],
-        "private": [
-            "--output","backup",
-            "--save","[!is[shadow]is[system]]","[removeprefix[$:/]addprefix[Private/tiddlers/_System/]]",
-            "--save","[!is[shadow]!is[system]]","[addprefix[Private/tiddlers/]]"
-        ],
-        "system": [
-            "--output","backup",
-            "--save","[!is[shadow]is[system]] -[prefix[$:/state]] -[[prefix[$:/temp]] -[prefix[$:/plugins/tiddlywiki]] -[prefix[$:/core]] -[prefix[$:/boot]]","[removeprefix[$:/]addprefix[System/tiddlers/_System/]]"
-        ],
         "index": [
-            "--setfield","[[$:/config/uzvg/publishFilter]]","tags","$:/config/uzvg/RenderTemplate","text/plain",
-            "--setfield","[[$:/theme]]","text","$:/config/uzvg/theme/readonly", "text/plain",
-            "--render","$:/plugins/tiddlywiki/tiddlyweb/save/offline","index.html","text/plain",
-            "--setfield","[[$:/theme]]","text","$:/config/uzvg/theme/normal","text/plain",
-            "--setfield","[[$:/config/uzvg/publishFilter]]","tags","","text/plain"
-        ],
-        "flashcards-index": [
             "--render",
-            "$:/uzvg/renderTemplates/flashcards-json",
-            "flashcards-index.json",
-            "text/plain"
-        ],
-        "twks-flashcards": [
-            "--render",
-            "$:/uzvg/renderTemplates/flashcards-json-test",
-            "flashcards-index-test.json",
-            "text/plain"
-        ],
-        "images-index": [
-            "--render",
-            "$:/uzvg/renderTemplates/get-images-index",
-            "images-index.json",
+            "$:/uzvg/tiddlycrafts/save/offline",
+            "index.html",
             "text/plain"
         ],
         "static": [

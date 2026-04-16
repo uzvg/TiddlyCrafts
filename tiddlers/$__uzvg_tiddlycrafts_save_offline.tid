@@ -1,0 +1,21 @@
+code-body: yes
+created: 20260416195816424
+modified: 20260416200509192
+title: $:/uzvg/tiddlycrafts/save/offline
+type: text/vnd.tiddlywiki
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+
+\procedure saveTiddlerFilter()
+	[is[tiddler]]
+	-[[$:/boot/boot.css]]
+	-[prefix[$:/HistoryList]]
+	-[status[pending]plugin-type[import]]
+	-[type[application/javascript]library[yes]]
+	-[[$:/boot/boot.js]]
+	-[[$:/boot/bootprefix.js]]
+	-[prefix[$:/plugins/]!author[uzvg]]
+	-[prefix[$:/temp/]]
+	+[sort[title]]
+\end
+{{$:/core/templates/tiddlywiki5.html}}

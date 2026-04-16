@@ -89,7 +89,11 @@ title: $:/languages/zh-Hans/plugins/uzvg/twks-music/readme
 
 ; 示例：
 
+<div class="tc-table-wrapper">
+
 |tc-max-width|k
 | !平台 | !URL | !正确的 `sid` |
 | !Spotify |`https://open.spotify.com/track/6norVbAE14clVMEyDuRw1m ` |`6norVbAE14clVMEyDuRw1m` |
 | !网易云音乐 |`https://music.163.com/#/song?id=448274120 ` |`448274120` |
+
+</div>

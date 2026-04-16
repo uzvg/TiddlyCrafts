@@ -1,7 +1,7 @@
 caption: About
 created: 20260416192833154
 creator: uzvg
-modified: 20260416192833988
+modified: 20260416201633048
 modifier: uzvg
 order: 4
 parent: Home
@@ -9,11 +9,7 @@ tags:
 title: About
 type: text/vnd.tiddlywiki
 
-!! Credit:
-
-* ''TiddlyCrafts'' is developed and built using [[Modern.TiddlyDev|https://github.com/tiddly-gittly/Modern.TiddlyDev]], a modern development environment for TiddlyWiki plugins. Special thanks to the developers.
-
 !! Links:
 
-* [[Github Repo|https://github.com/uzvg/TiddlyCrafts]]
-* [[Source Site|https://uzvg.site]]
+* @@font-family:serif;font-weight:bold;[[UZVG's WikiSpace|https://uzvg.site]]@@
+* [[TiddlyCrafts Github Repo|https://github.com/uzvg/TiddlyCrafts]]

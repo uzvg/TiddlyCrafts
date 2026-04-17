@@ -1,11 +1,11 @@
 created: 20260412133426730
-modified: 20260416193221775
+modified: 20260417080449062
 title: $:/languages/en-GB/Home
 type: text/vnd.tiddlywiki
 
 !! Welcome:
 
-<<twks-image "InspiratiosFlowLikeTheWind" width:"250px" align:"right">>
+<<twks-image "TiddlyCraftsCover" width:"250px" align:"right">>
 
 Welcome to my `tiddlywiki` plugin workshop. This site is used to package and publish a collection of small TiddlyWiki plugins that I’ve developed myself, most of which originate from my [[wikispace|https://uzvg.site]].
 
@@ -30,4 +30,4 @@ I hope more people will join this vibrant community—showcasing their carefully
 
 <<tabs
 tabsList:"[parent[Home]!is[draft]sort[order]]"
-default:"plugins list">>
+default:"TiddlyCraftsList">>

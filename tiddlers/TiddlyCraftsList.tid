@@ -1,11 +1,11 @@
 caption: Plugins
 created: 20260412113329503
 creator: uzvg
-modified: 20260412114913903
+modified: 20260417080449060
 modifier: uzvg
 order: 1
 parent: Home
-title: plugins list
+title: TiddlyCraftsList
 type: text/vnd.tiddlywiki
 
 <table class="tc-max-width tiddlycrafts-table">

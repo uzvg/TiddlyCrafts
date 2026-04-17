@@ -1,11 +1,11 @@
 created: 20260412131804672
-modified: 20260416193232136
+modified: 20260417080449062
 title: $:/languages/zh-Hans/Home
 type: text/vnd.tiddlywiki
 
 !! 欢迎：
 
-<<twks-image "InspiratiosFlowLikeTheWind" width:"250px" align:"right">>
+<<twks-image "TiddlyCraftsCover" width:"250px" align:"right">>
 
 欢迎大家来到我的 `tiddlywiki` 插件工坊，该网站用于打包并发布一些我自己写的tiddlywiki小插件，它们大多来自我的[[wikispace|https://uzvg.site]]站点。
 
@@ -30,4 +30,4 @@ TiddlyWiki 是一款可塑性极强、自由度极高的开源笔记软件，它
 
 <<tabs
 	tabsList:"[parent[Home]!is[draft]sort[order]]"
-	default:"plugins list">>
+	default:"TiddlyCraftsList">>

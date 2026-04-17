@@ -1,13 +1,13 @@
 caption: Credit
 created: 20260416191348776
-modified: 20260416192809989
+modified: 20260417080344494
 order: 3
 parent: Home
 tags: 
-title: credits
+title: TiddlyCraftsCredits
 type: text/vnd.tiddlywiki
 
-!! Thanks [[ひだかま|https://bsky.app/profile/deccazilla.bsky.social]] for extra palettes:
+!!! Thanks [[ひだかま|https://bsky.app/profile/deccazilla.bsky.social]] for extra palettes:
 
 <table class="tc-max-width">
 <thead style="font-family:serif;font-weight:bold;">

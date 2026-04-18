@@ -1,0 +1,10 @@
+{
+  "name": "TiddlyCrafts",
+  "version": "1.0.0",
+  "devDependencies": {
+    "tiddlywiki": "latest"
+  },
+  "scripts": {
+    "build": "tiddlywiki --output output --render '$:/uzvg/tiddlycrafts/save/offline' 'index.html' 'text/plain'"
+  }
+}

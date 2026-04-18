@@ -1,2 +1,34 @@
 title: $:/languages/zh-Hans/plugins/uzvg/twks-twikoo/readme
 
+!! 介绍：
+
+`twks-twioo` 将轻量级评论系统 ''[[twikoo|https://twikoo.js.org/]]'' 集成到你的 TiddlyWiki 中，使你为指定的 tiddler 添加评论区。
+
+!! 后端配置：
+
+在使用本插件之前，请确保已完成以下步骤：
+
+# 按照官方文档 👉 [[Twikoo 快速开始指南|https://twikoo.js.org/]] 部署好相应的后端服务（例如 Vercel，CloudFlare）。
+# 并从你的 Twikoo 后端服务中获取有效的 `envId`（环境 ID）。
+
+> 注意：必须正确配置并确保后端服务可访问，否则评论系统将无法正常工作。
+
+!! TiddlyWiki 前端配置：
+
+进入 `Settings` 标签页，在 TiddlyWiki 中配置你的插件。
+
+!! 配置文件备份：
+
+Twikoo 的配置文件保存在 [[$:/config/twks-twikoo]] 中，你可以导出该 tiddler 以备份配置。
+
+!! ⚠️ 需要注意的是:
+
+* 该配置文件中的信息，比如之前的`envId`等信息，并非敏感信息，它相当于只是你部署好的数据库的入口地址。
+* 在配置好twikoo的后台部署后，你需要进入twikoo的后台管理面板，指定twikoo的域名。
+
+!! 其他：
+
+* [[GitHub 仓库|https://github.com/uzvg/TiddlyCrafts/tree/main/plugins/twks-twikoo]]
+* 请确保你的 Twikoo 后端服务正在运行且可访问。
+* 请谨慎配置 `path` 和 `filter` 表达式，使其与 TiddlyWiki 的语法相匹配。
+* 如发现问题或希望参与贡献，请在下方的评论区反馈；当然，也可以通过 [[GitHub|https://github.com/uzvg/TiddlyCrafts/]] 仓库提交 issue 或 PR。

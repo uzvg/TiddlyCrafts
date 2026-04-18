@@ -1,6 +1,6 @@
 {
     "envId": "https://twikoo-vercel-red-kappa.vercel.app",
-    "lang": "en-gb",
+    "lang": "zh-cn",
     "region": "",
     "user-filter": "[<storyTiddler>!is[missing]!is[system]!is[image]has[text]] [<storyTiddler>plugin-type[plugin]author[uzvg]]"
 }

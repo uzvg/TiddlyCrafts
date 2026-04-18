@@ -1,43 +1,45 @@
 caption: Plugins
 created: 20260412113329503
 creator: uzvg
-modified: 20260417080449060
+modified: 20260417090859171
 modifier: uzvg
 order: 1
 parent: Home
 title: TiddlyCraftsList
 type: text/vnd.tiddlywiki
 
-<table class="tc-max-width tiddlycrafts-table">
-<thead>
-<tr>
-	<td>No</td>
-	<td>Plugins</td>
-	<td>Description</td>
-	<td>Version</td>
-	<td>Source</td>
-</tr>
-</thead>
-	<$list filter="[prefix[$:/plugins/uzvg/]]" counter="counter">
-		<$let
-			name={{{ [<currentTiddler>get[name]] }}}
-			version={{{ [<currentTiddler>get[version]] }}}
-			desc={{{ [<currentTiddler>get[description]] }}}
-			source={{{ [<currentTiddler>get[source]] }}}>
-			<tr>
-				<td> <strong> <<counter>> </strong></td>
-				<td>
-					<$link to=<<currentTiddler>>> <<name>> </$link>
-				</td>
-				<td> <<desc>> </td>
-				<td> <<version>> </td>
-				<td>
-					<a href=<<source>>>GitHub</a>
-				</td>
-			</tr>
-		</$let>
-	</$list>
-</table>
+<div class="tc-table-wrapper">
+	<table class="tc-max-width tiddlycrafts-table">
+	<thead>
+	<tr>
+		<td>No</td>
+		<td>Plugins</td>
+		<td>Description</td>
+		<td>Version</td>
+		<td>Source</td>
+	</tr>
+	</thead>
+		<$list filter="[prefix[$:/plugins/uzvg/]]" counter="counter">
+			<$let
+				name={{{ [<currentTiddler>get[name]] }}}
+				version={{{ [<currentTiddler>get[version]] }}}
+				desc={{{ [<currentTiddler>get[description]] }}}
+				source={{{ [<currentTiddler>get[source]] }}}>
+				<tr>
+					<td> <strong> <<counter>> </strong></td>
+					<td>
+						<$link to=<<currentTiddler>>> <<name>> </$link>
+					</td>
+					<td> <<desc>> </td>
+					<td> <<version>> </td>
+					<td>
+						<a href=<<source>>>GitHub</a>
+					</td>
+				</tr>
+			</$let>
+		</$list>
+	</table>
+</div>
 
 <style>
 	.tiddlycrafts-table > thead td {

@@ -47,12 +47,12 @@ caption: settings
 <div class="tc-table-wrapper">
 
 |tc-max-width tc-first-col-min-width twks-twikoo-settings-table|k
-| !Parameter | !Description | !Set Value |
-|`envId`(required)|Your Twikoo environment ID (Tencent Cloud) or Vercel deployment URL |<$edit-text tiddler=<<configTiddler>> index="envId" placeholder="envId (Required)" class="tc-edit-texteditor" tag="input"/>|
-|`lang`(optional)|Language for the comment interface (default: `zh-cn`) |<<lang-selector>>|
-|`region`(optional)|Environmental region, the default is `ap-Shanghai`, Tencent cloud environment fills in `ap-Shanghai` or `ap-guangzhou`; Vercel environment choose EMPTY. |<<region-selector>>|
-|`path`(optional)|Filter expression to distinguish different articles, default is to get the `created` field value. |<$edit-text tiddler=<<configTiddler>> index="path-filter" class="tc-edit-texteditor" placeholder="path(Optional)" tag="input"/>|
-|`filter`(optional)|Filter expression to determine which tiddlers will display the Twikoo comment section. |<$edit-text tiddler=<<configTiddler>> index="user-filter" placeholder="user-filter(Optional)" class="tc-edit-texteditor" tag="input"/>|
+| !Parameter | !Description | !Value |
+|`envId` |`(required)` Your Twikoo environment ID (Tencent Cloud) or Vercel deployment URL |<$edit-text tiddler=<<configTiddler>> index="envId" placeholder="envId (Required)" class="tc-edit-texteditor" tag="input"/>|
+|`lang` |`(optional)` Language for the comment interface (default: `zh-cn`) |<<lang-selector>>|
+|`region` |`(optional)`Environmental region, the default is `ap-Shanghai`, Tencent cloud environment fills in `ap-Shanghai` or `ap-guangzhou`; Vercel environment choose EMPTY. |<<region-selector>>|
+|`path` |`(optional)` Filter expression to distinguish different articles, default is to get the `created` field value. |<$edit-text tiddler=<<configTiddler>> index="path-filter" class="tc-edit-texteditor" placeholder="path(Optional)" tag="input"/>|
+|`filter` |`(optional)` Filter expression to determine which tiddlers will display the Twikoo comment section. |<$edit-text tiddler=<<configTiddler>> index="user-filter" placeholder="user-filter(Optional)" class="tc-edit-texteditor" tag="input"/>|
 
 </div>
 

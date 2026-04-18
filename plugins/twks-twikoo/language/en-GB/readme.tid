@@ -1,8 +1,8 @@
 title: $:/languages/en-GB/plugins/uzvg/twks-twikoo/readme
 
-!! Twikoo Comments for TiddlyWiki:
+!! Introduce:
 
-This plugin integrates ''Twikoo'' (a lightweight commenting system) into your TiddlyWiki, allowing you to add a comment section to specific tiddlers.
+This plugin `twks-twioo` integrates ''[[twikoo|https://twikoo.js.org/]]'' (a lightweight commenting system) into your TiddlyWiki, allowing you to add a comment section to specific tiddlers.
 
 !! Backend Configuration Prerequisites:
 

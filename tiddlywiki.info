@@ -31,6 +31,15 @@
             "index.html",
             "text/plain"
         ],
+        "cloudflare": [
+            "--setfield", "[[$:/config/SaverFilter]]", "text", "", "text/plain",
+            "--setfield", "[[$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/import]]", "text", "$:/uzvg/values/hide", "text/plain",
+            "--setfield", "[[$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/refresh]]", "text", "$:/uzvg/values/hide", "text/plain",
+            "--setfield", "[[$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-tiddler]]", "text", "$:/uzvg/values/hide", "text/plain",
+            "--setfield", "[[$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/save-wiki]]", "text", "$:/uzvg/values/hide", "text/plain",
+            "--setfield", "[[$:/DefaultTiddlers]]", "text", "$:/uzvg/values/Home", "text/plain",
+            "--render", "[[$:/uzvg/tiddlycrafts/save/offline]]", "index.html", "text/plain"
+        ],
         "static": [
             "--render",
             "$:/core/templates/static.template.html",

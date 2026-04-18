@@ -5,19 +5,6 @@
     "tiddlywiki": "latest"
   },
   "scripts": {
-    "build": [
-      "tiddlywiki",
-      "--output",
-      "output",
-      "--render",
-      "$:/uzvg/tiddlycrafts/save/offline",
-      "index.html",
-      "text/plain",
-      "--setfield",
-      "[[$:/config/SaverFilter]]",
-      "text",
-      "",
-      "text/plain"
-    ]
+    "build": "tiddlywiki --build cloudflare" 
   }
 }

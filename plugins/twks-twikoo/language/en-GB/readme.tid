@@ -1,5 +1,7 @@
 title: $:/languages/en-GB/plugins/uzvg/twks-twikoo/readme
 
+> ⚠️ This plugin is no longer maintained. Due to the inability to properly send the corresponding tiddler URL to users via email, the project has been temporarily suspended.
+
 !! Introduce:
 
 This plugin `twks-twioo` integrates ''[[twikoo|https://twikoo.js.org/]]'' (a lightweight commenting system) into your TiddlyWiki, allowing you to add a comment section to specific tiddlers.
@@ -19,7 +21,7 @@ Go to `Settings` tab to configure your twikoo comment plugin in tiddlywiki.
 
 !! Twikoo Config backup:
 
-The twikoo configs was saved in [[$:/config/tw-twikoo]] tiddler, you can export the tiddler and backup your twikoo config.
+The twikoo configs was saved in [[$:/config/twks-twikoo]] tiddler, you can export the tiddler and backup your twikoo config.
 
 !! Source Code & Issue:
 

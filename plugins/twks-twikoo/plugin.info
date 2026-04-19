@@ -3,9 +3,10 @@
   "name": "twks-twikoo",
   "author": "uzvg",
   "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-twikoo",
-  "description": "Displaying images in a styled card layout, supporting both internal image tiddlers and external image URLs",
+  "description": "Integrate twikoo(a lightweight comment system) into your tiddlywiki",
   "plugin-type": "plugin",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "core-version": ">=5.3.8",
+  "stability":"STABILITY_0_DEPRECATED",
   "list": "readme license tree settings contents"
 }

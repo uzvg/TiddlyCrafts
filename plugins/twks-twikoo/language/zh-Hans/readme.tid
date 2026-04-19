@@ -1,5 +1,7 @@
 title: $:/languages/zh-Hans/plugins/uzvg/twks-twikoo/readme
 
+> ⚠️ 当前插件已不再维护，因暂时无法解决将tiddler对应的网址正确发送至用户邮箱的问题，项目暂时搁置。
+
 !! 介绍：
 
 `twks-twioo` 将轻量级评论系统 ''[[twikoo|https://twikoo.js.org/]]'' 集成到你的 TiddlyWiki 中，使你为指定的 tiddler 添加评论区。
@@ -20,11 +22,6 @@ title: $:/languages/zh-Hans/plugins/uzvg/twks-twikoo/readme
 !! 配置文件备份：
 
 Twikoo 的配置文件保存在 [[$:/config/twks-twikoo]] 中，你可以导出该 tiddler 以备份配置。
-
-!! ⚠️ 需要注意的是:
-
-* 该配置文件中的信息，比如之前的`envId`等信息，并非敏感信息，它相当于只是你部署好的数据库的入口地址。
-* 在配置好twikoo的后台部署后，你需要进入twikoo的后台管理面板，指定twikoo的域名。
 
 !! 其他：
 

@@ -5,7 +5,8 @@
   "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-alerter",
   "description": "A Callout / Alert Block Procedure",
   "plugin-type": "plugin",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "core-version": ">=5.3.8",
+  "stability": "STABILITY_2_STABLE",
   "list": "readme demo license tree contents"
 }

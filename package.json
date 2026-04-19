@@ -1,0 +1,11 @@
+{
+  "name": "tiddlycrafts",
+  "devDependencies": {
+    "tiddlywiki": "^5.3.8",
+    "wrangler": "^4.83.0"
+  },
+  "scripts": {
+    "build": "tiddlywiki --build cloudflare",
+    "deploy": "wrangler pages deploy output --project-name=tiddlycrafts"
+  }
+}

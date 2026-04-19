@@ -3,9 +3,10 @@
   "name": "twks-image",
   "author": "uzvg",
   "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-image",
-  "description": "Displaying images in a styled card layout, supporting both internal image tiddlers and external image URLs",
+  "description": "Displaying images in a styled card layout, click the image will navigate to the image tiddler",
   "plugin-type": "plugin",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "core-version": ">=5.3.8",
+  "stability": "STABILITY_2_STABLE",
   "list": "readme license tree contents"
 }

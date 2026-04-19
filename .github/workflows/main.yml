@@ -1,0 +1,28 @@
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Cloudflare Pages
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      # 用 TiddlyWiki 直接构建
+      - name: Build TiddlyWiki
+        run: |
+          npx tiddlywiki --build index
+
+      # 安装 wrangler
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      # 部署
+      - name: Deploy
+        run: |
+          wrangler pages deploy ./output \
+            --project-name=tiddlycrafts
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

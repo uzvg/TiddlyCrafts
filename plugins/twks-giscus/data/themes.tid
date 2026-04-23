@@ -1,0 +1,28 @@
+title: $:/plugins/uzvg/twks-giscus/data/themes
+type: application/x-tiddler-dictionary
+
+light: Light
+light_high_contrast: Light High Contrast
+light_protanopia: Light Protanopia
+light_tritanopia: Light Tritanopia
+dark: Dark
+dark_high_contrast: Dark High Contrast
+dark_protanopia: Dark Protanopia
+dark_tritanopia: Dark Tritanopia
+dark_dimmed: Dark Dimmed
+preferred_color_scheme: Preferred Color Scheme
+transparent_dark: Transparent Dark
+noborder_light: Noborder Light
+noborder_dark: Noborder Dark
+noborder_gray: Noborder Gray
+cobalt: RStudio Cobalt
+purple_dark: Purple Dark
+gruvbox: Gruvbox
+gruvbox_dark: Gruvbox Dark
+gruvbox_light: Gruvbox Light
+catppuccin_latte: Catppuccin Latte
+catppuccin_frappe: Catppuccin Frappe
+catppuccin_macchiato: Catppuccin Macchiato
+catppuccin_mocha: Catppuccin Mocha
+fro: Fro
+custom: Custom

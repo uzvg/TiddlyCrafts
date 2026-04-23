@@ -1,0 +1,145 @@
+title: $:/plugins/uzvg/twks-giscus/settings
+caption: settings
+
+<!-- twks-giscus config tiddler for saving configs -->
+\procedure configTiddler() $:/config/twks-twikoo
+
+<!-- Generate options from the optionsList -->
+\procedure list-selector(tiddler,index,placeholder,optionsList,class)
+<$select
+	tiddler=<<tiddler>>
+	index=<<index>>
+	class=<<class>>>
+	<option disabled><<placeholder>></option>
+	<$list filter="[enlist<optionsList>]" variable="option">
+		<option> <<option>> </option>
+	</$list>
+</$select>	
+\end
+
+<!-- Generate options from the dataTiddler -->
+\procedure data-selector(dataTiddler,placeholder,tiddler,index,class,default)
+\function get-option-title() [<dataTiddler>getindex<option>]
+<$select
+	tiddler=<<tiddler>>
+	index=<<index>>
+	default=<<default>>
+	class=<<class>>>
+	<option disabled><<placeholder>></option>
+	<$list filter="[<dataTiddler>get[text]indexes[]]" variable="option">
+		<option value=<<option>>>
+			<<get-option-title>>
+		</option>
+	</$list>
+</$select>	
+\end
+
+<!-- Giscus language selector -->
+\procedure lang-selector()
+<$transclude $variable="data-selector"
+	dataTiddler="$:/plugins/uzvg/twks-giscus/data/languages"
+	placeholder="LANGUAGE"
+	tiddler=<<configTiddler>>
+	index="lang"/>
+\end
+
+<!-- Giscus theme selector -->
+\procedure theme-selector()
+<$transclude $variable="data-selector"
+	dataTiddler="$:/plugins/uzvg/twks-giscus/data/themes"
+	placeholder="THEME"
+	tiddler=<<configTiddler>>
+	index="theme"/>
+\end
+
+<!-- Discuss category selector -->
+\procedure category-selector()
+<$transclude $variable="list-selector"
+	tiddler=<<configTiddler>>
+	index="category"
+	placeholder="Pick a Category"
+	optionsList="Announcements General Ideas Polls Q&A [[Show and tell]]"/>
+\end
+
+<!-- Input position selector -->
+\procedure position-selector()
+<$transclude $variable="list-selector"
+	tiddler=<<configTiddler>>
+	index="position"
+	placeholder="Pick position"
+	optionsList="top bottom"/>
+\end
+
+
+!! Settings:
+
+<!-- <$giscus
+  repo="uzvg/publicwikispace"
+  repoId="R_kgDOOKXM8g"
+  category="Announcements"
+  categoryId="DIC_kwDOOKXM8s4C7FiI"
+  mapping="specific"
+  term="https://uzvg.site/#comments-20260419164818295"
+  strict="1"
+  reactionsEnabled="1"
+  emitMetadata="0"
+  inputPosition="top"
+  theme="cobalt"
+  lang="en"
+  loading="lazy"
+/> -->
+
+<!-- items need to set:
+* site url prefix ✅
+* github repo ✅
+* github repoid ✅
+* category list selector
+* languages ✅
+* categoryid ✅
+* reactionEnable
+* emitMetadata
+* theme ✅
+* inputPosition top bottom ✅
+* 
+ -->
+
+<div class="tc-table-wrapper">
+
+|tc-max-width tc-first-col-min-width twks-giscus-settings-table|k
+| !Setting | !Value |
+|`SiteUrl` |<$edit-text tiddler=<<configTiddler>> index="site-url" placeholder="(Required) https://xxx.com" class="tc-edit-texteditor" tag="input"/>|
+|`Repository` |<$edit-text tiddler=<<configTiddler>> index="repo" placeholder="(Required) ex: myusename/myrepo" class="tc-edit-texteditor" tag="input"/>|
+|`RepoId` |<$edit-text tiddler=<<configTiddler>> index="repo-id" placeholder="(Required)" class="tc-edit-texteditor" tag="input"/>|
+|`Category` |<<category-selector>>|
+|`CategoryId` |<$edit-text tiddler=<<configTiddler>> index="cate-id" placeholder="(Required)" class="tc-edit-texteditor" tag="input"/>|
+|`lang` |<<lang-selector>>|
+|`theme` |<<theme-selector>>|
+|`filter` |<$edit-text tiddler=<<configTiddler>> index="user-filter" placeholder="user-filter(Optional)" class="tc-edit-texteditor" tag="input"/>|
+
+</div>
+
+!! Details:
+
+!!! path:
+
+The `path` parameter in `twikoo` is used to specify the mapping relationship between articles and their corresponding Twikoo comment sections. The path value is a filter expression that determines the comment path for each tiddler. Its default value is `[<storyTiddler>get[created]]`. The reason we use the `created` field instead of the `title` field is that if we used the title, renaming a tiddler would cause the original comment section to become disconnected. Using the `created` timestamp avoids this issue.
+
+!!! filter:
+
+The `filter` setting is also a filter expression that determines which tiddlers will display the Twikoo comment section.
+
+The default filter expression is:
+
+```
+[all[current]!is[system]!visibility[private]!is[draft]!is[image]!tag[Journal]]
+```
+
+You can customize this filter expression. For example, `[all[current]tag[PermanentNotes]]` would add comment sections to all tiddlers tagged with "PermanentNotes".
+
+<!-- twikoo config document 👉 https://twikoo.js.org/frontend.html#%E9%80%9A%E8%BF%87-cdn-%E5%BC%95%E5%85%A5
+* envId: '您的环境id', // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
+* el: '#tcomment', // 容器元素
+* region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，腾讯云环境填 ap-shanghai 或 ap-guangzhou；Vercel 环境不填
+* path: location.pathname, // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
+* lang: 'zh-CN', // 用于手动设定评论区语言，支持的语言列表 https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js
+-->

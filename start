@@ -1,0 +1,6 @@
+#!/usr/bin/zsh
+
+print "Starting tiddlywiki..."
+tiddlywiki --listen port="9100"
+
+#vim: ft=zsh

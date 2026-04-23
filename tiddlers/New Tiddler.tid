@@ -1,0 +1,21 @@
+created: 20260419164818295
+modified: 20260419172314237
+tags: 
+title: New Tiddler
+type: text/vnd.tiddlywiki
+
+<$giscus
+  repo="uzvg/publicwikispace"
+  repoId="R_kgDOOKXM8g"
+  category="Announcements"
+  categoryId="DIC_kwDOOKXM8s4C7FiI"
+  mapping="specific"
+  term="https://uzvg.site/#comments-20260419164818295"
+  strict="1"
+  reactionsEnabled="1"
+  emitMetadata="1"
+  inputPosition="top"
+  theme="cobalt"
+  lang="en"
+  loading="lazy"
+/>

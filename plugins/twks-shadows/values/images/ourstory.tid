@@ -1,0 +1,7 @@
+title: $:/uzvg/FieldValues/images/ourstory
+tags: FieldValues
+
+\procedure domain-prefix() https://images.uzvg.site/ourstory/
+\function get-image-basename() [<currentTiddler>split[.]first[]]
+\function get-image-url() [<domain-prefix>addsuffix<get-image-basename>addsuffix[.avif]]
+<<get-image-url>>

@@ -1,0 +1,97 @@
+title: $:/plugins/uzvg/twks-giscus/procedures/twks-giscus-comment
+code-body: yes
+
+<!-- twks giscus comment -->
+\procedure twks-giscus-comment()
+\procedure stateTiddler() $:/state/twks-giscus
+
+\function get-state-cid() [<stateTiddler>get[text]]
+\function get-current-cid()
+  [<storyTiddler>get[created]]
+  :else[encodeuricomponent<storyTiddler>]
+\end get-current-cid
+
+\function get-btn-icon()
+  [<get-state-cid>match[get-current-cid]]
+  :then[[$:/plugins/uzvg/twks-giscus/icons/comment_on]]
+  :else[[$:/plugins/uzvg/twks-giscus/icons/comment_off]]
+\end get-btn-icon
+
+\function get-btn-title()
+  [<get-state-cid>match<get-current-cid>]
+  :then[[Close Comments]]
+  :else[[Open Comments]]
+\end get-btn-title
+
+\function get-state-value()
+  [<get-state-cid>match<get-current-cid>]
+  :then[[]]
+  :else[<get-current-cid>]
+\end get-state-value
+
+\procedure set-comment-actions()
+<$action-setfield
+  $tiddler=<<stateTiddler>>
+  text=<<get-state-value>>/>
+\end set-comment-actions
+
+<!-- twks giscus comment toggle button -->
+\procedure twks-giscus-comment-btn()
+<div class="twks-giscus-comment-btn-wrapper">
+  <$button
+    actions=<<set-comment-actions>>
+    class="twks-giscus-comment-btn">
+    <$transclude $variable=<<get-btn-icon>>/>
+    <<get-btn-title>>
+  </$button>
+</div>
+\end twks-giscus-comment-btn
+
+<!--invoke giscus widget-->
+\procedure twks-giscus-frame()
+\function get-giscus-term()
+  [<siteUrl>]
+  [[/GISCUSCOMMENTS/]]
+  [<get-current-cid>]
+  +[join[]]
+\end get-giscus-term
+
+<$let
+  configTiddler="$:/config/twks-giscus"
+  colorScheme={{{ [[$:/palette]get[text]get[color-scheme]] }}}
+  darkTheme={{{ [<configTiddler>getindex[dark-theme]] }}}
+  lightTheme={{{ [<configTiddler>getindex[light-theme]] }}}
+  siteUrl={{{ [<configTiddler>getindex[site-url]] }}}
+  term=<<get-giscus-term>>
+  repo={{{ [<configTiddler>getindex[repo]] }}}
+  repoId={{{ [<configTiddler>getindex[repo-id]] }}}
+  category={{{ [<configTiddler>getindex[category]] }}}
+  categoryId={{{ [<configTiddler>getindex[cate-id]] }}}
+  lang={{{ [<configTiddler>getindex[lang]] }}}
+  reactionsEnabled={{{ [<configTiddler>getindex[reactions-enable]] }}}
+  emitMetadata={{{ [<configTiddler>getindex[emit-metadata]] }}}
+  inputPosition={{{ [<configTiddler>getindex[input-position]] }}}
+  theme={{{ [<colorScheme>match[light]then<lightTheme>else<darkTheme>] }}}>
+  <$giscus
+    repo=<<repo>>
+    repoId=<<repoId>>
+    category=<<category>>
+    categoryId=<<categoryId>>
+    mapping="specific"
+    term=<<term>>
+    strict="1"
+    reactionsEnabled=<<reactionsEnabled>>
+    emitMetadata=<<emitMetadata>>
+    inputPosition=<<inputPosition>>
+    theme=<<theme>>
+    lang=<<lang>>
+    loading="lazy"/>
+</$let>
+\end twks-giscus-frame
+
+<!-- Main Procedure -->
+<<twks-giscus-comment-btn>>
+<$reveal type="match" state=<<stateTiddler>> text=<<get-current-cid>>>
+  <<twks-giscus-frame>>
+</$reveal>
+\end

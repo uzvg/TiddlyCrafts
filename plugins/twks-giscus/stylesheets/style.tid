@@ -1,2 +1,7 @@
 title: $:/plugins/uzvg/twks-giscus/stylesheets/twks-giscus.css
 tags: $:/tags/Stylesheet
+
+.twks-giscus-settings-table td:first-child {
+  font-weight: bold;
+  width: 6em;
+}

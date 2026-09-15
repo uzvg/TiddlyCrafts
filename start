@@ -1,6 +1,7 @@
 #!/usr/bin/zsh
 
 print "Starting tiddlywiki..."
+gio open "http://127.0.0.1:9100"
 tiddlywiki --listen port="9100"
 
 #vim: ft=zsh

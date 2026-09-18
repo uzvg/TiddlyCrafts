@@ -1,0 +1,43 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/settings
+tags: $:/tags/ControlPanel/SettingsTab
+caption: TiddlyFlashcards
+
+<!-- Settings:
+    1. Tiddlyflashcards panel display filter
+    2. DeckMapping rules
+    3. TagMapping rules
+ -->
+
+\function tf-config(suffix) [[$:/config/TiddlyFlashcards/]addsuffix<suffix>]
+<table class="tc-max-width tc-edit-max-width tc-first-col-min-width">
+    <tr>
+        <td>
+            <$link to=<<tf-config "DisplayFilter">> tooltip="Filter">
+                Display Filter
+            </$link>
+        </td>
+        <td>
+            <$edit class="tc-edit-texteditor" tiddler=<<tf-config "DisplayFilter">> autoHeight="yes"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <$link to=<<tf-config "DeckMappingRules">> tooltip="Filter">
+                DeckMapping rules
+            </$link>
+        </td>
+        <td>
+            <$edit class="tc-edit-texteditor" tiddler=<<tf-config "DeckMappingRules">> autoHeight="yes"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <$link to=<<tf-config "TagMappingRules">> tooltip="Filter">
+                TagMapping rules
+            </$link>
+        </td>
+        <td>
+            <$edit class="tc-edit-texteditor" tiddler=<<tf-config "TagMappingRules">> autoHeight="yes"/>
+        </td>
+    </tr>
+</table>

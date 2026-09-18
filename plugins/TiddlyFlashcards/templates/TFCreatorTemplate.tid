@@ -1,0 +1,6 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/templates/TFCreatorTemplate
+code-body: yes
+
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-creator]]
+
+<<tf-card-creator>>

@@ -1,0 +1,53 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-creator
+
+\procedure tf-card-creator()
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-creator-actions]]
+
+\function get-editor-placeholder() [<currentTab>get[placeholders-list]enlist-input[]nth<nth>else[]]
+\function get-editor-class() [<currentTab>get[editor-class-list]enlist-input[]nth<nth>else[tc-edit-texteditor]]
+
+<$let
+    identifier={{{ [<storyTiddler>get[created]] }}}
+    storeTiddler={{{ [qualify $:/temp/TiddlyFlashcards] }}}
+    storageFolder="$:/Storage/TiddlyFlashcards/DataTiddlers/"
+    dataTiddler={{{ [<storageFolder>addsufix<identifier>] }}}
+    explicitStateTiddler={{{ [[$:/state/TiddlyFlashcards/CardCreatorTabs/]addsufix<identifier>] }}}>
+
+    <$keyboard key="((tf-new-card))" actions=<<action.new-card>>>
+    <$keyboard key="((tf-switch-previous-tab))" actions=<<action.switch-previous-tab>>>
+    <$keyboard key="((tf-switch-next-tab))" actions=<<action.switch-next-tab>>>
+    <$keyboard key="escape" actions=<<action.delete-store>>>
+        <div class="twks-flashcards-creator">
+
+            <$list filter="[<currentTab>get[fields-list]enlist-input[]]" variable="currentField" counter="index">
+                <$let
+                    currentPlaceholder=<<get-editor-placeholder>>
+                    editorClass=<<get-editor-class>>>
+                    <$keyboard key="((tf-focus-previous-input))" actions=<<action.focus-previous-input>>>
+                    <$keyboard key="((tf-focus-next-input))" actions=<<action.focus-next-input>>>
+                        <div class="tc-flex tc-flex-row">
+                            <label><b><<currentField>>:</b></label>
+                            <$edit
+                                tiddler=<<storeTiddler>>
+                                field=<<currentField>>
+                                focus={{{ [<explicitStateTiddler>is[tiddler]then[yes]] }}}
+                                placeholder=<<currentPlaceholder>>
+                                class=<<editorClass>>/>
+                        </div>
+                    </$keyboard>
+                    </$keyboard>
+                </$let>
+            </$list>
+
+        </div>
+
+    </$keyboard>
+    </$keyboard>
+    </$keyboard>
+    </$keyboard>
+    </$keyboard>
+    </$keyboard>
+
+</$let>
+
+\end tf-card-creator

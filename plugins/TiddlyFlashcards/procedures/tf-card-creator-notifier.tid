@@ -1,0 +1,16 @@
+title: $:/plugins/uzvg/Procedures/tf-card-creator-notifier
+code-body: yes
+
+<!-- send notifications if has empty fields -->
+\procedure notifier.invalid-fields()
+<$action-sendmessage
+	$message="tm-notify"
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/InvalidFieldsWarning"/>
+\end notifier.invalid-fields
+
+<!-- send notifications when card created done -->
+\procedure notifier.new-card()
+<$action-sendmessage
+	$message="tm-notify"
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/CreateNewCard"/>
+\end notifier.new-card

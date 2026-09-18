@@ -1,0 +1,16 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/ViewTemplate
+tags: $:/tags/ViewTemplate
+code-body: yes
+
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-creator-tabs]]
+
+<$let
+    configTiddler="$:/config/TiddlyFlashcards/DisplayFilter"
+    displaySubfilter={{{ [<configTiddler>get[text]] }}}>
+
+    <% if [<storyTiddler>!has[tf-hide]subfilter<displaySubfilter>] %>
+        <<tf-card-creator-tabs>>
+        <<tf-card-list>>
+    <% endif %>
+
+</$let>

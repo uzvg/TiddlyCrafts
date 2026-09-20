@@ -1,0 +1,8 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Models/TFPair
+caption: TFPair
+tags: $:/tags/TFModels
+fields-list: Front Back
+model-name: TFPair
+model-versin: 1.0
+order: 4
+code-body: yes

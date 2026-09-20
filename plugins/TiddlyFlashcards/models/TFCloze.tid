@@ -1,0 +1,9 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Models/TFCloze
+caption: TFCloze
+tags: $:/tags/TFModels
+fields-list: Text [[Back Extra]]
+required-fields: Text
+model-name: TFCloze
+model-versin: 1.0
+order: 2
+code-body: yes

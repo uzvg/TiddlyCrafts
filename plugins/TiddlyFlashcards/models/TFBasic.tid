@@ -1,0 +1,8 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Models/TFBasic
+caption: TFBasic
+tags: $:/tags/TFModels
+fields-list: Front Back
+model-name: TFBasic
+model-versin: 1.0
+order: 1
+code-body: yes

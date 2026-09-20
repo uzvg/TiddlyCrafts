@@ -1,0 +1,8 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Models/TFOptionalPair
+caption: TFOptionalPair
+tags: $:/tags/TFModels
+fields-list: Front Back [[Add Reverse]]
+model-name: TFOptionalPair
+model-versin: 1.0
+order: 5
+code-body: yes

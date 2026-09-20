@@ -1,60 +1,98 @@
-title: $:/plugins/uzvg/Procedures/tf-card-creator-actions
+title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions
 code-body: yes
 
 <!-- ---------------- focus on nth input ---------------- -->
 \procedure action.focus-nth-input(nth)
 <$let
-	selector-pattern=".twks-flashcards-creator .tc-flex-row:nth-child($(nth)$) textarea"
+	selector-pattern="""[data-tiddler-title="$(storyTiddler)$"] [data-input-index="$(nth)$"] textarea"""
 	focus-selector={{{ [<selector-pattern>substitute[]] }}}>
 	<$action-sendmessage
 		$message="tm-focus-selector"
 		$param=<<focus-selector>>
 		focusVisible="true"
 		preventScroll="true"/>
+	<!-- Debug action
+	<$action-log $$message="Debug" focus-selector=<<focus-selector>>/> -->
 </$let>
 \end action.focus-nth-input
 
+<!-- Save input index when click on the textarea  -->
+\procedure action.click-input()
+<$action-setfield $tiddler=<<stateTiddler>> focus-index=<<dom-data-input-index>>/>
+\end action.click-input
+
 <!-- ---------------- switch to next tab ---------------- -->
 \procedure action.switch-next-tab()
-<$let
-    get-tabs-list="[tag[$:/tags/TFModels]!is[draft]sort[order]]"
-    nextTab={{{ [subfilter<get-tabs-list>after<currentTab>else<currentTab>] }}}>
-    <$action-setfield $tiddler=<<explicitStateTiddler>> text=<<nextTab>>/>
-</$let>
+<%if [<mode>match[create]] %>
+	<$let
+		get-tabs-list="[all[tiddlers+shadows]tag[$:/tags/TFModels]!is[draft]sort[order]]"
+		nextTab={{{ [subfilter<get-tabs-list>after<modelTiddler>] }}}>
+		<%if [<nextTab>!is[blank]] %>
+			<$action-setfield $tiddler=<<stateTiddler>> text=<<nextTab>> focus-index="1"/>
+		<% else %>
+			<<action.focus-nth-input nth="1">>
+		<% endif %>
+
+	</$let>
+<% endif %>
 \end action.switch-next-tab
 
 <!-- ---------------- switch to previous tab ---------------- -->
-
 \procedure action.switch-previous-tab()
-<$let
-    get-tabs-list="[tag[$:/tags/TFModels]!is[draft]sort[order]]"
-    previousTab={{{ [subfilter<get-tabs-list>before<currentTab>else<currentTab>] }}}>
-    <$action-setfield $tiddler=<<explicitStateTiddler>> text=<<previousTab>>/>
-</$let>
-
+<%if [<mode>match[create]] %>
+	<$let
+		get-tabs-list="[all[tiddlers+shadows]tag[$:/tags/TFModels]!is[draft]sort[order]]"
+		previousTab={{{ [subfilter<get-tabs-list>before<modelTiddler>] }}}>
+		<%if [<previousTab>!is[blank]] %>
+			<$action-setfield $tiddler=<<stateTiddler>> text=<<previousTab>> focus-index="1"/>
+		<% else %>
+			<<action.focus-nth-input nth="1">>
+		<% endif %>
+	</$let>
+<% endif %>
 \end action.switch-previous-tab
 
 <!-- ---------------- focus on next input ---------------- -->
-
 \procedure action.focus-next-input()
 <$let
-    totalNum={{{ [<currentTab>get[fields-list]enlist-input[]count[]] }}}
-    nth={{{ [<index>add[1]compare:number:lteq<totalNum>else<index>] }}}>
-    <$transclude $variable="action.focus-nth-input" nth=<<nth>>/>
+	inputCount={{{ [<modelTiddler>get[fields-list]enlist-input[]count[]] }}}
+	currentIndex={{{ [<stateTiddler>get[focus-index]else[1]] }}}
+	nextIndex={{{ [<currentIndex>add[1]compare:number:lt<inputCount>else<inputCount>] }}}>
+	<!-- <$action-log $$message="Debug"
+		currentIndex=<<currentIndex>>
+		nextIndex=<<nextIndex>>
+		stateTiddler=<<stateTiddler>>
+		default=<<default>>
+		state={{{ [<stateTiddler>get[text]] }}}/> -->
+		<!-- Save default tab -->
+	<%if [<stateTiddler>!is[tiddler]] %>
+		<$action-setfield $tiddler=<<stateTiddler>> text=<<default>>/>
+	<% endif %>
+	<%if [<currentIndex>compare:number:ne<nextIndex>] %>
+		<$action-setfield $tiddler=<<stateTiddler>> focus-index=<<nextIndex>>/>
+	<% endif %>
+	<<action.focus-nth-input nth=<<nextIndex>>>>
 </$let>
-
 \end action.focus-next-input
 
 <!-- ---------------- focus on previous input ---------------- -->
-
 \procedure action.focus-previous-input()
-<$transclude
-    $variable="action.focus-nth-input"
-    nth={{{ [<index>subtract[1]compare:number:gteq[1]else<index>] }}} />
+<$let
+    inputCount={{{ [<modelTiddler>get[fields-list]enlist-input[]count[]] }}}
+	currentIndex={{{ [<stateTiddler>get[focus-index]] }}}
+    previousIndex={{{ [<currentIndex>subtract[1]compare:number:gt[1]else[1]] }}}>
+	<%if [<stateTiddler>!is[tiddler]] %>
+		<$action-setfield $tiddler=<<stateTiddler>> text=<<default>>/>
+	<% endif %>
+	<%if [<currentIndex>compare:number:ne<previousIndex>] %>
+		<$action-setfield $tiddler=<<stateTiddler>> focus-index=<<previousIndex>>/>
+	<% endif %>
+	<<action.focus-nth-input nth=<<previousIndex>>>>
+</$let>
 \end action.focus-previous-input
 
 <!-- Action to set tiddlywiki flascards note field value -->
-\procedure action.set-note(dataTiddler,noteId,noteData)
+\widget action.set-note(dataTiddler,noteId,noteData)
 \function get-target-data() [<dataTiddler>get[text]else[]jsonset:json<noteId>,<noteData>format:json[2]]
 
 <$action-setfield

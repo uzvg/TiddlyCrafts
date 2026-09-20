@@ -1,0 +1,19 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-editor-tabs
+code-body: yes
+
+\procedure tf-editor-tabs()
+<$let
+    identifier={{{ [<storyTiddler>get[created]] }}}
+    tabsList="[all[tiddlers+shadows]tag[$:/tags/TFModels]!is[draft]sort[order]]"
+    default={{{ [subfilter<tabsList>first[]] }}}
+    template="$:/plugins/uzvg/TiddlyFlashcards/templates/tf-editor-template"
+    explicitStateTiddler={{{ [[$:/state/TiddlyFlashcards/tf-creator-tabs/]addsuffix<identifier>] }}}>
+
+    <$transclude $variable="tabs"
+        tabsList=<<tabsList>>
+        default=<<default>>
+        template=<<template>>
+        explicitState=<<explicitStateTiddler>>/>
+
+</$let>
+\end

@@ -1,0 +1,11 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/templates/tf-editor-template
+code-body: yes
+
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-editor]]
+
+<<tf-card-editor
+    modelTiddler=<<currentTab>>
+    storeTiddler={{{ [<qualify $:/temp/TiddlyFlashcards>] }}}
+    stateTiddler=<<explicitStateTiddler>>
+    dataTiddler={{{ [[$:/Storage/TiddlyFlashcards/DataTiddlers/]addsuffix<identifier>] }}}
+    mode="create">>

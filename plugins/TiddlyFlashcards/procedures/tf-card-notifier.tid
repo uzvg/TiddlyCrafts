@@ -1,4 +1,4 @@
-title: $:/plugins/uzvg/Procedures/tf-card-creator-notifier
+title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-notifier
 code-body: yes
 
 <!-- send notifications if has empty fields -->

@@ -108,7 +108,7 @@ code-body: yes
 <!-- ---------------- actions to create a new flascard ---------------- -->
 \procedure action.new-card()
 
-\import [[$:/plugins/uzvg/Procedures/tf-card-creator-notifier]]
+\import [[$:/plugins/uzvg/Procedures/tf-card-notifier]]
 \function get-model-name() [<currentTab>get[model-name]]
 \function get-model-version() [<currentTab>get[model-version]]
 \function get-field-value() [<storeTiddler>get<currentTiddler>]

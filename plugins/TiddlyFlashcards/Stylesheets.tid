@@ -2,7 +2,7 @@ title: $:/plugins/uzvg/TiddlyFlashcards/styles
 tags: $:/tags/Stylesheet
 code-body: yes
 
-.twks-flashcards-creator {
+.tf-card-editor-container {
 	display: flex;
 	flex-direction: column;
 	background: <<color page-background>>;
@@ -11,11 +11,11 @@ code-body: yes
 	justify-content: space-between;
 }
 
-.twks-flashcards-creator > .tc-flex {
+.tf-card-editor-container > .tc-flex {
 	align-items: center;
 	gap: .5em;
 }
-.twks-flashcards-creator label {
+.tf-card-editor-container label {
 	color: <<color yellow>>;
 	width: 3em;
 }

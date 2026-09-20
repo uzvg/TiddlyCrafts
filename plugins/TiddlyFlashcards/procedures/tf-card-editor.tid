@@ -1,0 +1,66 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-editor
+code-body: yes
+
+\procedure tf-card-editor(modelTiddler,storeTiddler,stateTiddler,dataTiddler,mode)
+
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions]]
+
+\function get-editor-placeholder() [<modelTiddler>get[placeholders-list]enlist-input[]nth<nth>else[]]
+\function get-editor-class() [<modelTiddler>get[editor-classes-list]enlist-input[]nth<nth>else[tc-edit-texteditor]]
+\function get-focus-status() [<index>compare:number:eq[1]then[yes]]
+
+<$keyboard key="((tf-new-card))" actions=<<action.new-card>>>
+<$keyboard key="((tf-switch-previous-tab))" actions=<<action.switch-previous-tab>>>
+<$keyboard key="((tf-switch-next-tab))" actions=<<action.switch-next-tab>>>
+<$keyboard key="escape" actions=<<action.delete-store>>>
+
+  <$eventcatcher
+      selector="[data-input-index]"
+      $click=<<action.click-input>>>
+
+    <div class="tf-card-editor-container">
+
+        <$list filter="[<currentTab>get[fields-list]enlist-input[]]" variable="currentField" counter="index">
+            <$let
+                placeHolder=<<get-editor-placeholder>>
+                editClass=<<get-editor-class>>
+                focusStatus=<<get-focus-status>>>
+                <$keyboard key="((tf-focus-previous-input))" actions=<<action.focus-previous-input>>>
+                <$keyboard key="((tf-focus-next-input))" actions=<<action.focus-next-input>>>
+                    <div class="tc-flex tc-flex-row" data-input-index=`$(index)$`>
+                        <label><b><<currentField>>:</b></label>
+                        <$edit
+                            tiddler=<<storeTiddler>>
+                            field=<<currentField>>
+                            placeholder=<<placeHolder>>
+                            focus=<<focusStatus>>
+                            class=<<editClass>>/>
+                    </div>
+                </$keyboard>
+                </$keyboard>
+            </$let>
+        </$list>
+
+    </div>
+
+  </$eventcatcher>
+
+</$keyboard>
+</$keyboard>
+</$keyboard>
+</$keyboard>
+<!-- Debug actions
+<div>
+* <$link to=<<explicitStateTiddler>>> explicitStateTiddler:<<explicitStateTiddler>> </$link>: <$text text={{{ [<stateTiddler>get[text]] }}}/>
+* <$link to=<<storeTiddler>>> <<storeTiddler>> </$link>
+* dataTiddler: <$link to=<<dataTiddler>>/>
+* <$button actions=<<action.switch-previous-tab>>> switch previous tab </$button>
+* <$button actions=<<action.switch-next-tab>>> switch next tab </$button>
+* <$button actions=<<action.focus-previous-input>>> focus previous input </$button>
+* <$button actions=<<action.focus-next-input>>> focus next input </$button>
+* <$button actions=<<action.delete-store>>> delete store </$button>
+* <$button actions="""<<action.focus-nth-input 2>>"""> focus on  second input </$button>
+</div>
+ -->
+
+\end tf-card-editor

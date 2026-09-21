@@ -1,0 +1,76 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-save-actions
+code-body: yes
+
+<!-- Action to set tiddlywiki flascards note field value -->
+
+\widget $action.set-note(dataTiddler,noteId,noteData)
+\function get-target-data() [<dataTiddler>get[text]else[]jsonset:json<noteId>,<noteData>format:json[2]]
+
+<$action-setfield
+    $tiddler=<<dataTiddler>>
+    text=<<get-target-data>>/>
+\end
+
+<!-- ---------------- actions to save a flashcard ---------------- -->
+\procedure action.save-card()
+
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-notifier]]
+
+\function get-model-name() [<modelTiddler>get[model-name]]
+\function get-model-version() [<modelTiddler>get[model-version]]
+\function get-field-value() [<storeTiddler>get<currentTiddler>]
+
+\function get-fields-data()
+	[<modelTiddler>get[fields-list]enlist-input[]]
+	:reduce[<accumulator>jsonset<currentTiddler>,<get-field-value>]
+\end get-fields-data
+
+\function get-note-data()
+	[[]jsonset:json[fields],<get-fields-data>]
+	+[jsonset[modelName],<get-model-name>]
+\end get-note-data
+
+\function get-invalid-fields()
+	[<modelTiddler>get[required-fields]]
+	:else[<modelTiddler>get[fields-list]]
+	:and[enlist-input[]]
+	:filter[<storeTiddler>!has<currentTiddler>]
+\end get-invalid-fields
+
+\function get-note-id()
+    [<mode>match[edit]then<cardId>]
+    [<mode>match[create]]
+    :then[<storeTiddler>get[created]format:date[YYYY0MM0DD0hh0mm0ss0XXX]]
+\end get-note-id
+
+<!-- ------------------------------If reqired fields are all non-empty------------------------------ -->
+<% if [function[get-invalid-fields]] %>
+    <<notifier.invalid-fields>>
+<% else %>
+	<!-- Initialize datatTiddler -->
+	<% if [<dataTiddler>!is[tiddler]] %>
+		<$action-setfield
+			$tiddler=<<dataTiddler>>
+			type="application/json"
+			source=<<storyTiddler>>
+			model-version=<<get-model-version>>/>
+	<% endif %>
+
+	<!-- Create Flashcard -->
+	<$action.set-note
+		dataTiddler=<<dataTiddler>>
+		noteId=<<get-note-id>>
+		noteData=<<get-note-data>>/>
+
+	<!-- Debug action:
+	<$action-log
+		$$message="Debug note data"
+		modelTiddler=<<modelTiddler>>
+		storeTiddler=<<storeTiddler>>
+		noteData=<<get-note-data>>
+		fieldsData=<<get-fields-data>>/> -->
+
+	<<action.delete-store>>
+	<<notifier.save-card>>
+<% endif %>
+\end action.save-card

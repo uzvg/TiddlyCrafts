@@ -1,0 +1,14 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/buttons/tf-discard-btn
+tf-mode: edit
+code-body: yes
+tags: $:/tags/TFBtns
+
+\procedure tf-discard-btn()
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions]]
+
+<$button actions=<<action.delete-store>> class="tc-btn-invisible">
+    <$transclude $tiddler="$:/core/images/erase">
+</$button>
+\end
+
+<<tf-discard-btn>>

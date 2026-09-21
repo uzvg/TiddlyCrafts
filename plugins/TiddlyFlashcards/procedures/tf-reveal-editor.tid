@@ -1,0 +1,60 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-reveal-editor
+code-body: yes
+
+\procedure tf-card-btns()
+<% if [<storeTiddler>is[tiddler]] %>
+  <$list filter="[all[tiddlers+shadows]tag[$:/TFBtns]tf-mode[edit]sort[order]]">
+    <$transclude $tiddler=<<currentTiddler>>/>
+  </$list>
+<% else %>
+  <$list filter="[all[tiddlers+shadows]tag[$:/TFBtns]tf-mode[display]sort[order]]">
+    <$transclude $tiddler=<<currentTiddler>>/>
+  </$list>
+<% endif %>
+\end tf-card-btns
+
+\procedure tf-card-display(cardId)
+\function get-field-value() [<dataTiddler>jsonget<cardId>,[fields],<currentField>]
+
+<$list filter="[<modelTiddler>get[fields-list]enlist-input[]]" variable="currentField">
+  <div class="tf-revealed-card" data-field-name=`$(currentField)$`>
+    <<get-field-value>>
+  </div>
+</$list>
+
+\end tf-card-display
+
+\procedure tf-reveal-editor(cardId)
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-editor]]
+
+<$let
+  storePrefix="$:/temp/TiddlyFlashcards/tf-card-editor/"
+  statePrefix="$:/state/TiddlyFlashcards/tf-card-editor/"
+  modelName={{{ [<dataTiddler>jsonget<cardId>,[model-name]] }}}
+  modelTiddler={{{ [all[tiddlers+shadows]tag[$:/tags/TFModels]model-name<modelName>] }}}
+  storeTiddler={{{ [<storePrefix>addsuffix<cardId>] }}}
+  stateTiddler={{{ [<statePrefix>addsuffix<cardId>] }}}
+  cardStatus={{{ [<dataTiddler>jsonget<cardId>,[status]match[suspend]else[unsuspend]] }}}>
+
+  <div class="tf-card-container" data-model-name=`$(modelName)$` data-card-status=`$(cardStatus))`>
+    <div class="tf-card-id">
+      #<<id>>
+    </div>
+
+    <div class="tf-card-btns">
+      <<tf-card-btns>>
+    </div>
+
+    <%if [<storeTiddler>is[tiddler]] %>
+      <<tr-card-editor
+        modelTidddler=<<modelTidddler>>
+        storeTiddler=<<storeTiddler>>
+        stateTiddler=<<stateTiddler>>
+        dataTiddler=<<stateTiddler>>
+        mode="edit">>
+    <% else %>
+      <<tf-card-display card=<<cardId>>>>
+    <% endif %>
+  </div>
+</$let>
+\end tf-reveal-editor

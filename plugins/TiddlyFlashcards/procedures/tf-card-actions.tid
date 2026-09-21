@@ -96,13 +96,14 @@ code-body: yes
 \end action.focus-previous-input
 
 <!-- Action to set tiddlywiki flascards note field value -->
-\widget action.set-note(dataTiddler,noteId,noteData)
+
+\widget $action.set-note(dataTiddler,noteId,noteData)
 \function get-target-data() [<dataTiddler>get[text]else[]jsonset:json<noteId>,<noteData>format:json[2]]
 
 <$action-setfield
     $tiddler=<<dataTiddler>>
     text=<<get-target-data>>/>
-\end action.set-note
+\end
 
 <!-- action to delete storeTiddler -->
 \procedure action.delete-store()
@@ -113,14 +114,12 @@ code-body: yes
 \procedure action.new-card()
 
 \import [[$:/plugins/uzvg/Procedures/tf-card-notifier]]
-\function get-model-name() [<currentTab>get[model-name]]
-\function get-model-version() [<currentTab>get[model-version]]
+\function get-model-name() [<modelTiddler>get[model-name]]
+\function get-model-version() [<modelTiddler>get[model-version]]
 \function get-field-value() [<storeTiddler>get<currentTiddler>]
 
 \function get-fields-data()
-	[<currentTab>is[tiddler]]
-	+[get[fields-list]]
-	+[enlist-input[]]
+	[<modelTiddler>get[fields-list]enlist-input[]]
 	:reduce[<accumulator>jsonset<currentTiddler>,<get-field-value>]
 \end get-fields-data
 
@@ -130,8 +129,8 @@ code-body: yes
 \end get-note-data
 
 \function get-invalid-fields()
-	[<currentTab>get[required-fields]]
-	:else[<currentTab>get[fields-list]]
+	[<modelTiddler>get[required-fields]]
+	:else[<modelTiddler>get[fields-list]]
 	:and[enlist-input[]]
 	:filter[<storeTiddler>!has<currentTiddler>]
 \end get-invalid-fields
@@ -156,6 +155,14 @@ code-body: yes
 		dataTiddler=<<dataTiddler>>
 		noteId=<<get-note-id>>
 		noteData=<<get-note-data>>/>
+
+	<!-- Debug action:
+	<$action-log
+		$$message="Debug note data"
+		modelTiddler=<<modelTiddler>>
+		storeTiddler=<<storeTiddler>>
+		noteData=<<get-note-data>>
+		fieldsData=<<get-fields-data>>/> -->
 
 	<<action.delete-store>>
 	<<notifier.new-card>>

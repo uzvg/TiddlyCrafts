@@ -51,13 +51,16 @@ code-body: yes
 </$keyboard>
 <!-- Debug actions
 <div>
+
 * <$link to=<<explicitStateTiddler>>> explicitStateTiddler:<<explicitStateTiddler>> </$link>: <$text text={{{ [<stateTiddler>get[text]] }}}/>
 * <$link to=<<storeTiddler>>> <<storeTiddler>> </$link>
+* <$link to=<<dataTiddler>>/>
 * dataTiddler: <$link to=<<dataTiddler>>/>
 * <$button actions=<<action.switch-previous-tab>>> switch previous tab </$button>
 * <$button actions=<<action.switch-next-tab>>> switch next tab </$button>
 * <$button actions=<<action.focus-previous-input>>> focus previous input </$button>
 * <$button actions=<<action.focus-next-input>>> focus next input </$button>
+* <$button actions=<<action.new-card>>> new card </$button>
 * <$button actions=<<action.delete-store>>> delete store </$button>
 * <$button actions="""<<action.focus-nth-input 2>>"""> focus on  second input </$button>
 </div>

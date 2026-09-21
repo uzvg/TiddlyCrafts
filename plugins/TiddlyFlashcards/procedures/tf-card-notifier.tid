@@ -5,7 +5,7 @@ code-body: yes
 \procedure notifier.invalid-fields()
 <$action-sendmessage
 	$message="tm-notify"
-	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/InvalidFieldsWarning"/>
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/invalid-field-notify"/>
 \end notifier.invalid-fields
 
 <!-- send notifications when card created done -->

@@ -1,4 +1,4 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/templates/InvalidFieldsWarning
+title: $:/plugins/uzvg/TiddlyFlashcards/templates/invalid-field-notify
 code-body:yes
 
 Required fields cannot be empty. Please fill all required fields.

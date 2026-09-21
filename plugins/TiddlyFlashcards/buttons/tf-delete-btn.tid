@@ -8,7 +8,7 @@ tags: $:/tags/TFBtns
 <$action-setfield $tiddler=<<dataTiddler>> text=<<get-target-data>>/>
 \end action.delete-card
 
-\procedure tf-discard-btn()
+\procedure tf-delete-btn()
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions]]
 
 <$button actions=<<action.delete-card>> class="tc-btn-invisible">

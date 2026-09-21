@@ -1,0 +1,22 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/buttons/tf-edit-card
+tf-mode: display
+code-body: yes
+tags: $:/tags/TFBtns
+
+<!-- Read Card Fields Value from the dataTiddler and save it into the storeTiddler -->
+\procedure action.edit-card()
+\function get-field-value() [<dataTiddler>get[text]jsonget<cardId>,fields,<currentTiddler>]
+<$action-setmultiplefields
+  $tiddler=<<storeTiddler>>
+  $fields="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]]"
+  $values="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]] :map[function[get-field-value]]"
+  $timestamp="no"/>
+\end action.edit-card
+
+\procedure tf-edit-btn()
+<$button actions=<<action.edit-card>> class="tc-btn-invisible">
+    <$transclude $tiddler="$:/core/images/edit-button">
+</$button>
+\end
+
+<<tf-edit-btn>>

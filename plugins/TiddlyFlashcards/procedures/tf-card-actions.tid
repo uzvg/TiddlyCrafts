@@ -18,7 +18,11 @@ code-body: yes
 
 <!-- Save input index when click on the textarea  -->
 \procedure action.click-input()
-<$action-setfield $tiddler=<<stateTiddler>> focus-index=<<dom-data-input-index>>/>
+<%if [<stateTiddler>!is[tiddler]] %>
+	<$action-setfield $tiddler=<<stateTiddler>> text=<<default>>/>
+<% else %>
+	<$action-setfield $tiddler=<<stateTiddler>> focus-index=<<dom-data-input-index>>/>
+<% endif %>
 \end action.click-input
 
 <!-- ---------------- switch to next tab ---------------- -->

@@ -9,8 +9,8 @@ code-body: yes
 \end notifier.invalid-fields
 
 <!-- send notifications when card created done -->
-\procedure notifier.new-card()
+\procedure notifier.save-card()
 <$action-sendmessage
 	$message="tm-notify"
-	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/CreateNewCard"/>
-\end notifier.new-card
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/save-card-notify"/>
+\end notifier.save-card

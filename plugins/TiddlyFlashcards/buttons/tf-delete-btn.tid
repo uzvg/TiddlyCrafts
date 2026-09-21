@@ -1,0 +1,19 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/buttons/tf-delete-btn
+tf-mode: display
+code-body: yes
+tags: $:/tags/TFBtns
+
+\procedure action.delete-card()
+\function get-target-data() [<dataTiddler>get[text]jsondelete<cardId>]
+<$action-setfield $tiddler=<<dataTiddler>> text=<<get-target-data>>/>
+\end action.delete-card
+
+\procedure tf-discard-btn()
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions]]
+
+<$button actions=<<action.delete-card>> class="tc-btn-invisible">
+    <$transclude $tiddler="$:/core/images/delete-button">
+</$button>
+\end
+
+<<tf-delete-btn>>

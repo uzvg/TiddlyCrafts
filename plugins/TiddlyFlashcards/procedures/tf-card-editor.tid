@@ -4,12 +4,13 @@ code-body: yes
 \procedure tf-card-editor(modelTiddler,storeTiddler,stateTiddler,dataTiddler,mode)
 
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions]]
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-save-actions]]
 
 \function get-editor-placeholder() [<modelTiddler>get[placeholders-list]enlist-input[]nth<nth>else[]]
 \function get-editor-class() [<modelTiddler>get[editor-classes-list]enlist-input[]nth<nth>else[tc-edit-texteditor]]
 \function get-focus-status() [<index>compare:number:eq[1]then[yes]]
 
-<$keyboard key="((tf-new-card))" actions=<<action.new-card>>>
+<$keyboard key="((tf-save-card))" actions=<<action.save-card>>>
 <$keyboard key="((tf-switch-previous-tab))" actions=<<action.switch-previous-tab>>>
 <$keyboard key="((tf-switch-next-tab))" actions=<<action.switch-next-tab>>>
 <$keyboard key="escape" actions=<<action.delete-store>>>

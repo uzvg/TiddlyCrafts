@@ -1,0 +1,31 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/buttons/tf-suspend-btn
+tf-mode: display
+code-body: yes
+tags: $:/tags/TFBtns
+
+\procedure action.suspend-card()
+<$action-setfield $tiddler=<<dataTiddler>> text=<<noteData>>/>
+\end action.suspend-card
+
+\procedure tf-suspend-btn()
+\function get-card-status() [<dataTiddler>get[text]jsonget<cardId>,[status]]
+\function get-btn-icon() [<cardStatus>match[suspend]then[$:/core/images/timestamp-off]else[$:/core/images/timestamp-on]]
+\function get-note-data()
+    [<cardStatus>match[suspend]]
+    :then[<dataTiddler>get[text]jsondelete<cardId>,[status]]
+    :else[<dataTiddler>get[text]jsonset<cardId>,[status],[suspend]]
+\end get-note-data
+
+<$let
+    cardStatus=<<get-card-status>>
+    noteData=<<get-note-data>>
+    btnIcon=<<get-btn-icon>>>
+
+    <$button actions=<<action.suspend-card>> class="tc-btn-invisible">
+        <$transclude $tiddler=<<btnIcon>>>
+    </$button>
+
+</let>
+\end tf-suspend-btn
+
+<<tf-suspend-btn>>

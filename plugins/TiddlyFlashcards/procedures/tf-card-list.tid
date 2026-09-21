@@ -4,7 +4,14 @@ code-body: yes
 \procedure  tf-card-list()
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-reveal-editor]]
 
-<$list filter="[<dataTiddler>get[text]jsonindexes[]]" variable="currentCard">
-    <<tf-reveal-editor cardId=<<currentCard>>>>
-</$list>
+<$let
+    dataPrefix="$:/Storage/TiddlyFlashcards/DataTiddlers/"
+    identifier={{{ [<storyTiddler>get[created]] }}}
+    dataTiddler={{{ [<dataPrefix>addsuffix<identifier>] }}}>
+
+    <$list filter="[<dataTiddler>get[text]jsonindexes[]]" variable="currentCard">
+        <<tf-reveal-editor cardId=<<currentCard>>>>
+    </$list>
+
+</$let>
 \end

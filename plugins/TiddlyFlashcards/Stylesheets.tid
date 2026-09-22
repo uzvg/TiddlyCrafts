@@ -1,6 +1,7 @@
 title: $:/plugins/uzvg/TiddlyFlashcards/styles
 tags: $:/tags/Stylesheet
 code-body: yes
+type: text/css
 
 .tf-card-editor-container {
   display: flex;
@@ -38,13 +39,28 @@ code-body: yes
   margin: 0 auto 14px;
   padding: 28px 30px 30px;
 
-  background: #fffefa;
-  border: 1px solid #d9d6ce;
+  /*
+   * Keep the card visually distinct from the page while
+   * remaining compatible with arbitrary TiddlyWiki palettes.
+   *
+   * The card is based on page-background, with a small amount
+   * of foreground mixed in to create a separate surface.
+   */
+  background: color-mix(
+    in srgb,
+    var(--tpc-page-background) 94%,
+    var(--tpc-foreground)
+  );
+
+  /* background: var(--tpc-page-background); */
+
+  border: 2px solid color-mix(in srgb, var(--tpc-foreground) 15%, transparent);
+
   border-radius: 9px;
 
   box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.03),
-    0 4px 12px rgba(0, 0, 0, 0.035);
+    0 1px 2px color-mix(in srgb, var(--tpc-foreground) 6%, transparent),
+    0 4px 12px color-mix(in srgb, var(--tpc-foreground) 5%, transparent);
 
   transition:
     border-color 120ms ease,
@@ -55,11 +71,11 @@ code-body: yes
 /* subtle interaction */
 
 .tf-card-container:hover {
-  border-color: #c9c5bc;
+  border-color: color-mix(in srgb, var(--tpc-foreground) 25%, transparent);
 
   box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.04),
-    0 7px 18px rgba(0, 0, 0, 0.045);
+    0 2px 4px color-mix(in srgb, var(--tpc-foreground) 8%, transparent),
+    0 7px 18px color-mix(in srgb, var(--tpc-foreground) 7%, transparent);
 
   transform: translateY(-1px);
 }
@@ -79,7 +95,7 @@ code-body: yes
   font-size: 9px;
   line-height: 1;
 
-  color: #aaa79f;
+  color: var(--tpc-very-muted-foreground);
 
   user-select: none;
   pointer-events: none;
@@ -145,7 +161,7 @@ code-body: yes
 
   background: transparent;
 
-  color: #8e8b84;
+  color: var(--tpc-tiddler-controls-foreground);
 
   cursor: pointer;
 
@@ -156,13 +172,14 @@ code-body: yes
 
 .tf-card-container .tf-card-btns .tc-btn-invisible:hover,
 .tf-card-container .tf-card-btns button:hover {
-  background: #ebe9e3;
-  color: #4f4d48;
+  background: color-mix(in srgb, var(--tpc-foreground) 8%, transparent);
+
+  color: var(--tpc-tiddler-controls-foreground-hover);
 }
 
 .tf-card-container .tf-card-btns .tc-btn-invisible:active,
 .tf-card-container .tf-card-btns button:active {
-  background: #e2dfd7;
+  background: color-mix(in srgb, var(--tpc-foreground) 13%, transparent);
 }
 
 /* ---------------------------------------------------------
@@ -191,7 +208,8 @@ code-body: yes
   margin-top: 18px;
   padding-top: 27px;
 
-  border-top: 1px dashed #d5d2ca;
+  border-top: 1px dashed
+    color-mix(in srgb, var(--tpc-foreground) 20%, transparent);
 }
 
 /* ---------------------------------------------------------
@@ -208,7 +226,7 @@ code-body: yes
   letter-spacing: 0.08em;
   text-transform: uppercase;
 
-  color: #a09d95;
+  color: var(--tpc-muted-foreground);
 }
 
 /* ---------------------------------------------------------
@@ -219,7 +237,7 @@ code-body: yes
   font-size: 16px;
   line-height: 1.65;
 
-  color: #373632;
+  color: var(--tpc-foreground);
 
   overflow-wrap: anywhere;
 }
@@ -262,14 +280,21 @@ code-body: yes
 
   transform: translateX(-50%);
 
-  background: #fffefa;
+  /*
+   * Match the card surface rather than using a fixed colour.
+   */
+  background: color-mix(
+    in srgb,
+    var(--tpc-page-background) 94%,
+    var(--tpc-foreground)
+  );
 
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   font-size: 13px;
   line-height: 18px;
 
-  color: #aaa79f;
+  color: var(--tpc-very-muted-foreground);
 
   pointer-events: none;
 }
@@ -314,8 +339,17 @@ code-body: yes
    --------------------------------------------------------- */
 
 .tf-card-container[data-card-status="suspend"] {
-  background: #f4f3ef;
-  border-color: #e0ddd5;
+  /*
+   * Suspended cards intentionally collapse toward the page
+   * background instead of disappearing completely.
+   */
+  background: color-mix(
+    in srgb,
+    var(--tpc-page-background) 98%,
+    var(--tpc-foreground)
+  );
+
+  border-color: color-mix(in srgb, var(--tpc-foreground) 10%, transparent);
 
   box-shadow: none;
 
@@ -327,15 +361,15 @@ code-body: yes
  */
 
 .tf-card-container[data-card-status="suspend"] .tf-field-name {
-  color: #aaa79f;
+  color: var(--tpc-very-muted-foreground);
 }
 
 .tf-card-container[data-card-status="suspend"] .tf-field-value {
-  color: #85827b;
+  color: var(--tpc-muted-foreground);
 }
 
 .tf-card-container[data-card-status="suspend"] .tf-card-id {
-  color: #b6b3ac;
+  color: var(--tpc-very-muted-foreground);
 }
 
 /*
@@ -343,7 +377,7 @@ code-body: yes
  */
 
 .tf-card-container[data-card-status="suspend"]:hover {
-  border-color: #ddd9d1;
+  border-color: color-mix(in srgb, var(--tpc-foreground) 13%, transparent);
 
   box-shadow: none;
 
@@ -356,7 +390,7 @@ code-body: yes
 
 .tf-card-container[data-card-status="suspend"]
   .tf-card-field:nth-child(2)::before {
-  color: #b7b4ad;
+  color: var(--tpc-very-muted-foreground);
 }
 
 /* ---------------------------------------------------------

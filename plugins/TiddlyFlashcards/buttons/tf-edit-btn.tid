@@ -5,12 +5,20 @@ tags: $:/tags/TFBtns
 
 <!-- Read Card Fields Value from the dataTiddler and save it into the storeTiddler -->
 \procedure action.edit-card()
-\function get-field-value() [<dataTiddler>get[text]jsonget<cardId>,fields,<currentTiddler>]
+\function get-field-value() [<dataTiddler>get[text]jsonget<cardId>,[fields],<currentTiddler>]
 <$action-setmultiplefields
   $tiddler=<<storeTiddler>>
   $fields="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]]"
   $values="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]] :map[function[get-field-value]]"
   $timestamp="no"/>
+
+  <$action-log
+    $$message="Debug info:"
+      modelTiddler=<<modelTiddler>>
+      storeTiddler=<<storeTiddler>>
+      stateTiddler=<<stateTiddler>>
+      dataTiddler=<<dataTiddler>>
+      values={{{ [<dataTiddler>get[text]jsonindexes<cardId>,[fields]] :map[function[get-field-value]] }}} />
 \end action.edit-card
 
 \procedure tf-edit-btn()

@@ -9,11 +9,12 @@ code-body: yes
 \function get-editor-class() [<modelTiddler>get[editor-classes-list]enlist-input[]nth<nth>else[tc-edit-texteditor]]
 \function get-focus-status() [<index>compare:number:eq[1]then[yes]]
 
-<$keyboard key="((tf-save-card))" actions=<<action.save-card>>>
 <$keyboard key="((tf-switch-previous-tab))" actions=<<action.switch-previous-tab>>>
 <$keyboard key="((tf-switch-next-tab))" actions=<<action.switch-next-tab>>>
+<$keyboard key="((tf-focus-previous-input))" actions=<<action.focus-previous-input>>>
+<$keyboard key="((tf-focus-next-input))" actions=<<action.focus-next-input>>>
+<$keyboard key="((tf-save-card))" actions=<<action.save-card>>>
 <$keyboard key="escape" actions=<<action.delete-store>>>
-
   <$eventcatcher
       selector="[data-input-index]"
       $click=<<action.click-input>>>
@@ -23,8 +24,6 @@ code-body: yes
                 placeHolder=<<get-editor-placeholder>>
                 editClass=<<get-editor-class>>
                 focusStatus=<<get-focus-status>>>
-                <$keyboard key="((tf-focus-previous-input))" actions=<<action.focus-previous-input>>>
-                <$keyboard key="((tf-focus-next-input))" actions=<<action.focus-next-input>>>
                     <div class="tf-editor-row" data-input-index=`$(index)$`>
                         <label><<currentField>></label>
                         <$edit
@@ -35,12 +34,12 @@ code-body: yes
                             refreshTitle=<<dataTiddler>>
                             class=<<editClass>>/>
                     </div>
-                </$keyboard>
-                </$keyboard>
             </$let>
         </$list>
     </div>
   </$eventcatcher>
+</$keyboard>
+</$keyboard>
 </$keyboard>
 </$keyboard>
 </$keyboard>
@@ -61,5 +60,4 @@ code-body: yes
 * <$button actions="""<<action.focus-nth-input 2>>"""> focus on  second input </$button>
 </div>
  -->
-
 \end tf-card-editor

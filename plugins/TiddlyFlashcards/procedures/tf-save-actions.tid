@@ -38,10 +38,15 @@ code-body: yes
 \end get-invalid-fields
 
 \function get-note-id()
-    [<mode>match[edit]then<cardId>]
-    [<mode>match[create]]
-    :then[<storeTiddler>get[created]format:date[YYYY0MM0DD0hh0mm0ss0XXX]]
+    [<cardId>!is[blank]]
+    :else[<storeTiddler>get[created]format:date[YYYY0MM0DD0hh0mm0ss0XXX]]
 \end get-note-id
+
+<!-- action to delete storeTiddler -->
+\procedure action.delete-store()
+<$action-deletetiddler $tiddler=<<storeTiddler>>/>
+<<action.focus-nth-input nth="1">>
+\end action.delete-store
 
 <!-- ------------------------------If reqired fields are all non-empty------------------------------ -->
 <% if [function[get-invalid-fields]] %>
@@ -65,11 +70,15 @@ code-body: yes
 	<!-- Debug action:
 	<$action-log
 		$$message="Debug note data"
+		mode=<<mode>>
+		cardId=<<cardId>>
+		noteId=<<get-note-id>>
 		modelTiddler=<<modelTiddler>>
 		storeTiddler=<<storeTiddler>>
 		noteData=<<get-note-data>>
-		fieldsData=<<get-fields-data>>/> -->
-
+		fieldsData=<<get-fields-data>>
+		targetData={{{ [<dataTiddler>get[text]else[]jsonset:json<noteId>,<get-note-data>] }}}/>
+ -->
 	<<action.delete-store>>
 	<<notifier.save-card>>
 <% endif %>

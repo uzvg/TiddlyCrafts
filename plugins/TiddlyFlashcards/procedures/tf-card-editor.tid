@@ -1,8 +1,7 @@
 title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-editor
 code-body: yes
 
-\procedure tf-card-editor(modelTiddler,storeTiddler,stateTiddler,dataTiddler,mode)
-
+\procedure tf-card-editor(modelTiddler,storeTiddler,stateTiddler,dataTiddler,mode,editorIndex:"1")
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions]]
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-save-actions]]
 
@@ -18,34 +17,30 @@ code-body: yes
   <$eventcatcher
       selector="[data-input-index]"
       $click=<<action.click-input>>>
-
-    <div class="tf-card-editor-container">
-
-        <$list filter="[<currentTab>get[fields-list]enlist-input[]]" variable="currentField" counter="index">
+    <div class="tf-card-editor-container" data-editor-index=`$(editorIndex)$`>
+        <$list filter="[<modelTiddler>get[fields-list]enlist-input[]]" variable="currentField" counter="index">
             <$let
                 placeHolder=<<get-editor-placeholder>>
                 editClass=<<get-editor-class>>
                 focusStatus=<<get-focus-status>>>
                 <$keyboard key="((tf-focus-previous-input))" actions=<<action.focus-previous-input>>>
                 <$keyboard key="((tf-focus-next-input))" actions=<<action.focus-next-input>>>
-                    <div class="tc-flex tc-flex-row" data-input-index=`$(index)$`>
-                        <label><b><<currentField>>:</b></label>
+                    <div class="tf-editor-row" data-input-index=`$(index)$`>
+                        <label><<currentField>></label>
                         <$edit
                             tiddler=<<storeTiddler>>
                             field=<<currentField>>
                             placeholder=<<placeHolder>>
                             focus=<<focusStatus>>
+                            refreshTitle=<<dataTiddler>>
                             class=<<editClass>>/>
                     </div>
                 </$keyboard>
                 </$keyboard>
             </$let>
         </$list>
-
     </div>
-
   </$eventcatcher>
-
 </$keyboard>
 </$keyboard>
 </$keyboard>
@@ -61,7 +56,7 @@ code-body: yes
 * <$button actions=<<action.switch-next-tab>>> switch next tab </$button>
 * <$button actions=<<action.focus-previous-input>>> focus previous input </$button>
 * <$button actions=<<action.focus-next-input>>> focus next input </$button>
-* <$button actions=<<action.new-card>>> new card </$button>
+* <$button actions=<<action.save-card>>> new card </$button>
 * <$button actions=<<action.delete-store>>> delete store </$button>
 * <$button actions="""<<action.focus-nth-input 2>>"""> focus on  second input </$button>
 </div>

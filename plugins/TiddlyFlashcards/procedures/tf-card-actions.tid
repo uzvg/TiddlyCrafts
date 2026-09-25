@@ -4,7 +4,7 @@ code-body: yes
 <!-- ---------------- focus on nth input ---------------- -->
 \procedure action.focus-nth-input(nth)
 <$let
-	selector-pattern="""[data-tiddler-title="$(storyTiddler)$"] [data-input-index="$(nth)$"] textarea"""
+	selector-pattern="""[data-tiddler-title="$(storyTiddler)$"] [data-editor-index="$(editorIndex)$"] [data-input-index="$(nth)$"] textarea"""
 	focus-selector={{{ [<selector-pattern>substitute[]] }}}>
 	<$action-sendmessage
 		$message="tm-focus-selector"
@@ -98,4 +98,5 @@ code-body: yes
 <!-- action to delete storeTiddler -->
 \procedure action.delete-store()
 <$action-deletetiddler $tiddler=<<storeTiddler>>/>
+<<action.focus-nth-input nth="1">>
 \end action.delete-store

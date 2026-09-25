@@ -1,7 +1,7 @@
 title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-list
 code-body: yes
 
-\procedure  tf-card-list()
+\procedure tf-card-list()
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-reveal-editor]]
 
 <$let

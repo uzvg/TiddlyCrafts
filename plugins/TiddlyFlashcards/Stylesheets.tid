@@ -3,422 +3,350 @@ tags: $:/tags/Stylesheet
 code-body: yes
 type: text/css
 
+/* ========== 基础容器 ========== */
 .tf-card-editor-container {
   display: flex;
   flex-direction: column;
-  background: <<color page-background>>;
   gap: 0.5em;
+  width: 100%;
+  box-sizing: border-box;
   padding: 1em;
-  justify-content: space-between;
+  background: var(--tpc-page-background);
 }
 
-.tf-card-editor-container > .tc-flex {
+/* ========== 每一行：横向布局 ========== */
+.tf-editor-row {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 0.5em;
-}
-.tf-card-editor-container label {
-  color: <<color yellow>>;
-  width: 3em;
+  gap: 10px;
+  width: 100%;
 }
 
-/* =========================================================
-   TiddlyFlashcards - Card List
-   ========================================================= */
+/* ========== Label 样式 ========== */
+.tf-editor-row > label {
+  flex: 0 0 4em;
+  min-width: 3em;
+  line-height: 1em;
+  text-align: right;
+  white-space: wrap;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;
+  color: var(--tpc-primary);
+  font-size: 0.8em;
+}
 
-/* ---------------------------------------------------------
-   Card
-   --------------------------------------------------------- */
+/* ========== 响应式：移动端纵向堆叠 ========== */
+@media screen and (max-width: 600px) {
+  .tf-editor-row {
+    flex-direction: column; /* 改为纵向 */
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .tf-editor-row > label {
+    flex: 0 0 auto;
+    min-width: unset;
+    width: 100%;
+    text-align: left;
+    line-height: 1.4;
+  }
+
+  .tf-editor-row > .tc-edit-texteditor {
+    width: 100%;
+  }
+
+  .tf-card-editor-container {
+    padding: 4px;
+    gap: 10px;
+  }
+}
+
+/* =============================================
+1. 卡片容器 — Grid 布局
+============================================= */
 
 .tf-card-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "id   btns"
+    "fields fields";
+
+  width: min(100%, 720px);
+  margin-inline: auto;
+
   position: relative;
-
-  width: 100%;
-  max-width: 780px;
-  box-sizing: border-box;
-
-  margin: 0 auto 14px;
-  padding: 28px 30px 30px;
-
-  /*
-   * Keep the card visually distinct from the page while
-   * remaining compatible with arbitrary TiddlyWiki palettes.
-   *
-   * The card is based on page-background, with a small amount
-   * of foreground mixed in to create a separate surface.
-   */
   background: color-mix(
     in srgb,
-    var(--tpc-page-background) 94%,
-    var(--tpc-foreground)
+    var(--tpc-page-background) 62%,
+    var(--tpc-tiddler-background)
   );
-
-  /* background: var(--tpc-page-background); */
-
-  border: 2px solid color-mix(in srgb, var(--tpc-foreground) 15%, transparent);
-
-  border-radius: 9px;
-
-  box-shadow:
-    0 1px 2px color-mix(in srgb, var(--tpc-foreground) 6%, transparent),
-    0 4px 12px color-mix(in srgb, var(--tpc-foreground) 5%, transparent);
-
+  border: 1px solid color-mix(in srgb, var(--tpc-primary) 20%, transparent);
+  border-radius: 1px;
+  padding: 10px 14px 12px;
   transition:
-    border-color 120ms ease,
-    box-shadow 120ms ease,
-    transform 120ms ease;
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 
-/* subtle interaction */
+/* 默认发光 */
+.tf-card-container {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--tpc-primary) 4%, transparent),
+    0 0 12px -4px color-mix(in srgb, var(--tpc-primary) 6%, transparent);
+}
 
 .tf-card-container:hover {
-  border-color: color-mix(in srgb, var(--tpc-foreground) 25%, transparent);
+  border-color: color-mix(in srgb, var(--tpc-primary) 45%, transparent);
 
   box-shadow:
-    0 2px 4px color-mix(in srgb, var(--tpc-foreground) 8%, transparent),
-    0 7px 18px color-mix(in srgb, var(--tpc-foreground) 7%, transparent);
-
-  transform: translateY(-1px);
+    0 0 0 1px color-mix(in srgb, var(--tpc-primary) 8%, transparent),
+    0 0 20px -4px color-mix(in srgb, var(--tpc-primary) 15%, transparent);
 }
 
-/* ---------------------------------------------------------
-   Card ID
-   --------------------------------------------------------- */
+/* ---------- 四角 L 形角标 ---------- */
+
+.tf-card-container::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  z-index: 2;
+
+  background:
+    /* 左上 */
+    linear-gradient(90deg, var(--tpc-primary), var(--tpc-primary)) 0 0 / 10px
+      1.5px no-repeat,
+    linear-gradient(0deg, var(--tpc-primary), var(--tpc-primary)) 0 0 / 1.5px
+      10px no-repeat,
+    /* 右上 */ linear-gradient(90deg, var(--tpc-primary), var(--tpc-primary))
+      100% 0 / 10px 1.5px no-repeat,
+    linear-gradient(0deg, var(--tpc-primary), var(--tpc-primary)) 100% 0 / 1.5px
+      10px no-repeat,
+    /* 左下 */ linear-gradient(90deg, var(--tpc-primary), var(--tpc-primary)) 0
+      100% / 10px 1.5px no-repeat,
+    linear-gradient(0deg, var(--tpc-primary), var(--tpc-primary)) 0 100% / 1.5px
+      10px no-repeat,
+    /* 右下 */ linear-gradient(90deg, var(--tpc-primary), var(--tpc-primary))
+      100% 100% / 10px 1.5px no-repeat,
+    linear-gradient(0deg, var(--tpc-primary), var(--tpc-primary)) 100% 100% /
+      1.5px 10px no-repeat;
+
+  opacity: 0.55;
+  transition: opacity 0.3s;
+}
+
+.tf-card-container:hover::before {
+  opacity: 1;
+}
+
+/* ---------- 左侧状态光条 ---------- */
+
+.tf-card-container::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  border-radius: 1px;
+
+  background: var(--tpc-very-muted-foreground);
+
+  box-shadow: 0 0 6px
+    color-mix(in srgb, var(--tpc-very-muted-foreground) 40%, transparent);
+
+  transition:
+    background 0.3s,
+    box-shadow 0.3s;
+}
+
+.tf-card-container[data-card-status="unsuspend"]::after {
+  background: var(--tpc-primary);
+
+  box-shadow: 0 0 8px color-mix(in srgb, var(--tpc-primary) 45%, transparent);
+}
+
+.tf-card-container[data-card-status="suspended"]::after {
+  background: var(--tpc-alert-highlight);
+  background: var(--tpc-muted-foreground);
+
+  box-shadow: 0 0 8px
+    color-mix(in srgb, var(--tpc-muted-foreground) 40%, transparent);
+}
+
+/* =============================================
+2. 卡片 ID
+============================================= */
 
 .tf-card-id {
-  position: absolute;
+  grid-area: id;
 
-  top: 10px;
-  left: 13px;
+  font-family:
+    "JetBrains Mono", "Fira Code", "SF Mono", Consolas, "Liberation Mono",
+    Menlo, monospace;
 
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-
-  font-size: 9px;
-  line-height: 1;
-
-  color: var(--tpc-very-muted-foreground);
-
+  font-size: 0.7rem;
+  color: var(--tpc-muted-foreground);
+  letter-spacing: 0.06em;
+  align-self: center;
   user-select: none;
-  pointer-events: none;
+  transition: color 0.3s;
 }
 
-/* ---------------------------------------------------------
-   Action buttons
-   --------------------------------------------------------- */
+.tf-card-container:hover .tf-card-id {
+  color: var(--tpc-foreground);
+}
+
+/* 菱形装饰 */
+
+.tf-card-id::before {
+  content: "◇";
+  color: var(--tpc-primary);
+  font-size: 0.55em;
+  margin-right: 5px;
+  vertical-align: 1px;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.tf-card-container:hover .tf-card-id::before {
+  opacity: 1;
+}
+
+/* =============================================
+3. 操作按钮
+============================================= */
 
 .tf-card-btns {
-  position: absolute;
-
-  top: 6px;
-  right: 8px;
-
+  grid-area: btns;
   display: flex;
-  align-items: center;
-  gap: 2px;
-
+  gap: 4px;
+  align-self: center;
   opacity: 0;
-  transform: translateY(-2px);
-
-  pointer-events: none;
+  transform: translateX(6px);
 
   transition:
-    opacity 120ms ease,
-    transform 120ms ease;
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
-/*
- * Show buttons when:
- * - mouse is over the card
- * - keyboard focus is inside the card
- */
-
-.tf-card-container:hover .tf-card-btns,
-.tf-card-container:focus-within .tf-card-btns {
+.tf-card-container:hover .tf-card-btns {
   opacity: 1;
-  transform: translateY(0);
-
-  pointer-events: auto;
+  transform: translateX(0);
 }
 
-/*
- * TiddlyWiki's native button class
- */
-
-.tf-card-container .tf-card-btns .tc-btn-invisible,
-.tf-card-container .tf-card-btns button {
-  display: inline-flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 28px;
-  height: 28px;
-
-  padding: 0;
-  margin: 0;
-
-  border: 0;
-  border-radius: 5px;
-
+.tf-card-btns button {
   background: transparent;
 
-  color: var(--tpc-tiddler-controls-foreground);
+  border: 1px solid color-mix(in srgb, var(--tpc-primary) 20%, transparent);
+
+  border-radius: 1px;
+  padding: 2px 10px;
+
+  font-size: 0.68rem;
+  font-family: inherit;
+  color: var(--tpc-muted-foreground);
 
   cursor: pointer;
+  letter-spacing: 0.04em;
 
-  transition:
-    background-color 100ms ease,
-    color 100ms ease;
+  transition: all 0.2s;
+  line-height: 1.5;
 }
 
-.tf-card-container .tf-card-btns .tc-btn-invisible:hover,
-.tf-card-container .tf-card-btns button:hover {
-  background: color-mix(in srgb, var(--tpc-foreground) 8%, transparent);
+.tf-card-btns button:hover {
+  color: var(--tpc-primary);
 
-  color: var(--tpc-tiddler-controls-foreground-hover);
+  border-color: color-mix(in srgb, var(--tpc-primary) 50%, transparent);
+
+  background: color-mix(in srgb, var(--tpc-primary) 6%, transparent);
+
+  box-shadow: 0 0 8px color-mix(in srgb, var(--tpc-primary) 10%, transparent);
 }
 
-.tf-card-container .tf-card-btns .tc-btn-invisible:active,
-.tf-card-container .tf-card-btns button:active {
-  background: color-mix(in srgb, var(--tpc-foreground) 13%, transparent);
-}
-
-/* ---------------------------------------------------------
-   Fields container
-   --------------------------------------------------------- */
+/* =============================================
+4. 字段区域
+============================================= */
 
 .tf-fields-container {
-  width: 100%;
+  grid-area: fields;
+  margin-top: 8px;
+  padding-top: 6px;
+
+  /* 顶部虚线分隔 */
+  border-top: 2px dotted color-mix(in srgb, var(--tpc-primary) 20%, transparent);
 }
 
-/* ---------------------------------------------------------
-   Individual field
-   --------------------------------------------------------- */
+/* =============================================
+5. 单个字段行
+============================================= */
 
 .tf-card-field {
-  position: relative;
+  display: flex;
+  align-items: stretch;
+  padding: 5px 0;
 
-  padding: 6px 0 10px;
+  border-bottom: 2px dotted
+    color-mix(in srgb, var(--tpc-primary) 20%, transparent);
 }
 
-/*
- * Every field after the first one gets a divider.
- */
-
-.tf-card-field + .tf-card-field {
-  margin-top: 18px;
-  padding-top: 27px;
-
-  border-top: 1px dashed
-    color-mix(in srgb, var(--tpc-foreground) 20%, transparent);
+.tf-card-field:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
-/* ---------------------------------------------------------
-   Field name
-   --------------------------------------------------------- */
+/* 字段名 — HUD 标签风格 */
 
 .tf-field-name {
-  margin-bottom: 7px;
-
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 1.3;
-
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-
-  color: var(--tpc-muted-foreground);
-}
-
-/* ---------------------------------------------------------
-   Field value
-   --------------------------------------------------------- */
-
-.tf-field-value {
-  font-size: 16px;
-  line-height: 1.65;
-
-  color: var(--tpc-foreground);
-
-  overflow-wrap: anywhere;
-}
-
-/*
- * Give the actual content a little more visual weight
- * without making it look like a review card.
- */
-
-.tf-card-field:first-child .tf-field-value {
-  font-size: 17px;
-}
-
-/* ---------------------------------------------------------
-   Card type symbol
-   --------------------------------------------------------- */
-
-/*
- * The type indicator sits on the first divider.
- *
- * Since the fields are wrapped by .tf-fields-container,
- * :nth-child(2) reliably means the second field.
- */
-
-.tf-card-field:nth-child(2)::before {
-  position: absolute;
-
-  top: -10px;
-  left: 50%;
+  width: 64px;
+  flex-shrink: 0;
 
   display: flex;
-
   align-items: center;
-  justify-content: center;
 
-  width: 30px;
-  height: 18px;
+  font-family: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
 
-  box-sizing: border-box;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 
-  transform: translateX(-50%);
+  color: var(--tpc-primary);
 
-  /*
-   * Match the card surface rather than using a fixed colour.
-   */
-  background: color-mix(
-    in srgb,
-    var(--tpc-page-background) 94%,
-    var(--tpc-foreground)
-  );
+  opacity: 0.55;
+  /* text-align: right; */
+  justify-content: flex-end;
 
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  padding: 3px 10px 3px 0;
 
-  font-size: 13px;
-  line-height: 18px;
+  border-right: 2px dotted
+    color-mix(in srgb, var(--tpc-primary) 20%, transparent);
 
-  color: var(--tpc-very-muted-foreground);
-
-  pointer-events: none;
+  line-height: 1.5;
+  transition: opacity 0.3s;
 }
 
-/* Basic */
-
-.tf-card-container[data-model-name="TFBasic"]
-  .tf-card-field:nth-child(2)::before {
-  content: "↓";
+.tf-card-container:hover .tf-field-name {
+  opacity: 0.85;
 }
 
-/* Cloze */
+/* 字段值 */
 
-.tf-card-container[data-model-name="TFCloze"]
-  .tf-card-field:nth-child(2)::before {
-  content: "◇";
+.tf-field-value {
+  flex: 1;
+  padding: 2px 0 2px 12px;
+
+  font-size: 0.85rem;
+  color: var(--tpc-foreground);
+
+  line-height: 1.55;
+  word-break: break-word;
 }
 
-/* Type */
-
-.tf-card-container[data-model-name="TFType"]
-  .tf-card-field:nth-child(2)::before {
-  content: "→";
-}
-
-/* Pair */
-
-.tf-card-container[data-model-name="TFPair"]
-  .tf-card-field:nth-child(2)::before {
-  content: "⇄";
-}
-
-/* Optional Pair */
-
-.tf-card-container[data-model-name="TFOptionalPair"]
-  .tf-card-field:nth-child(2)::before {
-  content: "⇄·";
-}
-
-/* ---------------------------------------------------------
-   Suspended card
-   --------------------------------------------------------- */
-
-.tf-card-container[data-card-status="suspend"] {
-  /*
-   * Suspended cards intentionally collapse toward the page
-   * background instead of disappearing completely.
-   */
-  background: color-mix(
-    in srgb,
-    var(--tpc-page-background) 98%,
-    var(--tpc-foreground)
-  );
-
-  border-color: color-mix(in srgb, var(--tpc-foreground) 10%, transparent);
-
-  box-shadow: none;
-
-  transform: none;
-}
-
-/*
- * Muted content
- */
-
-.tf-card-container[data-card-status="suspend"] .tf-field-name {
-  color: var(--tpc-very-muted-foreground);
-}
-
-.tf-card-container[data-card-status="suspend"] .tf-field-value {
-  color: var(--tpc-muted-foreground);
-}
-
-.tf-card-container[data-card-status="suspend"] .tf-card-id {
-  color: var(--tpc-very-muted-foreground);
-}
-
-/*
- * Don't make a suspended card "lift" on hover.
- */
-
-.tf-card-container[data-card-status="suspend"]:hover {
-  border-color: color-mix(in srgb, var(--tpc-foreground) 13%, transparent);
-
-  box-shadow: none;
-
-  transform: none;
-}
-
-/*
- * The divider symbol should also become quieter.
- */
-
-.tf-card-container[data-card-status="suspend"]
-  .tf-card-field:nth-child(2)::before {
-  color: var(--tpc-very-muted-foreground);
-}
-
-/* ---------------------------------------------------------
-   Touch devices
-   --------------------------------------------------------- */
-
-/*
- * There is no hover state on touch screens,
- * so keep the action buttons accessible.
- */
-
-@media (hover: none), (pointer: coarse) {
-  .tf-card-btns {
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-  }
-}
-
-/* ---------------------------------------------------------
-   Reduced motion
-   --------------------------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-  .tf-card-container,
-  .tf-card-btns,
-  .tf-card-btns button,
-  .tf-card-btns .tc-btn-invisible {
-    transition: none;
-  }
+.tf-field-value > p {
+	margin: 0;
 }

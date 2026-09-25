@@ -2,25 +2,36 @@ title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-reveal-editor
 code-body: yes
 
 \procedure tf-card-btns()
-<% if [<storeTiddler>is[tiddler]] %>
-  <$list filter="[all[tiddlers+shadows]tag[$:/tags/TFBtns]tf-mode[edit]sort[order]]">
-    <$transclude $tiddler=<<currentTiddler>>/>
-  </$list>
-<% else %>
-  <$list filter="[all[tiddlers+shadows]tag[$:/tags/TFBtns]tf-mode[display]sort[order]]">
-    <$transclude $tiddler=<<currentTiddler>>/>
-  </$list>
-<% endif %>
+<div class="tf-card-btns">
+  <% if [<storeTiddler>is[tiddler]] %>
+    <$list filter="[all[tiddlers+shadows]tag[$:/tags/TFBtns]tf-mode[edit]sort[order]]">
+      <$transclude $tiddler=<<currentTiddler>>/>
+    </$list>
+  <% else %>
+    <$list filter="[all[tiddlers+shadows]tag[$:/tags/TFBtns]tf-mode[display]sort[order]]">
+      <$transclude $tiddler=<<currentTiddler>>/>
+    </$list>
+  <% endif %>
+</div>
 \end tf-card-btns
 
 \procedure tf-card-display(cardId)
-\function get-field-value() [<dataTiddler>get[text]jsonget<cardId>,[fields],<currentField>]
-
-<$list filter="[<modelTiddler>get[fields-list]enlist-input[]]" variable="currentField">
-  <div class="tf-revealed-card" data-field-name=`$(currentField)$`>
-    <<get-field-value>>
-  </div>
-</$list>
+<div class="tf-fields-container">
+  <$list filter="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]reverse[]] -[[Add Reverse]]" variable="currentField">
+    <$let fieldValue={{{ [<dataTiddler>get[text]jsonget<cardId>,[fields],<currentField>] }}}>
+      <%if [<fieldValue>!is[blank]] %>
+        <div class="tf-card-field" data-field-name=`$(currentField)$`>
+          <div class="tf-field-name">
+            <<currentField>>
+          </div>
+          <div class="tf-field-value">
+            <$transclude $variable="fieldValue" $mode="block">>
+          </div>
+        </div>
+      <% endif %>
+    </$let>
+  </$list>
+</div>
 
 \end tf-card-display
 
@@ -34,9 +45,12 @@ code-body: yes
   modelTiddler={{{ [all[tiddlers+shadows]tag[$:/tags/TFModels]model-name<modelName>] }}}
   storeTiddler={{{ [<storePrefix>addsuffix<cardId>] }}}
   stateTiddler={{{ [<statePrefix>addsuffix<cardId>] }}}
-  cardStatus={{{ [<dataTiddler>jsonget<cardId>,[status]match[suspend]else[unsuspend]] }}}>
+  cardStatus={{{ [<dataTiddler>get[text]jsonget<cardId>,[status]match[suspend]else[unsuspend]] }}}>
 
-  <div class="tf-card-container" data-model-name=`$(modelName)$` data-card-status=`$(cardStatus)$`>
+  <div
+    class="tf-card-container"
+    data-model-name=`$(modelName)$`
+    data-card-status=`$(cardStatus)$`>
     <div class="tf-card-id">
       #<<cardId>>
     </div>

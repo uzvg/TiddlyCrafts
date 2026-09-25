@@ -4,6 +4,8 @@ code-body: yes
 
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-editor-tabs]]
 
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-list]]
+
 <$let
     configTiddler="$:/config/TiddlyFlashcards/DisplayFilter"
     displaySubfilter={{{ [<configTiddler>get[text]] }}}>

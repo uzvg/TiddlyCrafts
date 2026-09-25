@@ -1,0 +1,64 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/templates/tf-render-template
+code-body: yes
+
+\rules only import macrocallinline html conditional commentblock commentinline
+
+\import [[$:/uzvg/twks-flashcards/Share/tf.storage-vars]]
+\import [[$:/uzvg/twks-flashcards/Share/tf.tags-array]]
+\import [[$:/uzvg/twks-flashcards/Share/tf.target-deck]]
+\import [[$:/uzvg/twks-flashcards/Share/tf.cloze]]
+
+{
+	<!-- ------------------------------Wikify All Flashcards of model-version 1.3------------------------------ -->
+	<$list filter="[prefix<storageFolder>contains:model-version[1.3]]" variable="dataTiddler" join=",">
+		<$list filter="[<dataTiddler>get[text]jsonindexes[]]" variable="noteId" join=",">
+			<$let
+				data={{{ [<dataTiddler>get[text]] }}}
+				sourceTiddler={{{ [<dataTiddler>get[source]] }}}
+				modelName={{{ [<data>jsonget<noteId>,[modelName]] }}}
+				modelVersion={{{ [<data>jsonget<noteId>,[modelVersion]] }}}
+				deckName={{{ [tf.target-deck<sourceTiddler>] }}}
+				tagsArray={{{ [<sourceTiddler>get[tags]tf.tags-array[]] }}}>
+				<% if [<modelName>match[TFBasic]] %>
+					<$wikify name="wikifiedFront" text={{{ [<data>jsonget<noteId>,[fields],[Front]] }}} output="html">
+					<$wikify name="wikifiedBack" text={{{ [<data>jsonget<noteId>,[fields],[Back]] }}} output="html">
+						<$let
+							frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
+							backValue={{{ [<wikifiedBack>jsonstringify:rawunicode[]] }}}>
+							"<<noteId>>": {
+								"fields": {
+									"Front": "<$text text=<<frontValue>>/>",
+									"Back": "<$text text=<<backValue>>/>"
+								},
+								"modelName": "<<modelName>>",
+								"modelVersion": "<<modelVersion>>",
+								"deck": "<<deckName>>",
+								"tags": <<tagsArray>>
+							}
+						</$let>
+					</$wikify>
+					</$wikify>
+				<% elseif [<modelName>match[TFCloze]] %>
+					<$wikify name="wikifiedText" text={{{ [<data>jsonget<noteId>,[fields],[Text]] }}} output="html">
+					<$wikify name="wikifiedExtra" text={{{ [<data>jsonget<noteId>,[fields],[Back Extra]] }}} output="html">
+						<$let
+							textValue={{{ [<wikifiedText>jsonstringify:rawunicode[]] }}}
+							extraValue={{{ [<wikifiedExtra>jsonstringify:rawunicode[]] }}}>
+							"<<noteId>>": {
+								"fields": {
+									"Text": "<$text text=<<textValue>>/>",
+									"Back Extra": "<$text text=<<extraValue>>/>"
+								},
+								"modelName": "<<modelName>>",
+								"modelVersion": "<<modelVersion>>",
+								"deck": "<<deckName>>",
+								"tags": <<tagsArray>>
+							}
+						</$let>
+					</$wikify>
+					</$wikify>
+				<% endif %>
+			</$let>
+		</$list>
+	</$list>
+}

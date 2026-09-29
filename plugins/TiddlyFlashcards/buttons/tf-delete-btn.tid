@@ -4,7 +4,7 @@ code-body: yes
 tags: $:/tags/TFBtns
 
 \procedure action.delete-card()
-\function get-target-data() [<dataTiddler>get[text]jsondelete<cardId>]
+\function get-target-data() [<dataTiddler>get[text]jsondelete<cardId>format:json[2]]
 <$action-setfield $tiddler=<<dataTiddler>> text=<<get-target-data>>/>
 \end action.delete-card
 

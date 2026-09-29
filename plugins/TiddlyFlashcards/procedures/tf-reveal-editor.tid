@@ -16,17 +16,15 @@ code-body: yes
 \end tf-card-btns
 
 \procedure tf-card-display(cardId)
-<div class="tf-fields-container">
+<div class="tf-fields-container" data-tf-mode="display">
   <$list filter="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]reverse[]] -[[Add Reverse]]" variable="currentField">
     <$let fieldValue={{{ [<dataTiddler>get[text]jsonget<cardId>,[fields],<currentField>] }}}>
       <%if [<fieldValue>!is[blank]] %>
-        <div class="tf-field-row">
-          <div class="tf-field-name">
-            <<currentField>>
-          </div>
-          <div class="tf-field-value">
-            <$transclude $variable="fieldValue" $mode="block">>
-          </div>
+        <label class="tf-field-name">
+          <<currentField>>
+        </label>
+        <div class="tf-field-value">
+          <$transclude $variable="fieldValue" $mode="block">>
         </div>
       <% endif %>
     </$let>

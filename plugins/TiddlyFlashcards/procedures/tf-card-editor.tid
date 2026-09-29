@@ -18,14 +18,16 @@ code-body: yes
   <$eventcatcher
       selector="[data-input-index]"
       $click=<<action.click-input>>>
-    <div class="tf-field-container">
+    <div class="tf-fields-container" data-tf-mode="edit">
         <$list filter="[<modelTiddler>get[fields-list]enlist-input[]]" variable="currentField" counter="index">
             <$let
                 placeHolder=<<get-editor-placeholder>>
                 editClass=<<get-editor-class>>
                 focusStatus=<<get-focus-status>>>
-                    <div class="tf-editor-row" data-input-index=`$(index)$`>
-                        <label><<currentField>></label>
+                    <label class="tf-field-name">
+                        <<currentField>>
+                    </label>
+                    <div class="tf-field-value" data-input-index=`$(index)$`>
                         <$edit
                             tiddler=<<storeTiddler>>
                             field=<<currentField>>
@@ -61,4 +63,5 @@ code-body: yes
 * <$button actions=<<action.delete-store>>> delete store </$button>
 * <$button actions="""<<action.focus-nth-input 2>>"""> focus on  second input </$button>
 </div>
+* current mode: <code> <$text text=<<mode>>/>  </code>
 \end tf-card-editor

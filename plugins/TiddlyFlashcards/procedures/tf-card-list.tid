@@ -10,7 +10,9 @@ code-body: yes
     dataTiddler={{{ [<dataPrefix>addsuffix<identifier>] }}}>
 
     <$list filter="[<dataTiddler>get[text]jsonindexes[]]" variable="currentCard">
-        <<tf-reveal-editor cardId=<<currentCard>>>>
+        <<tf-reveal-editor
+            cardId=<<currentCard>>
+            mode="edit">>
     </$list>
 
 </$let>

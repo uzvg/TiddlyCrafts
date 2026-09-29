@@ -1,7 +1,7 @@
 title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-editor
 code-body: yes
 
-\procedure tf-card-editor(modelTiddler,storeTiddler,stateTiddler,dataTiddler,mode,editorIndex:"1")
+\procedure tf-card-editor(modelTiddler,storeTiddler,stateTiddler,dataTiddler,mode)
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions]]
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-save-actions]]
 
@@ -18,7 +18,7 @@ code-body: yes
   <$eventcatcher
       selector="[data-input-index]"
       $click=<<action.click-input>>>
-    <div class="tf-card-editor-container" data-editor-index=`$(editorIndex)$`>
+    <div class="tf-field-container">
         <$list filter="[<modelTiddler>get[fields-list]enlist-input[]]" variable="currentField" counter="index">
             <$let
                 placeHolder=<<get-editor-placeholder>>
@@ -45,6 +45,8 @@ code-body: yes
 </$keyboard>
 </$keyboard>
 <!-- Debug actions
+ -->
+
 <div>
 
 * <$link to=<<explicitStateTiddler>>> explicitStateTiddler:<<explicitStateTiddler>> </$link>: <$text text={{{ [<stateTiddler>get[text]] }}}/>
@@ -59,5 +61,4 @@ code-body: yes
 * <$button actions=<<action.delete-store>>> delete store </$button>
 * <$button actions="""<<action.focus-nth-input 2>>"""> focus on  second input </$button>
 </div>
- -->
 \end tf-card-editor

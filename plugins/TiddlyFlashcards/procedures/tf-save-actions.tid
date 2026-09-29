@@ -37,9 +37,13 @@ code-body: yes
 	:filter[<storeTiddler>!has<currentTiddler>]
 \end get-invalid-fields
 
+<!-- Get note id
+	If the editor in edit mode, then cardId was stored in dataTiddler
+	Else the editor in create mode, the noteId is created timestamp of the storeTiddler.
+ -->
 \function get-note-id()
-    [<cardId>!is[blank]]
-    :else[<storeTiddler>get[created]format:date[YYYY0MM0DD0hh0mm0ss0XXX]]
+	[<mode>match[edit]then<cardId>]
+	:else[<storeTiddler>get[created]format:date[YYYY0MM0DD0hh0mm0ss0XXX]]
 \end get-note-id
 
 <!-- action to delete storeTiddler -->
@@ -77,8 +81,7 @@ code-body: yes
 		storeTiddler=<<storeTiddler>>
 		noteData=<<get-note-data>>
 		fieldsData=<<get-fields-data>>
-		targetData={{{ [<dataTiddler>get[text]else[]jsonset:json<noteId>,<get-note-data>] }}}/>
- -->
+		targetData={{{ [<dataTiddler>get[text]else[]jsonset:json<get-note-id>,<get-note-data>] }}}/>
 	<<action.delete-store>>
 	<<notifier.save-card>>
 <% endif %>

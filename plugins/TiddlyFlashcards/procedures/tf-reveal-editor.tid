@@ -35,7 +35,7 @@ code-body: yes
 
 \end tf-card-display
 
-\procedure tf-reveal-editor(cardId)
+\procedure tf-reveal-editor(cardId,mode)
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-editor]]
 
 <$let

@@ -6,9 +6,11 @@ tags: $:/tags/TFBtns
 \procedure tf-save-btn()
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-save-actions]]
 
-<$button actions=<<action.save-card>> class="tc-btn-invisible">
-    <$transclude $tiddler="$:/core/images/done-button">
-</$button>
+<$let mode="edit">
+    <$button actions=<<action.save-card>> class="tc-btn-invisible">
+        <$transclude $tiddler="$:/core/images/done-button">
+    </$button>
+</$let>
 \end
 
 <<tf-save-btn>>

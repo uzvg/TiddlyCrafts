@@ -3,17 +3,24 @@ code-body: yes
 
 <!-- ---------------- focus on nth input ---------------- -->
 \procedure action.focus-nth-input(nth)
-<$let
-	selector-pattern="""[data-tiddler-title="$(storyTiddler)$"] [data-editor-index="$(editorIndex)$"] [data-input-index="$(nth)$"] textarea"""
-	focus-selector={{{ [<selector-pattern>substitute[]] }}}>
+<!-- If in the edit mode -->
+<%if [<stateTiddler>get[card-index]!is[blank]] %>
 	<$action-sendmessage
 		$message="tm-focus-selector"
-		$param=<<focus-selector>>
+		$param=`.tf-card-container[data-card-index="$(condition)$"] [data-input-index="$(nth)$"] textarea`
 		focusVisible="true"
 		preventScroll="true"/>
-	<!-- Debug action
-	<$action-log $$message="Debug" focus-selector=<<focus-selector>>/> -->
-</$let>
+<!-- Else in the create mode -->
+<% else %>
+	<$action-sendmessage
+		$message="tm-focus-selector"
+		$param=`[data-tiddler-title="$(storyTiddler)$"] .tf-fields-container[data-tf-mode="create"] [data-input-index="$(nth)$"] textarea`
+		focusVisible="true"
+		preventScroll="true"/>
+	<$action-log
+		$$message="Debug info:"
+		selector=`[data-tiddler-title="$(storyTiddler)$"] .tf-fields-container[data-tf-mode="create"] [data-input-index=$(nth)$] textarea`/>
+<% endif %>
 \end action.focus-nth-input
 
 <!-- Save input index when click on the textarea  -->
@@ -98,5 +105,5 @@ code-body: yes
 <!-- action to delete storeTiddler -->
 \procedure action.delete-store()
 <$action-deletetiddler $tiddler=<<storeTiddler>>/>
-<<action.focus-nth-input nth="1">>
+<$action-setfield $tiddler=<<dataTiddler>> modified=<<now timestamp>>/>
 \end action.delete-store

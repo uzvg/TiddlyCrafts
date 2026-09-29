@@ -30,7 +30,6 @@ code-body: yes
     </$let>
   </$list>
 </div>
-
 \end tf-card-display
 
 \procedure tf-reveal-editor(cardId)

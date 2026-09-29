@@ -3,6 +3,15 @@ tags: $:/tags/Stylesheet
 code-body: yes
 type: text/css
 
+<!-- Html structure of tf-reveal-editor
+.tf-card-container
+  .tf-card-id
+  .tf-card-btns
+  .tf-fields-container([data-tf-mode="display/edit/create"])
+    label.tf-field-name
+    .tf-field-value([data-input-index=1])
+ -->
+
 /* ========== 基础容器 ========== */
 .tf-card-editor-container {
   display: flex;

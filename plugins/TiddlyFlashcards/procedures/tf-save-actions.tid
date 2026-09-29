@@ -70,7 +70,6 @@ code-body: yes
 		dataTiddler=<<dataTiddler>>
 		noteId=<<get-note-id>>
 		noteData=<<get-note-data>>/>
-
 	<!-- Debug action:
 	<$action-log
 		$$message="Debug note data"
@@ -82,6 +81,7 @@ code-body: yes
 		noteData=<<get-note-data>>
 		fieldsData=<<get-fields-data>>
 		targetData={{{ [<dataTiddler>get[text]else[]jsonset:json<get-note-id>,<get-note-data>] }}}/>
+-->
 	<<action.delete-store>>
 	<<notifier.save-card>>
 <% endif %>

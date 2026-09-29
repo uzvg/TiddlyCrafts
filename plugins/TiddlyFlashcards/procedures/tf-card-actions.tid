@@ -105,5 +105,4 @@ code-body: yes
 <!-- action to delete storeTiddler -->
 \procedure action.delete-store()
 <$action-deletetiddler $tiddler=<<storeTiddler>>/>
-<$action-setfield $tiddler=<<dataTiddler>> modified=<<now timestamp>>/>
 \end action.delete-store

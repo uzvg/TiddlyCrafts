@@ -11,6 +11,9 @@ tags: $:/tags/TFBtns
   $fields="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]]"
   $values="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]] :map[function[get-field-value]]"
   $timestamp="no"/>
+  <!-- save cardId into to card-index when edit card -->
+<$action-setfield $tiddler=<<stateTiddler>> card-index=<<cardId>>/>
+
   <!-- <$action-log
     $$message="Debug info:"
       modelTiddler=<<modelTiddler>>

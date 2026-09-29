@@ -20,7 +20,7 @@ code-body: yes
   <$list filter="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]reverse[]] -[[Add Reverse]]" variable="currentField">
     <$let fieldValue={{{ [<dataTiddler>get[text]jsonget<cardId>,[fields],<currentField>] }}}>
       <%if [<fieldValue>!is[blank]] %>
-        <div class="tf-card-field" data-field-name=`$(currentField)$`>
+        <div class="tf-field-row">
           <div class="tf-field-name">
             <<currentField>>
           </div>
@@ -35,40 +35,32 @@ code-body: yes
 
 \end tf-card-display
 
-\procedure tf-reveal-editor(cardId,mode)
+\procedure tf-reveal-editor(cardId)
+\whitespace trim
+
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-editor]]
 
-<$let
-  storePrefix="$:/temp/TiddlyFlashcards/tf-card-editor/"
-  statePrefix="$:/state/TiddlyFlashcards/tf-card-editor/"
-  modelName={{{ [<dataTiddler>get[text]jsonget<cardId>,[modelName]] }}}
-  modelTiddler={{{ [all[tiddlers+shadows]tag[$:/tags/TFModels]model-name<modelName>] }}}
-  storeTiddler={{{ [<storePrefix>addsuffix<cardId>] }}}
-  stateTiddler={{{ [<statePrefix>addsuffix<cardId>] }}}
-  cardStatus={{{ [<dataTiddler>get[text]jsonget<cardId>,[status]match[suspend]else[unsuspend]] }}}>
-
-  <div
-    class="tf-card-container"
-    data-model-name=`$(modelName)$`
-    data-card-status=`$(cardStatus)$`>
-    <div class="tf-card-id">
-      #<<cardId>>
-    </div>
-
-    <div class="tf-card-btns">
-      <<tf-card-btns>>
-    </div>
-
-    <%if [<storeTiddler>is[tiddler]] %>
-      <<tf-card-editor
-        modelTiddler=<<modelTiddler>>
-        storeTiddler=<<storeTiddler>>
-        stateTiddler=<<stateTiddler>>
-        dataTiddler=<<dataTiddler>>
-        mode="edit">>
-    <% else %>
-      <<tf-card-display cardId=<<cardId>>>>
-    <% endif %>
+<div
+  class="tf-card-container"
+  data-card-index=`$(cardId)$`
+  data-card-status=`$(cardStatus)$`>
+  <div class="tf-card-id">
+    #<<cardId>>
   </div>
-</$let>
+
+  <div class="tf-card-btns">
+    <<tf-card-btns>>
+  </div>
+
+  <%if [<storeTiddler>is[tiddler]] %>
+    <<tf-card-editor
+      modelTiddler=<<modelTiddler>>
+      storeTiddler=<<storeTiddler>>
+      stateTiddler=<<stateTiddler>>
+      dataTiddler=<<dataTiddler>>
+      mode="edit">>
+  <% else %>
+    <<tf-card-display cardId=<<cardId>>>>
+  <% endif %>
+</div>
 \end tf-reveal-editor

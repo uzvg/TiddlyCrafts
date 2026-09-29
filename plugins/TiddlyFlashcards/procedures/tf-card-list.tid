@@ -7,12 +7,18 @@ code-body: yes
 <$let
     dataPrefix="$:/Storage/TiddlyFlashcards/DataTiddlers/"
     identifier={{{ [<storyTiddler>get[created]] }}}
-    dataTiddler={{{ [<dataPrefix>addsuffix<identifier>] }}}>
-
-    <$list filter="[<dataTiddler>get[text]jsonindexes[]]" variable="currentCard">
-        <<tf-reveal-editor
-            cardId=<<currentCard>>
-            mode="edit">>
+    dataTiddler={{{ [<dataPrefix>addsuffix<identifier>] }}}
+    storePrefix="$:/temp/TiddlyFlashcards/tf-card-editor/"
+    statePrefix="$:/state/TiddlyFlashcards/tf-card-editor/">
+    <$list filter="[<dataTiddler>get[text]jsonindexes[]]" variable="cardId">
+        <$let
+            modelName={{{ [<dataTiddler>get[text]jsonget<cardId>,[modelName]] }}}
+            modelTiddler={{{ [all[tiddlers+shadows]tag[$:/tags/TFModels]model-name<modelName>] }}}
+            storeTiddler={{{ [<storePrefix>addsuffix<cardId>] }}}
+            stateTiddler={{{ [<statePrefix>addsuffix<cardId>] }}}
+            cardStatus={{{ [<dataTiddler>get[text]jsonget<cardId>,[status]match[suspend]else[unsuspend]] }}}>
+            <<tf-reveal-editor cardId=<<cardId>>>>
+        </$let>
     </$list>
 
 </$let>

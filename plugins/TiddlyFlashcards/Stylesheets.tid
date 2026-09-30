@@ -3,359 +3,113 @@ tags: $:/tags/Stylesheet
 code-body: yes
 type: text/css
 
-<!-- Html structure of tf-reveal-editor
+/* Html structure of tf-reveal-editor
 .tf-card-container
   .tf-card-id
   .tf-card-btns
-  .tf-fields-container([data-tf-mode="display/edit/create"])
-    label.tf-field-name
-    .tf-field-value([data-input-index=1])
- -->
+    span.tc-keyboard
+      .tf-fields-container([data-tf-mode="display/edit/create"])
+        label.tf-field-name
+        .tf-field-value([data-input-index=1]) */
 
-/* ========== 基础容器 ========== */
-.tf-card-editor-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 1em;
-  background: var(--tpc-page-background);
+.tf-card-container .tc-keyboard,
+.tf-card-container .tc-eventcatcher {
+  display: contents;
 }
-
-/* ========== 每一行：横向布局 ========== */
-.tf-editor-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-}
-
-/* ========== Label 样式 ========== */
-.tf-editor-row > label {
-  flex: 0 0 4em;
-  min-width: 3em;
-  line-height: 1em;
-  text-align: right;
-  white-space: wrap;
-  font-weight: bold;
-  font-family: monospace;
-  text-transform: uppercase;
-  color: var(--tpc-primary);
-  font-size: 0.8em;
-}
-
-/* ========== 响应式：移动端纵向堆叠 ========== */
-@media screen and (max-width: 600px) {
-  .tf-editor-row {
-    flex-direction: column; /* 改为纵向 */
-    align-items: stretch;
-    gap: 4px;
-  }
-
-  .tf-editor-row > label {
-    flex: 0 0 auto;
-    min-width: unset;
-    width: 100%;
-    text-align: left;
-    line-height: 1.4;
-  }
-
-  .tf-editor-row > .tc-edit-texteditor {
-    width: 100%;
-  }
-
-  .tf-card-editor-container {
-    padding: 4px;
-    gap: 10px;
-  }
-}
-
-/* =============================================
-1. 卡片容器 — Grid 布局
-============================================= */
 
 .tf-card-container {
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 2em 1fr;
   grid-template-areas:
-    "id   btns"
-    "fields fields";
-
-  width: min(100%, 720px);
-  margin-inline: auto;
-
-  position: relative;
-  background: color-mix(
-    in srgb,
-    var(--tpc-page-background) 62%,
-    var(--tpc-tiddler-background)
-  );
-  border: 1px solid color-mix(in srgb, var(--tpc-primary) 20%, transparent);
-  border-radius: 1px;
-  padding: 10px 14px 12px;
-  transition:
-    border-color 0.3s,
-    box-shadow 0.3s;
+    "id button"
+    "field field";
 }
-
-/* 默认发光 */
-.tf-card-container {
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--tpc-primary) 4%, transparent),
-    0 0 12px -4px color-mix(in srgb, var(--tpc-primary) 6%, transparent);
-}
-
-.tf-card-container:hover {
-  border-color: color-mix(in srgb, var(--tpc-primary) 45%, transparent);
-
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--tpc-primary) 8%, transparent),
-    0 0 20px -4px color-mix(in srgb, var(--tpc-primary) 15%, transparent);
-}
-
-/* ---------- 四角 L 形角标 ---------- */
-
-.tf-card-container::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  pointer-events: none;
-  z-index: 2;
-
-  background:
-    /* 左上 */
-    linear-gradient(90deg, var(--tpc-primary), var(--tpc-primary)) 0 0 / 10px
-      1.5px no-repeat,
-    linear-gradient(0deg, var(--tpc-primary), var(--tpc-primary)) 0 0 / 1.5px
-      10px no-repeat,
-    /* 右上 */ linear-gradient(90deg, var(--tpc-primary), var(--tpc-primary))
-      100% 0 / 10px 1.5px no-repeat,
-    linear-gradient(0deg, var(--tpc-primary), var(--tpc-primary)) 100% 0 / 1.5px
-      10px no-repeat,
-    /* 左下 */ linear-gradient(90deg, var(--tpc-primary), var(--tpc-primary)) 0
-      100% / 10px 1.5px no-repeat,
-    linear-gradient(0deg, var(--tpc-primary), var(--tpc-primary)) 0 100% / 1.5px
-      10px no-repeat,
-    /* 右下 */ linear-gradient(90deg, var(--tpc-primary), var(--tpc-primary))
-      100% 100% / 10px 1.5px no-repeat,
-    linear-gradient(0deg, var(--tpc-primary), var(--tpc-primary)) 100% 100% /
-      1.5px 10px no-repeat;
-
-  opacity: 0.55;
-  transition: opacity 0.3s;
-}
-
-.tf-card-container:hover::before {
-  opacity: 1;
-}
-
-/* ---------- 左侧状态光条 ---------- */
-
-.tf-card-container::after {
-  content: "";
-  position: absolute;
-  left: -1px;
-  top: 10px;
-  bottom: 10px;
-  width: 2px;
-  border-radius: 1px;
-
-  background: var(--tpc-very-muted-foreground);
-
-  box-shadow: 0 0 6px
-    color-mix(in srgb, var(--tpc-very-muted-foreground) 40%, transparent);
-
-  transition:
-    background 0.3s,
-    box-shadow 0.3s;
-}
-
-.tf-card-container[data-card-status="unsuspend"]::after {
-  background: var(--tpc-primary);
-
-  box-shadow: 0 0 8px color-mix(in srgb, var(--tpc-primary) 45%, transparent);
-}
-
-.tf-card-container[data-card-status="suspended"]::after {
-  background: var(--tpc-alert-highlight);
-  background: var(--tpc-muted-foreground);
-
-  box-shadow: 0 0 8px
-    color-mix(in srgb, var(--tpc-muted-foreground) 40%, transparent);
-}
-
-/* =============================================
-2. 卡片 ID
-============================================= */
 
 .tf-card-id {
   grid-area: id;
+  display: grid;
+  align-items: center;
+  padding-inline-start: .6em;
 
-  font-family:
-    "JetBrains Mono", "Fira Code", "SF Mono", Consolas, "Liberation Mono",
-    Menlo, monospace;
-
-  font-size: 0.7rem;
-  color: var(--tpc-muted-foreground);
-  letter-spacing: 0.06em;
-  align-self: center;
-  user-select: none;
-  transition: color 0.3s;
+  font-family: monospace;
+  letter-spacing: 1px;
+  font-size: .8em;
 }
-
-.tf-card-container:hover .tf-card-id {
-  color: var(--tpc-foreground);
-}
-
-/* 菱形装饰 */
-
-.tf-card-id::before {
-  content: "◇";
-  color: var(--tpc-primary);
-  font-size: 0.55em;
-  margin-right: 5px;
-  vertical-align: 1px;
-  opacity: 0.5;
-  transition: opacity 0.3s;
-}
-
-.tf-card-container:hover .tf-card-id::before {
-  opacity: 1;
-}
-
-/* =============================================
-3. 操作按钮
-============================================= */
 
 .tf-card-btns {
-  grid-area: btns;
+  grid-area: button;
   display: flex;
-  gap: 4px;
-  align-self: center;
-  opacity: 0;
-  transform: translateX(6px);
 
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: .5em;
+  padding-inline-end: .5em;
 }
-
-.tf-card-container:hover .tf-card-btns {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.tf-card-btns button {
-  background: transparent;
-
-  border: 1px solid color-mix(in srgb, var(--tpc-primary) 20%, transparent);
-
-  border-radius: 1px;
-  padding: 2px 10px;
-
-  font-size: 0.68rem;
-  font-family: inherit;
-  color: var(--tpc-muted-foreground);
-
-  cursor: pointer;
-  letter-spacing: 0.04em;
-
-  transition: all 0.2s;
-  line-height: 1.5;
-}
-
-.tf-card-btns button:hover {
-  color: var(--tpc-primary);
-
-  border-color: color-mix(in srgb, var(--tpc-primary) 50%, transparent);
-
-  background: color-mix(in srgb, var(--tpc-primary) 6%, transparent);
-
-  box-shadow: 0 0 8px color-mix(in srgb, var(--tpc-primary) 10%, transparent);
-}
-
-/* =============================================
-4. 字段区域
-============================================= */
 
 .tf-fields-container {
-  grid-area: fields;
-  margin-top: 8px;
-  padding-top: 6px;
-
-  /* 顶部虚线分隔 */
-  border-top: 2px dotted color-mix(in srgb, var(--tpc-primary) 20%, transparent);
+  grid-area: field;
+  display: grid;
+  grid-template-columns: auto 1fr;
 }
-
-/* =============================================
-5. 单个字段行
-============================================= */
-
-.tf-card-field {
-  display: flex;
-  align-items: stretch;
-  padding: 5px 0;
-
-  border-bottom: 2px dotted
-    color-mix(in srgb, var(--tpc-primary) 20%, transparent);
-}
-
-.tf-card-field:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-/* 字段名 — HUD 标签风格 */
 
 .tf-field-name {
-  width: 64px;
-  flex-shrink: 0;
-
-  display: flex;
+  display: grid;
+  justify-items: right;
   align-items: center;
+  padding-inline: .5em;
 
-  font-family: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
-
-  font-size: 0.62rem;
-  font-weight: 600;
+  font-family: monospace;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: .8em;
+  font-weight: bold;
 
-  color: var(--tpc-primary);
-
-  opacity: 0.55;
-  /* text-align: right; */
-  justify-content: flex-end;
-
-  padding: 3px 10px 3px 0;
-
-  border-right: 2px dotted
-    color-mix(in srgb, var(--tpc-primary) 20%, transparent);
-
-  line-height: 1.5;
-  transition: opacity 0.3s;
 }
-
-.tf-card-container:hover .tf-field-name {
-  opacity: 0.85;
-}
-
-/* 字段值 */
 
 .tf-field-value {
-  flex: 1;
-  padding: 2px 0 2px 12px;
-
-  font-size: 0.85rem;
-  color: var(--tpc-foreground);
-
-  line-height: 1.55;
-  word-break: break-word;
+  display: grid;
+  align-items: center;
+  padding-inline-start: .5em;
 }
 
-.tf-field-value > p {
-	margin: 0;
+.tf-fields-container {
+  --accent: var(--tpc-primary);
+  --transition: .3s ease;
+
+}
+.tf-fields-container[data-tf-mode="create"] {
+  background: color-mix(in srgb, var(--tpc-background) 50%, var(--tpc-page-background) 50%);
+  padding: 1em;
+  
+  .tf-field-name {
+    color: var(--tpc-primary);
+    /* color: color-mix(in srgb, var(--tpc-primary) 80%, transparent); */
+  }
+}
+
+.tf-fields-container[data-tf-mode="display"] {
+  .tf-field-name {
+    border-top: 1px dotted var(--tpc-primary);
+    border-right: 1px dotted var(--tpc-primary);
+  }
+  
+  .tf-field-value {
+    border-top: 1px dotted var(--tpc-primary);
+  }
+}
+
+.tf-card-container {
+  border-width: 1px 1px 1px 3px;
+  border-style: solid;
+  border-color: var(--tpc-primary);
+  border-radius: 3px;
+  
+  box-shadow: 0 0 3px var(--tpc-primary);
+}
+
+.tf-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }

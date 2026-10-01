@@ -105,4 +105,5 @@ code-body: yes
 <!-- action to delete storeTiddler -->
 \procedure action.delete-store()
 <$action-deletetiddler $tiddler=<<storeTiddler>>/>
+<<action.focus-nth-input nth="1">>
 \end action.delete-store

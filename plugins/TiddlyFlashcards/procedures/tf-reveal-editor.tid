@@ -45,9 +45,7 @@ code-body: yes
     #<<cardId>>
   </div>
 
-  <div class="tf-card-btns">
-    <<tf-card-btns>>
-  </div>
+  <<tf-card-btns>>
 
   <%if [<storeTiddler>is[tiddler]] %>
     <<tf-card-editor

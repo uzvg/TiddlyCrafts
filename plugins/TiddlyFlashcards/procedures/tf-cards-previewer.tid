@@ -101,11 +101,11 @@ code-body: yes
         displayStatus={{{ [<previewerStateTiddler>get[display-all]] }}}
         setValue={{{ [<displayStatus>match[yes]then[]else[yes]] }}}
         btnIcon={{{ [<displayStatus>match[yes]then[$:/core/images/up-arrow]else[$:/core/images/down-arrow]] }}}>
-
         <<tf-list-header>>
-        <<tf-card-list>>
-        <<tf-list-paginator>>
-
+        <%if [<previewerStateTiddler>!has[hide-all]] %>
+            <<tf-card-list>>
+            <<tf-list-paginator>>
+        <% endif %>
         <li>dataTiddler:<<dataTiddler>></li>
         <li>cardsCount:<<cardsCount>></li>
         <li>pageCount:<<pageCount>></li>

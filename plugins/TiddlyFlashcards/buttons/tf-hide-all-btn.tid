@@ -1,0 +1,22 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/buttons/tf-hide-all-btn
+code-body: yes
+tags: $:/tags/TFListHeaderBtns
+order: 0
+
+\procedure tf-hide-all-btn()
+<$let
+    hideStatus={{{ [<previewerStateTiddler>get[hide-all]] }}}
+    setValue={{{ [<hideStatus>match[yes]then[]else[yes]] }}}
+    btnIcon={{{ [<hideStatus>match[yes]then[$:/core/images/plus-button]else[$:/core/images/minus-button]] }}}
+    btnToolTip={{{ [<hideStatus>match[yes]then[Unfold flashcards preview list]else[Fold flashcards preview list]] }}}>
+    <$button
+        setTitle=<<previewerStateTiddler>>
+        setField="hide-all"
+        setTo=<<setValue>>
+        tooltip=<<btnToolTip>>>
+        <$transclude $tiddler=<<btnIcon>>/>
+    </$button>
+</$let>
+\end
+
+<<tf-hide-all-btn>>

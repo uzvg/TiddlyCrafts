@@ -33,53 +33,30 @@ type: text/css
   --tf-accent: var(--tpc-primary);
 
   /* Card surface is derived from the TiddlyWiki background layers. */
-  --tf-surface:
-    color-mix(
-      in srgb,
-      var(--tpc-background) 65%,
-      var(--tpc-page-background)
-    );
+  --tf-surface: color-mix(
+    in oklab,
+    var(--tpc-background) 65%,
+    var(--tpc-page-background) 35%
+  );
 
-  --tf-surface-hover:
-    color-mix(
-      in srgb,
-      var(--tpc-background) 55%,
-      var(--tpc-page-background)
-    );
+  --tf-surface-hover: color-mix(
+    in oklab,
+    var(--tpc-background) 55%,
+    var(--tpc-page-background) 45%
+  );
 
   /* Border */
-  --tf-border:
-    color-mix(
-      in srgb,
-      var(--tf-accent) 30%,
-      transparent
-    );
+  --tf-border: color-mix(in oklab, var(--tf-accent) 30%, transparent);
 
-  --tf-border-hover:
-    color-mix(
-      in srgb,
-      var(--tf-accent) 65%,
-      transparent
-    );
+  --tf-border-hover: color-mix(in oklab, var(--tf-accent) 65%, transparent);
 
   /* Glow */
-  --tf-glow:
-    color-mix(
-      in srgb,
-      var(--tf-accent) 12%,
-      transparent
-    );
+  --tf-glow: color-mix(in oklab, var(--tf-accent) 12%, transparent);
 
-  --tf-glow-hover:
-    color-mix(
-      in srgb,
-      var(--tf-accent) 24%,
-      transparent
-    );
+  --tf-glow-hover: color-mix(in oklab, var(--tf-accent) 24%, transparent);
 
   /* Animation */
-  --tf-transition: 180ms ease;
-
+  --tf-transition: 300ms ease;
 
   /* ------------------------------------------------------------------------
      Layout

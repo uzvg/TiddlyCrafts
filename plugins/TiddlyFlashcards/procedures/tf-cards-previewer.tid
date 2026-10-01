@@ -19,9 +19,14 @@ code-body: yes
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-reveal-editor]]
 
 \function list-filter()
+    [<previewerStateTiddler>get[reverse-status]] =>reverseStatus
+    [<dataTiddler>get[text]] =>sourceData
+    [<reverseStatus>match[yes]]
+    :then[<sourceData>jsonindexes[]reverse[]]
+    :else[<sourceData>jsonindexes[]] =>sortedIndexes
     [<displayStatus>match[yes]]
-    :then[<dataTiddler>get[text]jsonindexes[]]
-    :else[<dataTiddler>get[text]jsonindexes[]rest<restCount>first<pageSize>]
+    :then[(sortedIndexes)]
+    :else[(sortedIndexes)rest<restCount>first<pageSize>]
 \end list-filter
 
 <div class="tf-card-list">

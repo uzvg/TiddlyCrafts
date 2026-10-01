@@ -1,0 +1,22 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/buttons/tf-reverse-btn
+code-body: yes
+tags: $:/tags/TFListHeaderBtns
+order: -1
+
+\procedure tf-reverse-order-btn()
+<$let
+    reverseStatus={{{ [<previewerStateTiddler>get[reverse-status]] }}}
+    setValue={{{ [<reverseStatus>match[yes]then[]else[yes]] }}}
+    btnIcon={{{ [<reverseStatus>match[yes]then[$:/core/images/input-button]else[$:/core/images/export-button]] }}}
+    btnToolTip={{{ [<reverseStatus>match[yes]then[Show flashcards in forward order]else[Show flashcards in reverse order]] }}}>
+    <$button
+        setTitle=<<previewerStateTiddler>>
+        setField="reverse-status"
+        setTo=<<setValue>>
+        tooltip=<<btnToolTip>>>
+        <$transclude $tiddler=<<btnIcon>>/>
+    </$button>
+</$let>
+\end
+
+<<tf-reverse-btn>>

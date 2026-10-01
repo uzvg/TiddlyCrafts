@@ -21,11 +21,9 @@ tags: $:/tags/TFBtns
     cardStatus=<<get-card-status>>
     noteData=<<get-note-data>>
     btnIcon=<<get-btn-icon>>>
-
     <$button actions=<<action.suspend-card>> class="tc-btn-invisible">
         <$transclude $tiddler=<<btnIcon>>>
     </$button>
-
 </let>
 \end tf-suspend-btn
 

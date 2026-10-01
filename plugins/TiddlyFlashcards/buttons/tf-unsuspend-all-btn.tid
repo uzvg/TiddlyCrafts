@@ -1,0 +1,21 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/buttons/tf-unsuspend-all-btn
+code-body: yes
+tags: $:/tags/TFListHeaderBtns
+order: 2
+
+\procedure tf-unsuspend-all-btn()
+\function get-target-data()
+    [<dataTiddler>get[text]] =>sourceData
+    [<sourceData>jsonindexes[]]
+    :reduce[<index>compare:number:eq[0]then<sourceData>else<accumulator>jsondelete<currentTiddler>,[status]]
+    +[format:json[2]]
+\end get-target-data
+<$button
+    setTitle=<<dataTiddler>>
+    setTo=<<get-target-data>>
+    tooltip="Suspend all flashcards">
+    <$transclude $tiddler="$:/core/images/unlocked-padlock"/>
+</$button>
+\end
+
+<<tf-unsuspend-all-btn>>

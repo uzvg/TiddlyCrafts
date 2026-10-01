@@ -1,0 +1,21 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/buttons/tf-open-setting-btn
+code-body: yes
+tags: $:/tags/TFListHeaderBtns
+order: 4
+
+\procedure tf-open-setting-btn()
+\procedure open-setting-actions()
+<$action-setfield
+    $tiddler="$:/state/tab-1749438307"
+    $value="$:/core/ui/ControlPanel/Settings"/>
+<$action-setfield
+    $tiddler="$:/state/tab--697582678"
+    $value="$:/plugins/uzvg/TiddlyFlashcards/settings"/>
+<$action-navigate $to="$:/ControlPanel"/>
+\end open-setting-actions
+<$button actions=<<open-setting-actions>>>
+    <$transclude $tiddler="$:/core/images/options-button"/>
+</$button>
+\end
+
+<<tf-open-setting-btn>>

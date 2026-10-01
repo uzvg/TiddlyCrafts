@@ -1,0 +1,14 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/buttons/tf-delete-all-btn
+code-body: yes
+tags: $:/tags/TFListHeaderBtns
+order: 3
+
+\procedure tf-delete-all-btn()
+<$button
+    actions="""<$action-deletetiddler $tiddler=<<dataTiddler>>/>"""
+    tooltip="Delete all flashcards of the current tiddler">
+    <$transclude $tiddler="$:/core/images/delete-button"/>
+</$button>
+\end
+
+<<tf-delete-all-btn>>

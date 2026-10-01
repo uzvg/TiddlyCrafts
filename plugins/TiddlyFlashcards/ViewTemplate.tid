@@ -4,7 +4,7 @@ code-body: yes
 
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-editor-tabs]]
 
-\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-list]]
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-cards-previewer]]
 
 <$let
     configTiddler="$:/config/TiddlyFlashcards/DisplayFilter"
@@ -12,7 +12,7 @@ code-body: yes
 
     <% if [<storyTiddler>!has[tf-hide]subfilter<displaySubfilter>] %>
         <<tf-editor-tabs>>
-        <<tf-card-list>>
+        <<tf-cards-previewer>>
     <% endif %>
 
 </$let>

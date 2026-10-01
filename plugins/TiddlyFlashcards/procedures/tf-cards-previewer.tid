@@ -1,10 +1,11 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-list
+title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-cards-previewer
 code-body: yes
 
 \procedure tf-list-header()
 <div class="tf-list-header">
     <div class="tf-page-indicator">
-        tf-list-header
+        <span class="tf-current-page"><<currentPage>></span>
+        <span>/<<pageCount>></span>
     </div>
     <div class="tf-header-btns">
         <$list filter="[all[tiddlers+shadows]tag[$:/tags/TFListHeaderBtns]sort[order]]">
@@ -12,7 +13,7 @@ code-body: yes
         </$list>
     </div>
 </div>
-\end tf-list-header
+\end
 
 \procedure tf-card-list()
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-reveal-editor]]
@@ -23,9 +24,24 @@ code-body: yes
     :else[<dataTiddler>get[text]jsonindexes[]rest<restCount>first<pageSize>]
 \end list-filter
 
+<div class="tf-card-list">
+    <$list filter="[function[list-filter]]" variable="cardId">
+        <$let
+            modelName={{{ [<dataTiddler>get[text]jsonget<cardId>,[modelName]] }}}
+            modelTiddler={{{ [all[tiddlers+shadows]tag[$:/tags/TFModels]model-name<modelName>] }}}
+            storeTiddler={{{ [<storePrefix>addsuffix<cardId>] }}}
+            stateTiddler={{{ [<statePrefix>addsuffix<cardId>] }}}
+            cardStatus={{{ [<dataTiddler>get[text]jsonget<cardId>,[status]match[suspend]else[unsuspend]] }}}>
+            <<tf-reveal-editor cardId=<<cardId>>>>
+        </$let>
+    </$list>
+</div>
+\end
+
+\procedure tf-list-paginator()
 \procedure next-page-btn()
 <$button
-    setTitle=<<paginatorStateTiddler>>
+    setTitle=<<previewerStateTiddler>>
     setTo=<<nextPage>>
     disabled={{{ [<setValue>is[blank]then[yes]] [<nextPage>compare:integer:gt<pageCount>then[yes]] }}}>
     Next&nbsp;⮞
@@ -34,7 +50,7 @@ code-body: yes
 
 \procedure previous-page-btn()
 <$button
-    setTitle=<<paginatorStateTiddler>>
+    setTitle=<<previewerStateTiddler>>
     setTo=<<previousPage>>
     disabled={{{ [<setValue>is[blank]then[yes]] [<previousPage>compare:integer:lt[1]then[yes]] }}}>
     ⮜&nbsp;Previous
@@ -43,7 +59,7 @@ code-body: yes
 
 \procedure display-all-btn()
 <$button
-    setTitle=<<paginatorStateTiddler>>
+    setTitle=<<previewerStateTiddler>>
     setField="display-all"
     setTo=<<setValue>>
     disabled={{{ [<cardsCount>compare:integer:lteq<pageSize>then[yes]] }}}
@@ -53,6 +69,14 @@ code-body: yes
 
 \end display-all-btn
 
+<div class="tf-list-paginator">
+    <<previous-page-btn>>
+    <<display-all-btn>>
+    <<next-page-btn>>
+</div>
+\end
+
+\procedure tf-cards-previewer()
 <$let
     dataPrefix="$:/Storage/TiddlyFlashcards/DataTiddlers/"
     identifier={{{ [<storyTiddler>get[created]] }}}
@@ -60,8 +84,8 @@ code-body: yes
     storePrefix="$:/temp/TiddlyFlashcards/tf-card-editor/"
     statePrefix="$:/state/TiddlyFlashcards/tf-card-editor/">
     <$let
-        paginatorStateTiddler={{{ [[$:/state/TiddlyFlashcards/cardListPaginator/]addsuffix<identifier>] }}}
-        currentPage={{{ [<paginatorStateTiddler>get[text]else[1]] }}}
+        previewerStateTiddler={{{ [[$:/state/TiddlyFlashcards/tf-cards-previewer/]addsuffix<identifier>] }}}
+        currentPage={{{ [<previewerStateTiddler>get[text]else[1]] }}}
         pageSize={{{  [<storyTiddler>get[tf-list-size]] [[$:/config/TiddlyFlashcards/CardListSize]get[text]] :else[[6]] }}}
         cardsCount={{{ [<dataTiddler>get[text]jsonindexes[]count[]] }}}
         pageCount={{{ [<cardsCount>divide<pageSize>ceil[]] }}}
@@ -69,34 +93,20 @@ code-body: yes
         previousPage={{{ [<currentPage>subtract[1]] }}}
         restCount={{{ [<currentPage>subtract[1]multiply<pageSize>] }}}
         btnDisabled={{{ [<nextPage>compare:integer:gt<pageCount>then[yes]] [<previousPage>compare:integer:lt[1]then[yes]] }}}
-        displayStatus={{{ [<paginatorStateTiddler>get[display-all]] }}}
+        displayStatus={{{ [<previewerStateTiddler>get[display-all]] }}}
         setValue={{{ [<displayStatus>match[yes]then[]else[yes]] }}}
         btnIcon={{{ [<displayStatus>match[yes]then[$:/core/images/up-arrow]else[$:/core/images/down-arrow]] }}}>
-        <div class="tf-card-list">
-            <$list filter="[function[list-filter]]" variable="cardId">
-                <$let
-                    modelName={{{ [<dataTiddler>get[text]jsonget<cardId>,[modelName]] }}}
-                    modelTiddler={{{ [all[tiddlers+shadows]tag[$:/tags/TFModels]model-name<modelName>] }}}
-                    storeTiddler={{{ [<storePrefix>addsuffix<cardId>] }}}
-                    stateTiddler={{{ [<statePrefix>addsuffix<cardId>] }}}
-                    cardStatus={{{ [<dataTiddler>get[text]jsonget<cardId>,[status]match[suspend]else[unsuspend]] }}}>
-                    <<tf-reveal-editor cardId=<<cardId>>>>
-                </$let>
-            </$list>
-            <div class="tf-list-paginator">
-                <<previous-page-btn>>
-                <<display-all-btn>>
-                <<next-page-btn>>
-                <<suspend-all-btn>>
-            </div>
-        </div>
+
         <<tf-list-header>>
+        <<tf-card-list>>
+        <<tf-list-paginator>>
+
         <li>dataTiddler:<<dataTiddler>></li>
         <li>cardsCount:<<cardsCount>></li>
         <li>pageCount:<<pageCount>></li>
         <li>currentPage:<<currentPage>></li>
         <li>nextPage:<<nextPage>></li>
-        <$link to=<<paginatorStateTiddler>>/>
+        <$link to=<<previewerStateTiddler>>/>
     </$let>
 </$let>
 \end

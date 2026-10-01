@@ -462,6 +462,20 @@ type: text/css
   flex-direction: row;
   justify-content: space-between;
   
+  .tf-page-indicator {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-inline-start: .5em;
+
+    .tf-current-page {
+      color: var(--tpc-primary);
+      &::before {
+        content: "🗏 "
+      }
+    }
+  }
+
   .tf-header-btns {
     display: flex;
     flex-direction: row;

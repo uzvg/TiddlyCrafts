@@ -40,4 +40,14 @@ caption: TiddlyFlashcards
             <$edit class="tc-edit-texteditor" tiddler=<<tf-config "TagMappingRules">> autoHeight="yes"/>
         </td>
     </tr>
+    <tr>
+    </tr>
+        <td>
+            <$link to=<<tf-config "CardListSize">> tooltip="The cards number of the cards list">
+                CardListSize
+            </$link>
+        </td>
+        <td>
+            <$edit-text tiddler=<<tf-config "CardListSize">> type="number" tag="input"/><p/>
+        </td>
 </table>

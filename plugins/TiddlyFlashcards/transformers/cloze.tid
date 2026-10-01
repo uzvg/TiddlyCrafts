@@ -1,0 +1,15 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/cloze
+code-body: yes
+tags: $:/tags/TFTransformer
+
+\function cloze(id,text) [[{{]addsuffix<id>addsuffix[::]addsuffix<text>addsuffix[}}]]
+\function clz(id,text) [[{{]addsuffix<id>addsuffix[::]addsuffix<text>addsuffix[}}]]
+\function c1(text) [[{{]addsuffix[c1::]addsuffix<text>addsuffix[}}]]
+\function c2(text) [[{{]addsuffix[c2::]addsuffix<text>addsuffix[}}]]
+\function c3(text) [[{{]addsuffix[c3::]addsuffix<text>addsuffix[}}]]
+\function c4(text) [[{{]addsuffix[c4::]addsuffix<text>addsuffix[}}]]
+\function c5(text) [[{{]addsuffix[c5::]addsuffix<text>addsuffix[}}]]
+\function c6(text) [[{{]addsuffix[c6::]addsuffix<text>addsuffix[}}]]
+\function c7(text) [[{{]addsuffix[c7::]addsuffix<text>addsuffix[}}]]
+\function c8(text) [[{{]addsuffix[c8::]addsuffix<text>addsuffix[}}]]
+\function c9(text) [[{{]addsuffix[c9::]addsuffix<text>addsuffix[}}]]

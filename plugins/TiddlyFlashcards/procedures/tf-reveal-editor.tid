@@ -42,7 +42,7 @@ code-body: yes
   data-card-index=`$(cardId)$`
   data-card-status=`$(cardStatus)$`>
   <div class="tf-card-id">
-    #<<cardId>>
+    <<cardId>>
   </div>
 
   <<tf-card-btns>>

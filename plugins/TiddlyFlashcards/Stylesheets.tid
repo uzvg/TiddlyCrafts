@@ -320,7 +320,7 @@ type: text/css
 
   font-family: monospace;
   font-size: 0.8em;
-  font-weight: bold;
+  font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
 
@@ -371,12 +371,18 @@ type: text/css
   flex-direction: row;
   justify-content: space-between;
   margin-inline: auto;
+  height: 2.5em;
+  align-items: center;
+  width: min(100%, 54em);
+  margin-top: .5em;
 }
 
 .tf-list-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 2.5em;
+  align-items: flex-start;
 
   .tf-page-indicator {
     display: flex;
@@ -386,8 +392,10 @@ type: text/css
 
     .tf-current-page {
       color: var(--tpc-primary);
+      font-weight: bold;
       &::before {
         content: "🗏 ";
+        color: var(--tpc-foreground);
       }
     }
   }

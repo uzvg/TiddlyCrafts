@@ -3,7 +3,7 @@ code-body: yes
 tags: $:/tags/TFListHeaderBtns
 order: -1
 
-\procedure tf-reverse-order-btn()
+\procedure tf-reverse-btn()
 <$let
     reverseStatus={{{ [<previewerStateTiddler>get[reverse-status]] }}}
     setValue={{{ [<reverseStatus>match[yes]then[]else[yes]] }}}

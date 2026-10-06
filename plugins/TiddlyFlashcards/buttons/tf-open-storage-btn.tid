@@ -1,0 +1,14 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/buttons/tf-open-storage-btn
+code-body: yes
+tags: $:/tags/TFListHeaderBtns
+order: -2
+
+\procedure tf-open-storage-btn()
+<$button
+    actions="""<$action-navigate $to=<<dataTiddler>>/>"""
+    tooltip="Open dataTiddler">
+    <$transclude $tiddler="$:/core/images/open-window"/>
+</$button>
+\end
+
+<<tf-open-storage-btn>>

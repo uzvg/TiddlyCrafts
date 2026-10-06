@@ -13,7 +13,8 @@ order: 3
 
 <$button
     actions=<<delete-all-actions>>
-    tooltip="Delete all flashcards of the current tiddler">
+    tooltip="Delete all flashcards of the current tiddler"
+    class="tc-btn-invisible">
     <$transclude $tiddler="$:/core/images/delete-button"/>
 </$button>
 \end

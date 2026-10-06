@@ -13,7 +13,8 @@ order: -1
         setTitle=<<previewerStateTiddler>>
         setField="reverse-status"
         setTo=<<setValue>>
-        tooltip=<<btnToolTip>>>
+        tooltip=<<btnToolTip>>
+        class="tc-btn-invisible">
         <$transclude $tiddler=<<btnIcon>>/>
     </$button>
 </$let>

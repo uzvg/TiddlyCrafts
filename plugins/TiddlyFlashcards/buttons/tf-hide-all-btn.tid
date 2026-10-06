@@ -13,6 +13,7 @@ order: 0
         setTitle=<<previewerStateTiddler>>
         setField="hide-all"
         setTo=<<setValue>>
+        class="tc-btn-invisible"
         tooltip=<<btnToolTip>>>
         <$transclude $tiddler=<<btnIcon>>/>
     </$button>

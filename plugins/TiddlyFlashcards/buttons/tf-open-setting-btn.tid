@@ -13,7 +13,10 @@ order: 4
     $value="$:/plugins/uzvg/TiddlyFlashcards/settings"/>
 <$action-navigate $to="$:/ControlPanel"/>
 \end open-setting-actions
-<$button actions=<<open-setting-actions>>>
+<$button
+    actions=<<open-setting-actions>>
+    class="tc-btn-invisible"
+    tooltip="Open tiddlyflashcard settings">
     <$transclude $tiddler="$:/core/images/options-button"/>
 </$button>
 \end

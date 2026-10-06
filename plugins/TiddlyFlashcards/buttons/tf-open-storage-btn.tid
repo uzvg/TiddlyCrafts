@@ -6,7 +6,8 @@ order: -2
 \procedure tf-open-storage-btn()
 <$button
     actions="""<$action-navigate $to=<<dataTiddler>>/>"""
-    tooltip="Open dataTiddler">
+    tooltip="Open dataTiddler"
+    class="tc-btn-invisible">
     <$transclude $tiddler="$:/core/images/open-window"/>
 </$button>
 \end

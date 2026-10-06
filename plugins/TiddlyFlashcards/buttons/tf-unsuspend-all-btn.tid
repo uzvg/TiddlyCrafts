@@ -13,6 +13,7 @@ order: 2
 <$button
     setTitle=<<dataTiddler>>
     setTo=<<get-target-data>>
+    class="tc-btn-invisible"
     tooltip="Unsuspend all flashcards">
     <$transclude $tiddler="$:/core/images/unlocked-padlock"/>
 </$button>

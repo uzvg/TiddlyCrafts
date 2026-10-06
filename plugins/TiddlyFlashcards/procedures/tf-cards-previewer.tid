@@ -4,8 +4,9 @@ code-body: yes
 \procedure tf-list-header()
 <div class="tf-list-header">
     <div class="tf-page-indicator">
-        <span class="tf-current-page"><<currentPage>></span>
-        <span>/<<pageCount>></span>
+        <span class="tf-current-page"><<currentIndicatorCount>></span>
+        <span>/<<pageIndicatorCount>></span>
+        <span class="tf-cards-count">⟦<<cardsCount>> NOTES⟧</span>
     </div>
     <div class="tf-header-btns">
         <$list filter="[all[tiddlers+shadows]tag[$:/tags/TFListHeaderBtns]sort[order]]">
@@ -109,7 +110,9 @@ code-body: yes
         btnDisabled={{{ [<nextPage>compare:integer:gt<pageCount>then[yes]] [<previousPage>compare:integer:lt[1]then[yes]] }}}
         displayStatus={{{ [<previewerStateTiddler>get[display-all]] }}}
         setValue={{{ [<displayStatus>match[yes]then[]else[yes]] }}}
-        btnIcon={{{ [<displayStatus>match[yes]then[$:/core/images/up-arrow]else[$:/core/images/down-arrow]] }}}>
+        btnIcon={{{ [<displayStatus>match[yes]then[$:/core/images/up-arrow]else[$:/core/images/down-arrow]] }}}
+        currentIndicatorCount={{{ [<displayStatus>match[yes]then[1]else<currentPage>] }}}
+        pageIndicatorCount={{{ [<displayStatus>match[yes]then[1]else<pageCount>] }}}>
         <%if [<dataTiddler>is[tiddler]] %>
             <<tf-list-header>>
             <%if [<previewerStateTiddler>!has[hide-all]] %>

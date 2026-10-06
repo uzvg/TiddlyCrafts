@@ -398,6 +398,10 @@ type: text/css
         color: var(--tpc-foreground);
       }
     }
+
+    .tf-cards-count::before {
+      content:"▪";
+    }
   }
 
   .tf-header-btns {

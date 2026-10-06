@@ -16,6 +16,8 @@ code-body: yes
 \end tf-card-btns
 
 \procedure tf-card-display(cardId)
+\import [all[tiddlers+shadows]tag[$:/tags/TFTransformer/ForTW]]
+
 <div class="tf-fields-container" data-tf-mode="display">
   <$list filter="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]reverse[]] -[[Add Reverse]]" variable="currentField">
     <$let fieldValue={{{ [<dataTiddler>get[text]jsonget<cardId>,[fields],<currentField>] }}}>

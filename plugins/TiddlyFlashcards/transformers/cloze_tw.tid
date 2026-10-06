@@ -1,0 +1,20 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/cloze_tw
+code-body: yes
+tags: $:/tags/TFTransformer/ForTW
+
+\procedure cloze(id,text)
+<span class="tf-cloze" data-cloze-id=`$(id)$`>
+    <$transclude $variable="text" $mode="inline"/>
+<span>
+\end
+
+\procedure clz(text,id:c1) <<cloze id=<<id>> text=<<text>>>>
+\procedure c1(text) <<cloze id="c1" text=<<text>>>>
+\procedure c2(text) <<cloze id="c2" text=<<text>>>>
+\procedure c3(text) <<cloze id="c3" text=<<text>>>>
+\procedure c4(text) <<cloze id="c4" text=<<text>>>>
+\procedure c5(text) <<cloze id="c5" text=<<text>>>>
+\procedure c6(text) <<cloze id="c6" text=<<text>>>>
+\procedure c7(text) <<cloze id="c7" text=<<text>>>>
+\procedure c8(text) <<cloze id="c8" text=<<text>>>>
+\procedure c9(text) <<cloze id="c9" text=<<text>>>>

@@ -1,9 +1,9 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/cloze
+title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/cloze_anki
 code-body: yes
-tags: $:/tags/TFTransformer
+tags: $:/tags/TFTransformer/ForAnki
 
 \function cloze(id,text) [[{{]addsuffix<id>addsuffix[::]addsuffix<text>addsuffix[}}]]
-\function clz(id,text) [[{{]addsuffix<id>addsuffix[::]addsuffix<text>addsuffix[}}]]
+\function clz(text,id:c1) [[{{]addsuffix<id>addsuffix[::]addsuffix<text>addsuffix[}}]]
 \function c1(text) [[{{]addsuffix[c1::]addsuffix<text>addsuffix[}}]]
 \function c2(text) [[{{]addsuffix[c2::]addsuffix<text>addsuffix[}}]]
 \function c3(text) [[{{]addsuffix[c3::]addsuffix<text>addsuffix[}}]]

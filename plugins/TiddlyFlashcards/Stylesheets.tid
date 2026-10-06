@@ -9,7 +9,7 @@ type: text/css
 
     HTML structure of tf-reveal-editor
 
-    .tf-card-container
+    .tf-card-container[tf-card-index]
       .tf-card-id
       .tf-card-btns
         span.tc-keyboard
@@ -77,6 +77,8 @@ type: text/css
    */
   width: min(100%, 54em);
 
+  padding: .5em;
+
   /* ------------------------------------------------------------------------
      Surface
      ------------------------------------------------------------------------ */
@@ -116,9 +118,9 @@ type: text/css
      ------------------------------------------------------------------------ */
 
   &[data-card-status="suspend"] {
-    --tf-accent: color-mix(in srgb, var(--tpc-foreground) 38%, transparent);
+    --tf-accent: color-mix(in oklab, var(--tpc-foreground) 38%, transparent);
 
-    --tf-border: color-mix(in srgb, var(--tpc-foreground) 16%, transparent);
+    --tf-border: color-mix(in oklab, var(--tpc-foreground) 16%, transparent);
 
     --tf-glow: transparent;
     --tf-glow-hover: transparent;
@@ -134,7 +136,7 @@ type: text/css
 
       box-shadow: none;
 
-      border-color: color-mix(in srgb, var(--tpc-foreground) 28%, transparent);
+      border-color: color-mix(in oklab, var(--tpc-foreground) 28%, transparent);
     }
   }
 
@@ -169,7 +171,7 @@ type: text/css
   font-size: 0.8em;
   letter-spacing: 1px;
 
-  color: color-mix(in srgb, var(--tpc-foreground) 50%, transparent);
+  color: color-mix(in oklab, var(--tpc-foreground) 50%, transparent);
 
   transition: color var(--tf-transition);
   
@@ -178,7 +180,7 @@ type: text/css
   }
 
   .tf-card-container:hover & {
-    color: color-mix(in srgb, var(--tpc-foreground) 80%, transparent);
+    color: color-mix(in oklab, var(--tpc-foreground) 80%, transparent);
   }
 }
 
@@ -202,15 +204,21 @@ type: text/css
    * is hovered.
    */
   button {
+    background: color-mix(in oklab, var(--tf-accent) 5%, transparent);
+    border: 1px solid var(--tf-border);
+    border-radius: 2px;
+    padding: 1px .5em;
+
     opacity: 0;
 
-    transform: translateY(-2px) scale(0.92);
+    transform: translateX(6px) scale(0.92);
 
     pointer-events: none;
 
     transition:
       opacity var(--tf-transition),
       transform var(--tf-transition);
+    
   }
 
   /*
@@ -219,9 +227,15 @@ type: text/css
   .tf-card-container:hover & button {
     opacity: 1;
 
-    transform: translateY(0) scale(1);
+    transform: translateX(0) scale(1);
 
     pointer-events: auto;
+  }
+
+  .tf-card-container:hover & button:hover {
+    box-shadow:
+      0 2px 8px var(--tf-glow),
+      0 0 12px var(--tf-glow-hover);
   }
 }
 
@@ -242,13 +256,13 @@ type: text/css
   &[data-tf-mode="display"] {
     .tf-field-name,
     .tf-field-value {
-      border-block-start: 1px dotted
-        color-mix(in srgb, var(--tf-accent) 25%, transparent);
+      border-block-start: 2px dotted
+        color-mix(in oklab, var(--tf-accent) 25%, transparent);
     }
 
     .tf-field-name {
-      border-inline-end: 1px dotted
-        color-mix(in srgb, var(--tf-accent) 25%, transparent);
+      border-inline-end: 2px dotted
+        color-mix(in oklab, var(--tf-accent) 25%, transparent);
     }
   }
 
@@ -263,16 +277,16 @@ type: text/css
     border-radius: 3px;
 
     background: color-mix(
-      in srgb,
+      in oklab,
       var(--tpc-background) 50%,
       var(--tpc-page-background)
     );
 
     box-shadow: inset 0 0 0 1px
-      color-mix(in srgb, var(--tf-accent) 12%, transparent);
+      color-mix(in oklab, var(--tf-accent) 12%, transparent);
 
     .tf-field-name {
-      color: var(--tf-accent);
+      color: color-mix(in oklab, var(--tpc-primary) 100%, transparent);
     }
   }
 
@@ -282,13 +296,13 @@ type: text/css
 
   &[data-tf-mode="edit"] {
     background: color-mix(
-      in srgb,
+      in oklab,
       var(--tpc-background) 55%,
       var(--tpc-page-background)
     );
 
     .tf-field-name {
-      color: color-mix(in srgb, var(--tf-accent) 75%, var(--tpc-foreground));
+      color: color-mix(in oklab, var(--tf-accent) 75%, var(--tpc-foreground));
     }
   }
 }
@@ -302,7 +316,7 @@ type: text/css
   justify-items: end;
   align-items: center;
 
-  padding-inline: 0.5em;
+  padding-inline: 1em;
 
   font-family: monospace;
   font-size: 0.8em;
@@ -310,12 +324,16 @@ type: text/css
   letter-spacing: 1px;
   text-transform: uppercase;
 
-  color: color-mix(in srgb, var(--tpc-foreground) 58%, transparent);
+  color: color-mix(in oklab, var(--tpc-primary) 60%, transparent);
 
   transition:
     color var(--tf-transition),
     background-color var(--tf-transition),
     border-color var(--tf-transition);
+  
+  .tf-card-container:hover & {
+    color: color-mix(in oklab, var(--tpc-primary) 100%, transparent);
+  }
 }
 
 /* ==========================================================================
@@ -328,7 +346,7 @@ type: text/css
 
   min-width: 0;
 
-  padding-inline-start: 0.5em;
+  padding-inline: 1em;
 
   transition:
     color var(--tf-transition),

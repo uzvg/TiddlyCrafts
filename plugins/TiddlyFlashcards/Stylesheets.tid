@@ -113,6 +113,13 @@ type: text/css
     transform: translateY(-1px);
   }
 
+  &:hover .tf-cloze {
+    filter: none;
+    background: color-mix(in oklab, currentColor 5%, transparent);
+    border: 1px solid var(--tf-border);
+    border-radius: 2px;
+  }
+
   /* ------------------------------------------------------------------------
      Suspended
      ------------------------------------------------------------------------ */
@@ -417,4 +424,13 @@ type: text/css
       transform: translateX(-6px);
     }
   }
+}
+
+.tf-cloze {
+  filter: blur(4px);
+  user-select: none;
+  margin-inline: 0.1em;
+  transition:
+    filter 0.3s ease,
+    background 0.3s ease;
 }

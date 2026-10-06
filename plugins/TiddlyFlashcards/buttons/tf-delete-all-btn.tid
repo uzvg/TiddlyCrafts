@@ -4,8 +4,15 @@ tags: $:/tags/TFListHeaderBtns
 order: 3
 
 \procedure tf-delete-all-btn()
+
+\procedure delete-all-actions()
+<$action-confirm $message="Do you wish to delete all flashcards of the currentTiddler?">
+    <$action-deletetiddler $tiddler=<<dataTiddler>>/>
+</$action-confirm>>
+\end delete-all-actions
+
 <$button
-    actions="""<$action-deletetiddler $tiddler=<<dataTiddler>>/>"""
+    actions=<<delete-all-actions>>
     tooltip="Delete all flashcards of the current tiddler">
     <$transclude $tiddler="$:/core/images/delete-button"/>
 </$button>

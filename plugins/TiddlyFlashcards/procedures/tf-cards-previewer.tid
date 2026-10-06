@@ -48,6 +48,7 @@ code-body: yes
 <$button
     setTitle=<<previewerStateTiddler>>
     setTo=<<nextPage>>
+    tooltip="Next paginated cards"
     disabled={{{ [<setValue>is[blank]then[yes]] [<nextPage>compare:integer:gt<pageCount>then[yes]] }}}>
     Next&nbsp;⮞
 </$button>
@@ -57,18 +58,26 @@ code-body: yes
 <$button
     setTitle=<<previewerStateTiddler>>
     setTo=<<previousPage>>
+    tooltip="Previous paginated cards"
     disabled={{{ [<setValue>is[blank]then[yes]] [<previousPage>compare:integer:lt[1]then[yes]] }}}>
     ⮜&nbsp;Previous
 </$button>
 \end previous-page-btn
 
 \procedure display-all-btn()
+\function get-btn-tooltip()
+    [<displayStatus>match[yes]]
+    :then[[Show paginated cards]]
+    :else[[Show all cards]]
+\end get-btn-tooltip
+
 <$button
     setTitle=<<previewerStateTiddler>>
     setField="display-all"
     setTo=<<setValue>>
     disabled={{{ [<cardsCount>compare:integer:lteq<pageSize>then[yes]] }}}
-    class="tc-btn-invisible">
+    class="tc-btn-invisible"
+    tooltip=<<get-btn-tooltip>>>
     <$transclude $tiddler=<<btnIcon>>/>
 </$button>
 

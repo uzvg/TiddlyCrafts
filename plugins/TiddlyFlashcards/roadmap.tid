@@ -1,0 +1,8 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/roadmap
+
+; TiddlyFlashcards Roadmap:
+
+* Find and clean up orphaned data tiddlers
+* Support inserting images into flashcards and syncing them to Anki
+* Navigate from an Anki card back to its corresponding tiddler in TiddlyWiki
+* Support cloze deletions inside LaTeX formulas

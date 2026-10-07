@@ -3,6 +3,6 @@ caption: TFType
 tags: $:/tags/TFModels
 fields-list: Front Back
 model-name: TFType
-model-versin: 1.0
+model-version: 1.0
 order: 3
 code-body: yes

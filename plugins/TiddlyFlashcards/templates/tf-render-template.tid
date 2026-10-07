@@ -1,7 +1,7 @@
 title: $:/plugins/uzvg/TiddlyFlashcards/templates/tf-render-template
 code-body: yes
 
-\rules only import macrocallinline html conditional commentblock commentinline
+\rules only import fnprocdef macrocallinline html conditional commentblock commentinline
 
 <!-- Import ToAnki transformer -->
 \import [all[tiddlers+shadows]tag[$:/tags/TFTransformer]prefix[$:/plugins/uzvg/TiddlyFlashcards/Transformers/ToAnki/]!is[draft]]
@@ -29,7 +29,6 @@ code-body: yes
 	:cascade[[$:/config/TiddlyFlashcards/DeckMappingRules]get[text]]
 	+[!is[blank]else[TFDefault]]
 \end get-target-deck
-
 
 <$let
 	storageFolder="$:/Storage/TiddlyFlashcards/DataTiddlers/"
@@ -61,13 +60,13 @@ code-body: yes
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",
 									"deck": "<<deckName>>",
-									"tags": "<<tagsArray>>"
+									"tags": <<tagsArray>>
 								}
 							</$let>
 						</$wikify>
 						</$wikify>
-					<!-- Wikify Other Flashcards -->
-					<% else %>
+					<!-- Wikify TFBasic Flashcards -->
+					<% elseif [<modelName>match[TFBasic]] [<modelName>match[TFPair]] %>
 						<$wikify name="wikifiedFront" text={{{ [<sourceData>jsonget<noteId>,[fields],[Front]] }}} output="html">
 						<$wikify name="wikifiedBack" text={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}} output="html">
 							<$let
@@ -76,14 +75,45 @@ code-body: yes
 								"<<noteId>>": {
 									"fields": {
 										"Front": "<$text text=<<frontValue>>/>",
-										<%if [<modelName>match[TFType]] %>
-											"Back": "<$text text={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}} />",
-										<% else %>
-											"Back": "<$text text=<<backValue>>/>",
-										<% endif %>
-										<% if [<modelName>match[TFOptionalPair]] %>
-											"Add Reverse": "<$text text={{{ [<sourceData>jsonget<noteId>,[fields],[Add Reverse]] }}}/>"
-										<% endif %>
+										"Back": "<$text text=<<backValue>>/>"
+									},
+									"modelName": "<<modelName>>",
+									"modelVersion": "<<modelVersion>>",
+									"deck": "<<deckName>>",
+									"tags": <<tagsArray>>
+								}
+							</$let>
+						</$wikify>
+						</$wikify>
+					<% elseif [<modelName>match[TFType]] %>
+						<$wikify name="wikifiedFront" text={{{ [<sourceData>jsonget<noteId>,[fields],[Front]] }}} output="html">
+							<$let
+								frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
+								backValue={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}}>
+								"<<noteId>>": {
+									"fields": {
+										"Front": "<$text text=<<frontValue>>/>",
+										"Back": "<$text text=<<backValue>>/>"
+									},
+									"modelName": "<<modelName>>",
+									"modelVersion": "<<modelVersion>>",
+									"deck": "<<deckName>>",
+									"tags": <<tagsArray>>
+								}
+							</$let>
+						</$wikify>
+					<% elseif [<modelName>match[TFOptionalPair]] %>
+						<$wikify name="wikifiedFront" text={{{ [<sourceData>jsonget<noteId>,[fields],[Front]] }}} output="html">
+						<$wikify name="wikifiedBack" text={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}} output="html">
+							<$let
+								frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
+								backValue={{{ [<wikifiedBack>jsonstringify:rawunicode[]] }}}
+								reverseValue={{{ [<sourceData>jsonget<noteId>,[fields],[Add Reverse]] }}}>
+								"<<noteId>>": {
+									"fields": {
+										"Front": "<$text text=<<frontValue>>/>",
+										"Back": "<$text text=<<backValue>>/>",
+										"Add Reverse": "<$text text=<<reverseValue>>/>"
 									},
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",

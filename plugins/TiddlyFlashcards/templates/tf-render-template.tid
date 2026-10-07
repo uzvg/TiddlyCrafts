@@ -3,62 +3,93 @@ code-body: yes
 
 \rules only import macrocallinline html conditional commentblock commentinline
 
-\import [[$:/uzvg/twks-flashcards/Share/tf.storage-vars]]
-\import [[$:/uzvg/twks-flashcards/Share/tf.tags-array]]
-\import [[$:/uzvg/twks-flashcards/Share/tf.target-deck]]
-\import [[$:/uzvg/twks-flashcards/Share/tf.cloze]]
+<!-- Import ToAnki transformer -->
+\import [all[tiddlers+shadows]tag[$:/tags/TFTransformer]prefix[$:/plugins/uzvg/TiddlyFlashcards/Transformers/ToAnki/]!is[draft]]
 
-{
-	<!-- ------------------------------Wikify All Flashcards of model-version 1.3------------------------------ -->
-	<$list filter="[prefix<storageFolder>contains:model-version[1.3]]" variable="dataTiddler" join=",">
-		<$list filter="[<dataTiddler>get[text]jsonindexes[]]" variable="noteId" join=",">
-			<$let
-				data={{{ [<dataTiddler>get[text]] }}}
-				sourceTiddler={{{ [<dataTiddler>get[source]] }}}
-				modelName={{{ [<data>jsonget<noteId>,[modelName]] }}}
-				modelVersion={{{ [<data>jsonget<noteId>,[modelVersion]] }}}
-				deckName={{{ [tf.target-deck<sourceTiddler>] }}}
-				tagsArray={{{ [<sourceTiddler>get[tags]tf.tags-array[]] }}}>
-				<% if [<modelName>match[TFBasic]] %>
-					<$wikify name="wikifiedFront" text={{{ [<data>jsonget<noteId>,[fields],[Front]] }}} output="html">
-					<$wikify name="wikifiedBack" text={{{ [<data>jsonget<noteId>,[fields],[Back]] }}} output="html">
-						<$let
-							frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
-							backValue={{{ [<wikifiedBack>jsonstringify:rawunicode[]] }}}>
-							"<<noteId>>": {
-								"fields": {
-									"Front": "<$text text=<<frontValue>>/>",
-									"Back": "<$text text=<<backValue>>/>"
-								},
-								"modelName": "<<modelName>>",
-								"modelVersion": "<<modelVersion>>",
-								"deck": "<<deckName>>",
-								"tags": <<tagsArray>>
-							}
-						</$let>
-					</$wikify>
-					</$wikify>
-				<% elseif [<modelName>match[TFCloze]] %>
-					<$wikify name="wikifiedText" text={{{ [<data>jsonget<noteId>,[fields],[Text]] }}} output="html">
-					<$wikify name="wikifiedExtra" text={{{ [<data>jsonget<noteId>,[fields],[Back Extra]] }}} output="html">
-						<$let
-							textValue={{{ [<wikifiedText>jsonstringify:rawunicode[]] }}}
-							extraValue={{{ [<wikifiedExtra>jsonstringify:rawunicode[]] }}}>
-							"<<noteId>>": {
-								"fields": {
-									"Text": "<$text text=<<textValue>>/>",
-									"Back Extra": "<$text text=<<extraValue>>/>"
-								},
-								"modelName": "<<modelName>>",
-								"modelVersion": "<<modelVersion>>",
-								"deck": "<<deckName>>",
-								"tags": <<tagsArray>>
-							}
-						</$let>
-					</$wikify>
-					</$wikify>
-				<% endif %>
-			</$let>
+\function array-reduce-step()
+	[<index>compare:number:eq[0]]
+	:then[[]jsonset:array[]jsonset[0],<currentTiddler>]
+	:else[<accumulator>jsonset<index>,<currentTiddler>]
+\end array-reduce-step
+
+<!--
+* Turning tiddlywiki titleList into json array.
+* Anki don't allow space in the tags, so replace it with "_" here. 
+-->
+\function get-tags-array(sourceTiddler)
+	[<sourceTiddler>tags[]subfilter<TagMappingRules>]
+	:map[search-replace:g:regexp[\s],[_]] =>tagsList
+	:reduce[function[array-reduce-step]]
+\end get-tags-array
+
+\function get-target-deck(sourceTiddler)
+	[<sourceTiddler>]
+	:cascade[[$:/config/TiddlyFlashcards/DeckMappingRules]get[text]]
+	+[!is[blank]else[TFDefault]]
+\end get-target-deck
+
+
+<$let
+	storageFolder="$:/Storage/Flashcards/DataTiddlers/"
+	DeckMappingRules={{{ [[$:/config/TiddlyFlashcards/DeckMappingRules]get[text]] }}}
+	TagMappingRules={{{ [[$:/config/TiddlyFlashcards/TagMappingRules]get[text]] }}}>
+	<!-- ------------------------------Wikify All Flashcards of model-version 1.0------------------------------ -->
+	{
+		<$list filter="[all[tiddlers]prefix<storageFolder>]" variable="dataTiddler" join=",">
+			<$list filter="[<dataTiddler>get[text]jsonindexes[]]" variable="noteId" join=",">
+				<$let
+					sourceData={{{ [<dataTiddler>get[text]] }}}
+					sourceTiddler={{{ [<dataTiddler>get[source]] }}}
+					modelName={{{ [<sourceData>jsonget<noteId>,[modelName]] }}}
+					modelVersion={{{ [<sourceData>jsonget<noteId>,[modelVersion]] }}}
+					deckName={{{ [function[get-target-deck],<sourceTiddler>] }}}
+					tagsArray={{{ [function[get-tags-array],<sourceTiddler>] }}}>
+					<!-- Wikify TFCloze Flashcards -->
+					<% if [<modelName>match[TFCloze]] %>
+						<$wikify name="wikifiedText" text={{{ [<sourceData>jsonget<noteId>,[fields],[Text]] }}} output="html">
+						<$wikify name="wikifiedExtra" text={{{ [<sourceData>jsonget<noteId>,[fields],[Back Extra]] }}} output="html">
+							<$let
+								textValue={{{ [<wikifiedText>jsonstringify:rawunicode[]] }}}
+								extraValue={{{ [<wikifiedExtra>jsonstringify:rawunicode[]] }}}>
+								"<<noteId>>": {
+									"fields": {
+										"Text": "<$text text=<<textValue>>/>",
+										"Back Extra": "<$text text=<<extraValue>>/>"
+									},
+									"modelName": "<<modelName>>",
+									"modelVersion": "<<modelVersion>>",
+									"deck": "<<deckName>>",
+									"tags": <<tagsArray>>
+								}
+							</$let>
+						</$wikify>
+						</$wikify>
+					<!-- Wikify Other Flashcards -->
+					<% else %>
+						<$wikify name="wikifiedFront" text={{{ [<sourceData>jsonget<noteId>,[fields],[Front]] }}} output="html">
+						<$wikify name="wikifiedBack" text={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}} output="html">
+							<$let
+								frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
+								backValue={{{ [<wikifiedBack>jsonstringify:rawunicode[]] }}}>
+								"<<noteId>>": {
+									"fields": {
+										"Front": "<$text text=<<frontValue>>/>",
+										"Back": "<$text text=<<backValue>>/>",
+										<% if [<modelName>match[TFOptionalPair]] %>
+											"Add Reverse": "<$text text={{{ [<sourceData>jsonget<noteId>,[fields],[Add Reverse]] }}}/>"
+										<% endif %>
+									},
+									"modelName": "<<modelName>>",
+									"modelVersion": "<<modelVersion>>",
+									"deck": "<<deckName>>",
+									"tags": <<tagsArray>>
+								}
+							</$let>
+						</$wikify>
+						</$wikify>
+					<% endif %>
+				</$let>
+			</$list>
 		</$list>
-	</$list>
-}
+	}
+</$let>

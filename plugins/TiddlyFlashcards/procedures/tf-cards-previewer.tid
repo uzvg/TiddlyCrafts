@@ -117,7 +117,7 @@ code-body: yes
             <<tf-list-header>>
             <%if [<previewerStateTiddler>!has[hide-all]] %>
                 <<tf-card-list>>
-                <%if [<pageCount>compare:number:ne[1]] %>
+                <%if [<pageCount>compare:number:gt[1]] %>
                     <<tf-list-paginator>>
                 <% endif %>
             <% endif %>

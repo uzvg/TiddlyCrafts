@@ -17,8 +17,10 @@ code-body: yes
 * Anki don't allow space in the tags, so replace it with "_" here. 
 -->
 \function get-tags-array(sourceTiddler)
-	[<sourceTiddler>tags[]subfilter<TagMappingRules>]
-	:map[search-replace:g:regexp[\s],[_]] =>tagsList
+	[<TagMappingRules>is[blank]]
+	:then[<sourceTiddler>tags[]]
+	:else[<sourceTiddler>tags[]subfilter<TagMappingRules>]
+	:map[search-replace:g:regexp[\s],[_]]
 	:reduce[function[array-reduce-step]]
 \end get-tags-array
 
@@ -30,7 +32,7 @@ code-body: yes
 
 
 <$let
-	storageFolder="$:/Storage/Flashcards/DataTiddlers/"
+	storageFolder="$:/Storage/TiddlyFlashcards/DataTiddlers/"
 	DeckMappingRules={{{ [[$:/config/TiddlyFlashcards/DeckMappingRules]get[text]] }}}
 	TagMappingRules={{{ [[$:/config/TiddlyFlashcards/TagMappingRules]get[text]] }}}>
 	<!-- ------------------------------Wikify All Flashcards of model-version 1.0------------------------------ -->
@@ -59,7 +61,7 @@ code-body: yes
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",
 									"deck": "<<deckName>>",
-									"tags": <<tagsArray>>
+									"tags": "<<tagsArray>>"
 								}
 							</$let>
 						</$wikify>

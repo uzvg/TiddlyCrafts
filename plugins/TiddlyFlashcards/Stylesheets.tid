@@ -225,6 +225,12 @@ type: text/css
     transition:
       opacity var(--tf-transition),
       transform var(--tf-transition);
+
+    & svg.tc-image-button {
+      width: .8em;
+      height: .8em;
+      fill: var(--tf-accent);
+    }
   }
 
   /*

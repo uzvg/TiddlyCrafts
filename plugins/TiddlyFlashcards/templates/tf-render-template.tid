@@ -74,7 +74,11 @@ code-body: yes
 								"<<noteId>>": {
 									"fields": {
 										"Front": "<$text text=<<frontValue>>/>",
-										"Back": "<$text text=<<backValue>>/>",
+										<%if [<modelName>match[TFType]] %>
+											"Back": "<$text text={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}} />",
+										<% else %>
+											"Back": "<$text text=<<backValue>>/>",
+										<% endif %>
 										<% if [<modelName>match[TFOptionalPair]] %>
 											"Add Reverse": "<$text text={{{ [<sourceData>jsonget<noteId>,[fields],[Add Reverse]] }}}/>"
 										<% endif %>

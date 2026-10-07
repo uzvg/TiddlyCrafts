@@ -1,0 +1,9 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/ToTw/latex
+code-body: yes
+tags: $:/tags/TFTransformer
+
+\procedure ltx(text,mode:"block")
+<$latex
+    text=<<text>>
+    displayMode={{{ [<mode>match[block]then[true]else[false]] }}}/>
+\end

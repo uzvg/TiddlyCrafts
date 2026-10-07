@@ -1,0 +1,16 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/ToAnki/latex
+code-body: yes
+tags: $:/tags/TFTransformer
+
+<!--
+    <anki-mathjax>f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi</anki-mathjax>
+    <anki-mathjax>f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,{{c1::d\xi}}</anki-mathjax>
+    <anki-mathjax block="true">f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi</anki-mathjax>
+-->
+\procedure ltx(text, mode:"block")
+    <%if [<mode>match[block]] %>
+        <anki-mathjax block="true"><<text>></anki-mathjax>
+    <% else %>
+        <anki-mathjax><<text>></anki-mathjax>
+    <% endif %>
+\end

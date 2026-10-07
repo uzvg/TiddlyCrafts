@@ -1,6 +1,6 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/cloze_tw
+title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/ToTw/cloze
 code-body: yes
-tags: $:/tags/TFTransformer/ForTW
+tags: $:/tags/TFTransformer
 
 \procedure cloze(id,text)
 <span class="tf-cloze" data-cloze-id=`$(id)$`>

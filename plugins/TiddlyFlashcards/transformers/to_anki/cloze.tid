@@ -1,6 +1,6 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/cloze_anki
+title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/ToAnki/cloze
 code-body: yes
-tags: $:/tags/TFTransformer/ForAnki
+tags: $:/tags/TFTransformer
 
 \function cloze(id,text) [[{{]addsuffix<id>addsuffix[::]addsuffix<text>addsuffix[}}]]
 \function clz(text,id:c1) [[{{]addsuffix<id>addsuffix[::]addsuffix<text>addsuffix[}}]]

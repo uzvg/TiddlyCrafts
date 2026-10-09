@@ -16,7 +16,7 @@ code-body: yes
 \end tf-card-btns
 
 \procedure tf-card-display(cardId)
-\import [all[tiddlers+shadows]tag[$:/tags/TFTransformer/ForTW]]
+\import [all[tiddlers+shadows]tag[$:/tags/TFTransformer]prefix[$:/plugins/uzvg/TiddlyFlashcards/Transformers/ToTw/]]
 
 <div class="tf-fields-container" data-tf-mode="display">
   <$list filter="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]reverse[]] -[[Add Reverse]]" variable="currentField">

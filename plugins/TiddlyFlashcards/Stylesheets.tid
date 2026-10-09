@@ -406,7 +406,7 @@ type: text/css
       color: var(--tpc-primary);
       font-weight: bold;
       &::before {
-        content: "🗏 ";
+        content: "🗐 ";
         color: var(--tpc-foreground);
       }
     }

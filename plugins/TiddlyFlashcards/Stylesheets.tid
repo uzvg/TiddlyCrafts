@@ -434,7 +434,7 @@ type: text/css
 }
 
 .tf-cloze {
-  filter: blur(4px);
+  filter: blur(3px);
   user-select: none;
   margin-inline: 0.1em;
   transition:

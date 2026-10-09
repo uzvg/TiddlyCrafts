@@ -55,7 +55,8 @@ code-body: yes
 								"<<noteId>>": {
 									"fields": {
 										"Text": "<$text text=<<textValue>>/>",
-										"Back Extra": "<$text text=<<extraValue>>/>"
+										"Back Extra": "<$text text=<<extraValue>>/>",
+										"Source": "<$text text=<<sourceTiddler>>/>"
 									},
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",
@@ -75,7 +76,8 @@ code-body: yes
 								"<<noteId>>": {
 									"fields": {
 										"Front": "<$text text=<<frontValue>>/>",
-										"Back": "<$text text=<<backValue>>/>"
+										"Back": "<$text text=<<backValue>>/>",
+										"Source": "<$text text=<<sourceTiddler>>/>"
 									},
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",
@@ -93,7 +95,8 @@ code-body: yes
 								"<<noteId>>": {
 									"fields": {
 										"Front": "<$text text=<<frontValue>>/>",
-										"Back": "<$text text=<<backValue>>/>"
+										"Back": "<$text text=<<backValue>>/>",
+										"Source": "<$text text=<<sourceTiddler>>/>"
 									},
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",
@@ -113,7 +116,8 @@ code-body: yes
 									"fields": {
 										"Front": "<$text text=<<frontValue>>/>",
 										"Back": "<$text text=<<backValue>>/>",
-										"Add Reverse": "<$text text=<<reverseValue>>/>"
+										"Add Reverse": "<$text text=<<reverseValue>>/>",
+										"Source": "<$text text=<<sourceTiddler>>/>"
 									},
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",

@@ -44,7 +44,8 @@ code-body: yes
 					modelName={{{ [<sourceData>jsonget<noteId>,[modelName]] }}}
 					modelVersion={{{ [<sourceData>jsonget<noteId>,[modelVersion]] }}}
 					deckName={{{ [function[get-target-deck],<sourceTiddler>] }}}
-					tagsArray={{{ [function[get-tags-array],<sourceTiddler>] }}}>
+					tagsArray={{{ [function[get-tags-array],<sourceTiddler>] }}}
+					noteStatus={{{ [<sourceData>jsonget<noteId>,[status]] }}}>
 					<!-- Wikify TFCloze Flashcards -->
 					<% if [<modelName>match[TFCloze]] %>
 						<$wikify name="wikifiedText" text={{{ [<sourceData>jsonget<noteId>,[fields],[Text]] }}} output="html">
@@ -61,7 +62,8 @@ code-body: yes
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",
 									"deck": "<<deckName>>",
-									"tags": <<tagsArray>>
+									"tags": <<tagsArray>>,
+                  "status": "<<noteStatus>>"
 								}
 							</$let>
 						</$wikify>
@@ -82,7 +84,8 @@ code-body: yes
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",
 									"deck": "<<deckName>>",
-									"tags": <<tagsArray>>
+									"tags": <<tagsArray>>,
+                  "status": "<<noteStatus>>"
 								}
 							</$let>
 						</$wikify>
@@ -101,7 +104,8 @@ code-body: yes
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",
 									"deck": "<<deckName>>",
-									"tags": <<tagsArray>>
+									"tags": <<tagsArray>>,
+                  "status": "<<noteStatus>>"
 								}
 							</$let>
 						</$wikify>
@@ -122,7 +126,8 @@ code-body: yes
 									"modelName": "<<modelName>>",
 									"modelVersion": "<<modelVersion>>",
 									"deck": "<<deckName>>",
-									"tags": <<tagsArray>>
+									"tags": <<tagsArray>>,
+                  "status": "<<noteStatus>>"
 								}
 							</$let>
 						</$wikify>

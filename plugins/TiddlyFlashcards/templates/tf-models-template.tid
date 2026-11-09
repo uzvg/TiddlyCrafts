@@ -1,6 +1,8 @@
 title: $:/plugins/uzvg/TiddlyFlashcards/templates/tf-models-template
 code-body: yes
 
+\rules only import fnprocdef macrocallinline html conditional commentblock commentinline
+
 {
   "TFBasic": {
     "type": 0,
@@ -127,7 +129,7 @@ code-body: yes
       {
         "name": "Card 1",
         "front": "{{Front}}\n\n{{type:Back}}\n",
-        "back": "{{Front}}\n\n<hr id=answer>\n\n{{type:Back}}\n\n<div class=\"tf-link\">\n    <a href=\"{{WikiUrl}}/tiddler/{{TFNoteId}}\">\n        Open in TiddlyWiki\n    </a>\n</div>\n"
+        "back": "{{Front}}\n\n<hr id=\"answer\">\n\n{{type:Back}}\n\n<div class=\"tf-link\">\n    <a href=\"{{WikiUrl}}/tiddler/{{TFNoteId}}\">\n        Open in TiddlyWiki\n    </a>\n</div>\n"
       }
     ]
   },
@@ -170,12 +172,12 @@ code-body: yes
       {
         "name": "Card 1",
         "front": "{{Front}}\n",
-        "back": "{{FrontSide}}\n\n<hr id=answer>\n\n{{Back}}\n\n<div class=\"tf-link\">\n    <a href=\"{{WikiUrl}}/tiddler/{{TFNoteId}}\">\n        Open in TiddlyWiki\n    </a>\n</div>\n"
+        "back": "{{FrontSide}}\n\n<hr id=\"answer\">\n\n{{Back}}\n\n<div class=\"tf-link\">\n    <a href=\"{{WikiUrl}}/tiddler/{{TFNoteId}}\">\n        Open in TiddlyWiki\n    </a>\n</div>\n"
       },
       {
         "name": "Card 2",
         "front": "{{Back}}\n",
-        "back": "{{FrontSide}}\n\n<hr id=answer>\n\n{{Front}}\n\n<div class=\"tf-link\">\n    <a href=\"{{WikiUrl}}/tiddler/{{TFNoteId}}\">\n        Open in TiddlyWiki\n    </a>\n</div>\n"
+        "back": "{{FrontSide}}\n\n<hr id=\"answer\">\n\n{{Front}}\n\n<div class=\"tf-link\">\n    <a href=\"{{WikiUrl}}/tiddler/{{TFNoteId}}\">\n        Open in TiddlyWiki\n    </a>\n</div>\n"
       }
     ]
   },
@@ -223,12 +225,12 @@ code-body: yes
       {
         "name": "Card 1",
         "front": "{{Front}}\n",
-        "back": "{{FrontSide}}\n\n<hr id=answer>\n\n{{Back}}\n\n<div class=\"tf-link\">\n    <a href=\"{{WikiUrl}}/tiddler/{{TFNoteId}}\">\n        Open in TiddlyWiki\n    </a>\n</div>\n"
+        "back": "{{FrontSide}}\n\n<hr id=\"answer\">\n\n{{Back}}\n\n<div class=\"tf-link\">\n    <a href=\"{{WikiUrl}}/tiddler/{{TFNoteId}}\">\n        Open in TiddlyWiki\n    </a>\n</div>\n"
       },
       {
         "name": "Card 2",
         "front": "{{#Add Reverse}}{{Back}}{{/Add Reverse}}\n",
-        "back": "{{FrontSide}}\n\n<hr id=answer>\n\n{{Front}}\n\n<div class=\"tf-link\">\n    <a href=\"{{WikiUrl}}/tiddler/{{TFNoteId}}\">\n        Open in TiddlyWiki\n    </a>\n</div>\n"
+        "back": "{{FrontSide}}\n\n<hr id=\"answer\">\n\n{{Front}}\n\n<div class=\"tf-link\">\n    <a href=\"{{WikiUrl}}/tiddler/{{TFNoteId}}\">\n        Open in TiddlyWiki\n    </a>\n</div>\n"
       }
     ]
   }

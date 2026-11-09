@@ -43,6 +43,12 @@
             "--setfield", "[[$:/DefaultTiddlers]]", "text", "$:/uzvg/values/Home", "text/plain",
             "--render", "[[$:/uzvg/tiddlycrafts/save/offline]]", "index.html", "text/plain"
         ],
+        "flashcards": [
+            "--render",
+            "$:/plugins/uzvg/TiddlyFlashcards/templates/tf-render-template",
+            "flashcards.json",
+            "text/plain"
+        ],
         "static": [
             "--render",
             "$:/core/templates/static.template.html",

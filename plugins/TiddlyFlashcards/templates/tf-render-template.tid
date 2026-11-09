@@ -1,0 +1,9 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/templates/tf-render-template
+code-body: yes
+
+\rules only import fnprocdef macrocallinline html conditional commentblock commentinline
+
+{
+    "tf_models": <$transclude $tiddler="$:/plugins/uzvg/TiddlyFlashcards/templates/tf-models-template"/>,
+    "tf_notes": <$transclude $tiddler="$:/plugins/uzvg/TiddlyFlashcards/templates/tf-notes-template"/>
+}

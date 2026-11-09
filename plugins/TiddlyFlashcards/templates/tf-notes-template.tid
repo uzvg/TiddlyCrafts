@@ -1,4 +1,4 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/templates/tf-render-template
+title: $:/plugins/uzvg/TiddlyFlashcards/templates/tf-notes-template
 code-body: yes
 
 \rules only import fnprocdef macrocallinline html conditional commentblock commentinline

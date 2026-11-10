@@ -1,7 +1,7 @@
 title: $:/plugins/uzvg/TiddlyFlashcards/templates/tf-models-template
 code-body: yes
 
-\rules only import fnprocdef macrocallinline html conditional commentblock commentinline
+\rules only
 
 {
   "TFBasic": {

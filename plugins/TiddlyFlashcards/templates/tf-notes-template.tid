@@ -45,7 +45,7 @@ code-body: yes
 					modelVersion={{{ [<sourceData>jsonget<noteId>,[modelVersion]] }}}
 					deckName={{{ [function[get-target-deck],<sourceTiddler>] }}}
 					tagsArray={{{ [function[get-tags-array],<sourceTiddler>] }}}
-					noteStatus={{{ [<sourceData>jsonget<noteId>,[status]] }}}>
+					noteStatus={{{ [<sourceData>jsonget<noteId>,[status]else[unsuspend]] }}}>
 					<!-- Wikify TFCloze Flashcards -->
 					<% if [<modelName>match[TFCloze]] %>
 						<$wikify name="wikifiedText" text={{{ [<sourceData>jsonget<noteId>,[fields],[Text]] }}} output="html">

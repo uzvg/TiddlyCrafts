@@ -1,7 +1,7 @@
 caption: Plugins
 created: 20260412113329503
 creator: uzvg
-modified: 20260419161504492
+modified: 20261112120605274
 modifier: uzvg
 order: 1
 parent: Home
@@ -43,7 +43,7 @@ type: text/vnd.tiddlywiki
 					<td> <<version>> </td>
 					<td> <<stability>> </td>
 					<td>
-						<a href=<<source>>>GitHub</a>
+						<a href=<<source>> target="_blank" rel="noopener noreferrer">GitHub</a>
 					</td>
 				</tr>
 			</$let>

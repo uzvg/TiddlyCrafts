@@ -2,7 +2,7 @@
   "title": "$:/plugins/uzvg/twks-alerter",
   "name": "twks-alerter",
   "author": "uzvg",
-  "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-alerter",
+  "source": "https://github.com/uzvg/TiddlyCrafts/tree/main/plugins/twks-alerter",
   "description": "A Callout / Alert Block Procedure",
   "plugin-type": "plugin",
   "version": "0.8.5",

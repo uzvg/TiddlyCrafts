@@ -2,7 +2,7 @@
   "title": "$:/plugins/uzvg/twks-twikoo",
   "name": "twks-twikoo",
   "author": "uzvg",
-  "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-twikoo",
+  "source": "https://github.com/uzvg/TiddlyCrafts/tree/main/plugins/twks-twikoo",
   "description": "Integrate twikoo(a lightweight comment system) into your tiddlywiki",
   "plugin-type": "plugin",
   "version": "0.8.7",

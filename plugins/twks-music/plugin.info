@@ -6,7 +6,7 @@
   "core-version": ">=5.3.8",
   "plugin-type": "plugin",
   "version": "0.1.2",
-  "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-music",
+  "source": "https://github.com/uzvg/TiddlyCrafts/tree/main/plugins/twks-music",
   "stability": "STABILITY_2_STABLE",
   "list": "readme demo tree"
 }

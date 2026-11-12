@@ -2,7 +2,7 @@
   "title": "$:/plugins/uzvg/TiddlyFlashcards",
   "name": "TiddlyFlashcards",
   "author": "uzvg",
-  "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/TiddlyFlashcards",
+  "source": "https://github.com/uzvg/TiddlyCrafts/tree/main/plugins/TiddlyFlashcards",
   "description": "Create and sync flashcards from tiddlywiki to anki.",
   "dependents": "$:/plugins/flibbles/relink, $:/plugins/flibbles/relink-titles",
   "plugin-type": "plugin",

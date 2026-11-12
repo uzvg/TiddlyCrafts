@@ -2,7 +2,7 @@
   "title": "$:/plugins/uzvg/twks-image",
   "name": "twks-image",
   "author": "uzvg",
-  "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-image",
+  "source": "https://github.com/uzvg/TiddlyCrafts/tree/main/plugins/twks-image",
   "description": "Displaying images in a styled card layout, click the image will navigate to the image tiddler",
   "plugin-type": "plugin",
   "version": "0.8.4",

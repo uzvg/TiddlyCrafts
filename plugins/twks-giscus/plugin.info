@@ -2,11 +2,11 @@
   "title": "$:/plugins/uzvg/twks-giscus",
   "name": "twks-giscus",
   "author": "uzvg",
-  "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-giscus",
+  "source": "https://github.com/uzvg/TiddlyCrafts/tree/main/plugins/twks-giscus",
   "description": "Integrate giscus comment into your tiddlywiki",
   "plugin-type": "plugin",
   "version": "0.1.3",
   "core-version": ">=5.3.8",
-  "stability": "STABILITY_1_EXPERIMENTAL",
+  "stability": "STABILITY_0_DEPRECATED",
   "list": "readme settings license tree contents"
 }

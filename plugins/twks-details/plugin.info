@@ -2,7 +2,7 @@
   "title": "$:/plugins/uzvg/twks-details",
   "name": "twks-details",
   "author": "uzvg",
-  "source": "https://github.com/uzvg/TiddlyCrafts/tree/master/src/twks-details",
+  "source": "https://github.com/uzvg/TiddlyCrafts/tree/main/plugins/twks-details",
   "description": "A native toggle (collapsible/expandable) widget write in pure wikitext",
   "plugin-type": "plugin",
   "version": "1.0.6",

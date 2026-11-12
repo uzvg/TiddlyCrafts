@@ -86,7 +86,7 @@ code-body: yes
       {
         "name": "Card 1",
         "front": "<div class=\"tf-card-container\">\n  <div class=\"tf-card-header\">\n    <div class=\"tf-card-id\">{{TFNoteId}}</div>\n    <div class=\"tf-card-source\" data-source=\"{{Source}}\" title=\"Click to copy Source\">{{WikiName}}/{{Source}}</div>\n  </div>\n  <div class=\"tf-fields-container\">\n    <label class=\"tf-field-name\"> Text </label>\n    <div class=\"tf-field-value\">{{cloze:Text}}</div>\n  </div>\n</div>\n",
-        "back": "<div class=\"tf-card-container\">\n  <div class=\"tf-card-header\">\n    <div class=\"tf-card-id\">{{TFNoteId}}</div>\n    <div class=\"tf-card-source\" data-source=\"{{Source}}\" title=\"Click to copy Source\">{{WikiName}}/{{Source}}</div>\n  </div>\n  <div class=\"tf-fields-container\">\n    <label class=\"tf-field-name\"> Text </label>\n    <div class=\"tf-field-value\">{{cloze:Text}}</div>\n\n    <label class=\"tf-field-name\"> Back Extra </label>\n    <div class=\"tf-field-value\">{{Back Extra}}</div>\n  </div>\n</div>\n"
+        "back": "<div class=\"tf-card-container\">\n  <div class=\"tf-card-header\">\n    <div class=\"tf-card-id\">{{TFNoteId}}</div>\n    <div class=\"tf-card-source\" data-source=\"{{Source}}\" title=\"Click to copy Source\">{{WikiName}}/{{Source}}</div>\n  </div>\n  <div class=\"tf-fields-container\">\n    <label class=\"tf-field-name\"> Text </label>\n    <div class=\"tf-field-value\">{{cloze:Text}}</div>\n    {{#Back Extra}}\n        <label class=\"tf-field-name\"> Back Extra </label>\n        <div class=\"tf-field-value\">{{Back Extra}}</div>\n    {{/Back Extra}}\n  </div>\n</div>\n"
       }
     ]
   },

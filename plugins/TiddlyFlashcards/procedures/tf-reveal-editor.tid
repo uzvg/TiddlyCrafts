@@ -42,7 +42,8 @@ code-body: yes
 <div
   class="tf-card-container"
   data-card-index=`$(cardId)$`
-  data-card-status=`$(cardStatus)$`>
+  data-card-status=`$(cardStatus)$`
+  tabindex="-1">
   <div class="tf-card-id">
     <<cardId>>
   </div>

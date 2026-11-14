@@ -4,6 +4,7 @@
     "tiddlywiki": "latest"
   },
   "scripts": {
+    "start": "tiddlywiki --listen port=9100",
     "build": "tiddlywiki --build cloudflare"
   }
 }

@@ -1,11 +1,11 @@
 created: 20260412133426730
-modified: 20261115103806446
+modified: 20261116100750189
 title: $:/languages/en-GB/Home
 type: text/vnd.tiddlywiki
 
 !! Welcome:
 
-<<twks-image "TiddlyCraftsCover.jpeg" width:"250px" align:"right">>
+<<twks-image "TiddlyCraftsCover.jpg" width:"250px" align:"right">>
 
 Welcome to my `tiddlywiki` plugin workshop. This site is used to package and publish a collection of small TiddlyWiki plugins that I’ve developed myself, most of which originate from my [[wikispace|https://uzvg.site]].
 

@@ -19,3 +19,7 @@ before cloning, otherwise images arrive as pointer files:
 ```sh
 git lfs install
 ```
+
+## Notice:
+
+Don’t run `bun run build` locally. It’s used for deploying to a remote server and will modify files in the local repository.

@@ -1,7 +1,7 @@
-title: $:/language/en-GB/plugins/uzvg/TiddlyFlashcards/readme
+title: $:/languages/en-GB/plugins/uzvg/TiddlyFlashcards/readme
 
 <$let
-    tabsList="[tag[$:/tags/TFDoc]prefix[$:/language/en-GB/plugins/uzvg/TiddlyFlashcards/Docs]!is[draft]sort[order]]"
+    tabsList="[all[shadows]tag[$:/tags/TFDoc]prefix[$:/languages/en-GB/plugins/uzvg/TiddlyFlashcards/Docs/]!is[draft]sort[order]]"
     default={{{ [subfilter<tabsList>first[]] }}}
     explicitStateTiddler=<<qualify title:"$:/state/TiddlyFlashcards/Reame">>>
     <<tabs
@@ -9,4 +9,4 @@ title: $:/language/en-GB/plugins/uzvg/TiddlyFlashcards/readme
         default=<<default>>
         explicitState=<<explicitStateTiddler>>
         class="tc-vertical">>
-</let>
+</$let>

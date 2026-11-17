@@ -34,6 +34,13 @@ code-body: yes
 </$let>
 \end readme-link
 
+\procedure readme-img(img,width:"60%",caption)
+<figure style="text-align: center; margin: 0;">
+  <$image source=<<img>> alt=<<caption>> style=`width: $(width)$; display: inline-block;`/>
+  <figcaption style="font-size: 0.9em; color: gray;"><<caption>></figcaption>
+</figure>
+\end readme-img
+
 \procedure page-navigator()
 <div class="tc-flex tc-flex-row" style="justify-content:space-between;">
   <<readme-previous-btn>>

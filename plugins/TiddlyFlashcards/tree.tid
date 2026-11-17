@@ -1,3 +1,15 @@
 title: $:/plugins/uzvg/TiddlyFlashcards/tree
 
+!! Code tree:
+
 <<tree prefix:"$:/plugins/uzvg/TiddlyFlashcards/">>
+
+!! Translation tree:
+
+!!! en-GB:
+
+<<tree prefix:"$:/languages/en-GB/plugins/uzvg/TiddlyFlashcards/">>
+
+!!! zh-Hans:
+
+<<tree prefix:"$:/languages/zh-Hans/plugins/uzvg/TiddlyFlashcards/">>

@@ -31,28 +31,12 @@ The idea is simple: separate note-taking from flashcard creation, but keep the t
 
 <details>
   <summary><strong>1. TiddlyFlashcards on the TiddlyWiki side</strong></summary>
-  <figure style="text-align: center; margin: 0;">
-
-    <$image
-      source="$:/plugins/uzvg/TiddlyFlashcards/images/TiddlyFlashcardsOnTWSide.png"
-      style="width: 60%;
-      display: inline-block;"/>
-
-    <figcaption style="font-size: 0.9em; color: gray;">Card editor in TiddlyWiki</figcaption>
-  </figure>
+  <<readme-img img:"$:/plugins/uzvg/TiddlyFlashcards/images/TiddlyFlashcardsOnTWSide.png" caption:"Card editor in TiddlyWiki">>
 </details>
 
 <details>
   <summary><strong>2. TiddlyFlashcards on the Anki side</strong></summary>
-  <figure style="text-align: center; margin: 0;">
-
-    <$image
-      source="$:/plugins/uzvg/TiddlyFlashcards/images/TiddlyFlashcardsOnAnkiSide.png"
-      style="width: 60%;
-      display: inline-block;"/>
-
-    <figcaption style="font-size: 0.9em; color: gray;">Reviewing in Anki</figcaption>
-  </figure>
+  <<readme-img img:"$:/plugins/uzvg/TiddlyFlashcards/images/TiddlyFlashcardsOnAnkiSide.png" caption:"Reviewing in Anki">>
 </details>
 
 !! 3. Why Separate Note-taking and Flashcard Creation?

@@ -1,0 +1,8 @@
+title: $:/languages/en-GB/plugins/uzvg/TiddlyFlashcards/Docs/TroubleShootings
+caption: 5. TroubleShootings
+tags: $:/tags/TFDoc
+order: 5
+
+\import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
+
+<<page-navigator>>

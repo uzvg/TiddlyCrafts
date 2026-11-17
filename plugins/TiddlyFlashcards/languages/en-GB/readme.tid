@@ -3,7 +3,7 @@ title: $:/languages/en-GB/plugins/uzvg/TiddlyFlashcards/readme
 <$let
     tabsList="[all[shadows]tag[$:/tags/TFDoc]prefix[$:/languages/en-GB/plugins/uzvg/TiddlyFlashcards/Docs/]!is[draft]sort[order]]"
     default={{{ [subfilter<tabsList>first[]] }}}
-    explicitStateTiddler=<<qualify title:"$:/state/TiddlyFlashcards/Reame">>>
+    explicitStateTiddler="$:/state/TiddlyFlashcards/Readme-index">
     <<tabs
         tabsList=<<tabsList>>
         default=<<default>>

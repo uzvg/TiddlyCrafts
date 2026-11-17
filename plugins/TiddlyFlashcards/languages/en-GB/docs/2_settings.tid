@@ -1,0 +1,116 @@
+title: $:/languages/en-GB/plugins/uzvg/TiddlyFlashcards/Docs/Settings
+caption: 2. Settings
+tags: $:/tags/TFDoc
+order: 2
+
+\import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
+
+<<page-navigator>>
+
+TiddlyFlashcards is configured in two places: the plugin inside TiddlyWiki, and the add-on inside Anki. Do the TiddlyWiki side first, because the add-on has to be told where your TiddlyWiki installation and your wiki live.
+
+!! 1. Before you start
+
+TiddlyFlashcards keeps the flashcards of each tiddler in a separate data tiddler, linked back through a `source` field that holds the tiddler's title. Renaming a tiddler must not break that link, so TiddlyWiki needs to know that `source` contains a title.
+
+Install both plugins:
+
+* [[$:/plugins/flibbles/relink|https://flibbles.github.io/tw5-relink/#%24%3A%2Fplugins%2Fflibbles%2Frelink]]
+* [[$:/plugins/flibbles/relink-fieldnames|https://flibbles.github.io/tw5-relink/#%24%3A%2Fplugins%2Fflibbles%2Frelink-fieldnames]]
+
+Then open relink's settings and add `source` to the field names whose values are titles:
+
+```
+source: title
+```
+
+<<readme-img img:"$:/plugins/uzvg/TiddlyFlashcards/images/RelinkConfigurations.png" caption:"Add source as a field whose value is a title">>
+
+!! 2. Settings in TiddlyWiki
+
+!!! 1. Display Filter
+
+Which tiddlers get the card creator at the bottom. The filter is a list: one tiddler selection per line.
+
+To show the panel only on tiddlers tagged `PermanentNotes` or `LiteratureNotes`:
+
+```
+[tag[PermanentNotes]]
+[tag[LiteratureNotes]]
+```
+
+The card creator and the card preview then appear under those tiddlers.
+
+To keep a single tiddler clean even though it matches the filter, give it a `tf-hide` field set to `1`.
+
+!!! 2. DeckMapping rules
+
+Which Anki deck the exported cards go to. A card takes its deck and its tags from the tiddler it belongs to.
+
+That tiddler is called `sourceTiddler` below. TiddlyFlashcards builds the deck name with this filter:
+
+```
+[<sourceTiddler>]
+:cascade[[$:/config/TiddlyFlashcards/DeckMappingRules]get[text]]
++[!is[blank]else[TFDefault]]
+```
+
+When no rule matches, the cards fall back to the `TFDefault` deck.
+
+!!! 3. TagMapping rules
+
+Which tags the cards inherit from their tiddler. Most people never need this one.
+
+```
+[<sourceTiddler>tags[]subfilter<TagMappingRules>]
+```
+
+`sourceTiddler` is the owning tiddler; `TagMappingRules` is the filter you typed in the settings page. Left blank, the tags pass through unchanged.
+
+For example, drop tags that only make sense on your notes:
+
+```
+[remove[Books]]
+```
+
+Or drop several at once:
+
+```
+[remove[LiteratureNotes PermanentNotes]]
+```
+
+Cards from those tiddlers then reach Anki without those tags.
+
+!!! 4. CardListSize
+
+How many preview cards appear on each page of the card list. Six works well for most people.
+
+For a single tiddler, set its `tf-list-size` field instead.
+
+!! 3. Settings in Anki
+
+With the add-on installed, open its config: ''Tools'' ➡ ''Add-ons'' ➡ ''TiddlyFlashcards'' ➡ ''config''.
+
+<<readme-img img:"$:/plugins/uzvg/TiddlyFlashcards/images/TiddlyFlashcardsAnkiSettings.png" caption:"TiddlyFlashcards Anki Settings">>
+
+!!! 1. TiddlyWiki binary
+
+The absolute path to your TiddlyWiki binary. On Unix-like systems, `which tiddlywiki` prints it. Fill it in, then click ''test'' to confirm the path works.
+
+!!! 2. TiddlyWiki plugin path
+
+The value of your `$TIDDLYWIKI_PLUGIN_PATH` environment variable. Some Node.js users keep all their TiddlyWiki plugins in one folder.
+
+See [[Environment Variables on Node.js|https://tiddlywiki.com/#Environment%20Variables%20on%20Node.js]].
+
+!!! 3. Add a TiddlyWiki
+
+TiddlyFlashcards works with two kinds of workspace, `folder` and `html`. Add the one that matches your setup.
+
+''API URL'' is the local port your TiddlyWiki listens on. It is meant for jumping straight to a tiddler, but that feature isn't implemented yet, so leave it empty for now.
+
+!!! 4. Save
+
+Click ''save'' and the Anki side is configured. Next, create your first cards: 👉 <<readme-link index:"3">>.
+
+<<page-navigator>>

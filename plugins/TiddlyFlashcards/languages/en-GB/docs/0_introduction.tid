@@ -1,0 +1,126 @@
+title: $:/languages/en-GB/plugins/uzvg/TiddlyFlashcards/Docs/Introduction
+caption: 0. Introduction
+tags: $:/tags/TFDoc
+order: 0
+
+\import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
+
+<<page-navigator>>
+
+If you want to get started right away, feel free to skip this introduction and head straight to 👉 <<readme-link index:"1">>.
+
+!! 1. TiddlyFlashcards
+
+> ''Write your understanding into tiddlers.''
+> ''Create flashcards worth remembering.''
+> ''Use Anki to review.''
+
+TiddlyFlashcards is more than just a plugin. It's a workflow that connects TiddlyWiki with Anki, making it easier to turn understanding into long-term memory.
+
+Rather than replacing either tool, TiddlyFlashcards combines their strengths in a single learning workflow.
+
+|tc-max-width|k
+| !Component | !Main responsibility |
+|TiddlyWiki |Knowledge authoring and organization (flashcards stay in context) |
+|TiddlyFlashcards |Focused flashcard creation and synchronization |
+|Anki |Spaced repetition and review |
+
+The idea is simple: separate note-taking from flashcard creation, but keep the two connected.
+
+!! 2. Quick Look
+
+<details>
+  <summary><strong>1. TiddlyFlashcards on the TiddlyWiki side</strong></summary>
+  <figure style="text-align: center; margin: 0;">
+
+    <$image
+      source="$:/plugins/uzvg/TiddlyFlashcards/images/TiddlyFlashcardsOnTWSide.png"
+      style="width: 60%;
+      display: inline-block;"/>
+
+    <figcaption style="font-size: 0.9em; color: gray;">Card editor in TiddlyWiki</figcaption>
+  </figure>
+</details>
+
+<details>
+  <summary><strong>2. TiddlyFlashcards on the Anki side</strong></summary>
+  <figure style="text-align: center; margin: 0;">
+
+    <$image
+      source="$:/plugins/uzvg/TiddlyFlashcards/images/TiddlyFlashcardsOnAnkiSide.png"
+      style="width: 60%;
+      display: inline-block;"/>
+
+    <figcaption style="font-size: 0.9em; color: gray;">Reviewing in Anki</figcaption>
+  </figure>
+</details>
+
+!! 3. Why Separate Note-taking and Flashcard Creation?
+
+Writing notes and creating flashcards are two different cognitive activities.
+
+When writing notes, I prefer to focus entirely on understanding and organizing knowledge: exploring ideas, explaining concepts in my own words, and building connections between them.
+
+Stopping to think about flashcard questions and answers in the middle of this process interrupts the flow of writing and forces me to switch constantly between two ways of thinking.
+
+That's why I prefer to separate these activities.
+
+First, focus on understanding the material and organizing your notes. Once everything is clear, move on to a dedicated flashcard creation session.
+
+In that session, concentrate entirely on reviewing what you've written, identifying what is worth remembering, and turning those ideas into questions and answers.
+
+This lets you stay in flow while creating flashcards, rather than interrupting your writing.
+
+!!! From Understanding to Remembering
+
+I prefer to understand something before trying to memorize it.
+
+For me, learning is about connecting new information with existing knowledge, gradually turning external input into something I genuinely understand and can use.
+
+AI can generate plenty of information, notes, and even flashcards. But generating information is not the same as internalizing it.
+
+The important question is not how much information I can collect, but how much of it I can actually make my own.
+
+This is why I find it useful to separate understanding from memorization, while keeping them connected through a deliberate workflow.
+
+!! 4. How It Works
+
+!!! 1. Write and organize knowledge in TiddlyWiki
+
+Start by writing your notes as you normally would.
+
+Explore ideas, collect references, and connect related information.
+
+Focus on understanding first. You don't need to think about flashcards while writing.
+
+!!! 2. Create flashcards with TiddlyFlashcards
+
+Once your notes are ready, scroll down to the card editor in the current tiddler.
+
+Focus on extracting what is worth remembering, and turn those ideas into questions and answers.
+
+A single tiddler can contain multiple flashcards, each using a different Anki note type.
+
+Cards can be previewed, edited, deleted, and suspended or unsuspended independently.
+
+Each card remains associated with its original tiddler, so you can always return to the complete context when needed.
+
+!!! 3. Sync with Anki
+
+Sync your flashcards with Anki.
+
+TiddlyWiki remains your primary place for authoring and managing flashcards, while TiddlyFlashcards handles syncing with Anki.
+
+!!! 4. Review with Anki
+
+Let Anki handle spaced repetition and review scheduling.
+
+Focus on recalling what you've learned and gradually strengthen the memories you've chosen to retain.
+
+!! Further Reading
+
+If you're interested in the ideas behind this workflow, I'd highly recommend reading:
+
+* [[20 Rules of Knowledge Formulation — SuperMemo Guru|https://supermemo.guru/wiki/20_rules_of_knowledge_formulation]] — by Piotr Wozniak; how to formulate knowledge for effective long-term learning.
+
+<<page-navigator>>

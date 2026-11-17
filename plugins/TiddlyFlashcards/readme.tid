@@ -8,3 +8,9 @@ title: $:/plugins/uzvg/TiddlyFlashcards/readme
 \end
 
 <<lingo "plugins/uzvg/TiddlyFlashcards/readme">>
+
+<style>
+.tc-tab-buttons.tc-vertical button {
+    text-align: start;
+  }
+</style>

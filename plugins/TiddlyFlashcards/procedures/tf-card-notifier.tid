@@ -14,3 +14,10 @@ code-body: yes
 	$message="tm-notify"
 	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/save-card-notify"/>
 \end notifier.save-card
+
+<!-- send notifications when DisplayFilter was set done-->
+\procedure notifier.save-config()
+<$action-sendmessage
+	$message="tm-notify"
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/save-config-notify"/>
+\end notifier.save-config

@@ -1,0 +1,42 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
+code-body: yes
+
+\procedure explicitStateTiddler() $:/state/TiddlyFlashcards/Readme-index
+\function get-current-language() [{$:/language}match[/$:/languages/zh-Hans]else[$:/languages/en-GB]]
+\function get-next-tab() [all[shadows]tag[$:/tags/TFDoc]prefix<get-current-language>!is[draft]nsort[order]after<currentTab>]
+\function get-previous-tab() [all[shadows]tag[$:/tags/TFDoc]prefix<get-current-language>!is[draft]nsort[order]before<currentTab>]
+
+\procedure readme-next-btn()
+<$button
+  actions="""<$action-setfield $tiddler=<<explicitStateTiddler>> text=<<get-next-tab>>/>"""
+  disabled={{{ [<get-next-tab>is[blank]then[yes]else[no]] }}}>
+  Next ➤
+</$button>
+\end readme-next-btn
+
+\procedure readme-previous-btn()
+<$button
+  actions="""<$action-setfield $tiddler=<<explicitStateTiddler>> text=<<get-previous-tab>>/>"""
+  disabled={{{ [<get-previous-tab>is[blank]then[yes]else[no]] }}}>
+  ⮜ Previous
+</$button>
+\end readme-previous-btn
+
+\procedure readme-link(index,caption)
+<$let
+  tabTitle={{{ [all[shadows]tag[$:/tags/TFDoc]prefix<get-current-language>!is[draft]field:order<index>] }}}
+  tabCaption={{{ [<tabTitle>get[caption]] }}}>
+  <$button
+    actions="""<$action-setfield $tiddler=<<explicitStateTiddler>> text=<<tabTitle>>/>"""
+    class="tc-btn-invisible tc-tiddlylink">
+    <<tabCaption>>
+  </$button>
+</$let>
+\end readme-link
+
+\procedure page-navigator()
+<div class="tc-flex tc-flex-row" style="justify-content:space-between;">
+  <<readme-previous-btn>>
+  <<readme-next-btn>>
+</div>
+\end page-navigator

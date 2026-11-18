@@ -7,6 +7,7 @@
     "tiddlywiki/highlight",
     "tiddlywiki/katex",
     "tiddlywiki/codemirror",
+    "tiddlywiki/pluginlibrary",
     "tiddlywiki/codemirror-autocomplete",
     "tiddlywiki/codemirror-closebrackets",
     "tiddlywiki/codemirror-closetag",
@@ -29,11 +30,23 @@
   "build": {
     "index": [
       "--render",
-      "$:/uzvg/tiddlycrafts/save/offline",
+      "$:/core/save/all",
       "index.html",
       "text/plain"
     ],
-    "externalImage": [
+    "prune": [
+      "--deletetiddlers",
+      "[prefix[$:/state/]]",
+      "--deletetiddlers",
+      "[prefix[$:/Storage/]]",
+      "--deletetiddlers",
+      "[prefix[$:/temp/]]",
+      "--deletetiddlers",
+      "[is[draft]]",
+      "--deletetiddlers",
+      "[all[tiddlers+shadows]prefix[$:/plugins/]!author[uzvg]]"
+    ],
+    "images": [
       "--setfield",
       "[all[tiddlers+shadows]is[image]!type[image/svg+xml]!has[_canonical_uri]]",
       "text",
@@ -45,7 +58,7 @@
       "$:/uzvg/FieldValues/images/TiddlyCrafts",
       "text/plain"
     ],
-    "cloudflare": [
+    "fields": [
       "--setfield",
       "[[$:/config/SaverFilter]]",
       "text",
@@ -80,9 +93,21 @@
       "[[$:/DefaultTiddlers]]",
       "text",
       "$:/uzvg/values/Home",
-      "text/plain",
-      "--render",
-      "[[$:/uzvg/tiddlycrafts/save/offline]]",
+      "text/plain"
+    ],
+    "library": [
+      "--makelibrary",
+      "$:/UpgradeLibrary",
+      "--savelibrarytiddlers",
+      "$:/UpgradeLibrary",
+      "[prefix[$:/plugins/]]",
+      "recipes/library/tiddlers/",
+      "$:/UpgradeLibrary/List",
+      "--savetiddler",
+      "$:/UpgradeLibrary/List",
+      "recipes/library/tiddlers.json",
+      "--rendertiddler",
+      "$:/plugins/tiddlywiki/pluginlibrary/library.template.html",
       "index.html",
       "text/plain"
     ],

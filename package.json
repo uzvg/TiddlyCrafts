@@ -6,7 +6,8 @@
   "//sync-images": "preview: bun run sync-images -- --dry-run | mirror exactly (delete non-image files on remote): append --delete-excluded",
   "scripts": {
     "start": "tiddlywiki --listen port=9100",
-    "build": "tiddlywiki --build externalImage --build cloudflare",
+    "build-tiddlycrafts": "tiddlywiki --build prune --build images --build fields --build index",
+    "build-library": "tiddlywiki --build images --build library",
     "sync-images": "rclone sync . CloudFlare:images/TiddlyCrafts/ --include \"*.{png,jpg,jpeg,gif,webp,avif,bmp,tif,tiff,ico}\" --progress"
   }
 }

@@ -1,32 +1,58 @@
 created: 20260412131804672
-modified: 20261116100750189
+modified: 20261118224000000
 title: $:/languages/zh-Hans/Home
 type: text/vnd.tiddlywiki
 
-!! 欢迎：
+!! 简介：
 
 <<twks-image "TiddlyCraftsCover.jpg" width:"250px" align:"right">>
 
-欢迎大家来到我的 `tiddlywiki` 插件工坊，该网站用于打包并发布一些我自己写的tiddlywiki小插件，它们大多来自我的[[wikispace|https://uzvg.site]]站点。
+TiddlyCrafts 是我自己写的一些 TiddlyWiki 插件和工具。有的是为了解决工作里的小问题，有的是试玩性质，后来发现留着还有用，就没删。所以数量涨得很慢，一般是我遇到问题、又找不到合适的插件时，才会多写一个。
 
-TiddlyWiki 是一款可塑性极强、自由度极高的开源笔记软件，它提供的，不仅是一个记录文字的工具，更像是一堆等待被拼凑的乐高积木。从基础的文本编辑到复杂的知识图谱构建，从简单的待办清单到功能完备的个人知识管理系统，TiddlyWiki 几乎可以满足我对于创作工作的所有想象。
+这些插件都是我需要的。放出来，是觉得别人可能也用得上。TiddlyWiki 我每天都在用，插件也就一直在维护。
 
-对我而言，使用 TiddlyWiki 定制自己专属的工作流程本身就是一场充满乐趣的创造之旅。每一次调整界面布局、编写自定义宏、设计独特的标签体系，都是在将自己的思维方式与工具进行深度融合。从笔记的组织、再到使用自定义的构建脚本生成发布的HTML网页，再到定时发布，这种「工具为我所用」的掌控感，是其他封闭生态的笔记应用难以比拟的。
+大部分是些小部件：图片、提示框、折叠区块，还有几个记笔记和读书用的小工具。它们不改 TiddlyWiki 本身的工作方式，只是补上我觉得缺的部分。用一个或者全用，看你的需要。
 
-希望更多朋友能够加入这个充满活力的社区，展示自己精心打磨的 workflow 配置，交流在使用过程中遇到的难题与解决方案。让我们共同探索 TiddlyWiki 的无限可能，在协作与分享中发现更多属于知识管理的乐趣与价值。
+这里的东西可以随便用、随便改。哪个插件跟你的需求差一点，直接打开源码改就行。这些插件大多也是这么来的。
 
-!! 设计原则：
+安装很简单，拖进 TiddlyWiki 就可以。
 
-''TiddlyCrafts'' 的插件设计遵循以下核心原则：
+''自己用着顺手，就放出来了。''
 
-; 原生优先的架构设计：
-* 除非必需引入第三方 JavaScript 库，TiddlyCrafts 的绝大多数插件均基于 TiddlyWiki 原生组件开发。这不仅确保了与 TiddlyWiki 原生界面风格的视觉统一，更实现了对主题切换的深度适配——绝大多数插件能够随 TiddlyWiki 的主题变更自动调整样式，保持整体视觉体验的一致性。
+!! 安装：
 
-; 可持续的维护承诺：
-* ''TiddlyCrafts'' 的插件最初源于我个人站点 [[wikispace|https://uzvg.site]] 的实用需求，随后逐步整理打包发布。由于 TiddlyWiki 是我日常创作的核心工具，这些插件将在可预见的未来获得长期持续的维护与更新。
+装 TiddlyCrafts 的插件有三种方式。
 
-; 低门槛的定制与入门：
-* 得益于原生 `Wikitext` 语法的简洁性，用户在掌握基础语法后即可轻松阅读和修改插件源码，按需进行个性化定制。同时，这些经过实际验证的 Wikitext 代码范例，也为 TiddlyWiki 新手提供了直观的学习素材，帮助快速理解筛选器与语法特性的实际应用场景。
+!!! 1. 插件库（推荐）
+
+; 第一步：安装插件库
+
+把下面的链接拖进 TiddlyWiki，导入即可。
+
+<div style="text-align: center;">
+  <$link to="$:/config/TiddlyCraftsPluginLibrary" class="crft-lib">TiddlyCrafts Library</$link>
+</div>
+
+; 第二步：管理插件
+
+打开 `$:/ControlPanel` ➡ `Plugins` ➡ `TiddlyCrafts Library`，可以安装、更新或卸载插件。
+
+<<twks-alerter type:"caution" text:"标着''已废弃''（Deprecated）的插件不要装。">>
+
+!!! 2. 拖拽
+
+往下翻到 <kbd>Plugins</kbd> 标签页，把列表里的插件链接拖进 TiddlyWiki。
+
+!!! 3. Node.js（本地插件）
+
+如果用的是 Node.js 版，想把插件当本地文件夹用，先克隆仓库：
+
+```
+git clone git@github.com:uzvg/TiddlyCrafts.git
+cd TiddlyCrafts
+```
+
+插件都在 ''plugins'' 文件夹里。剩下的步骤见 [[在 Node.js 上安装自定义插件|https://tiddlywiki.com/#Installing%20custom%20plugins%20on%20Node.js]]。
 
 <<tabs
 	tabsList:"[parent[Home]!is[draft]sort[order]]"

@@ -6,3 +6,73 @@ order: 6
 \import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
 
 <<page-navigator>>
+
+!! 1. Project Status
+
+TiddlyFlashcards is still in beta. The plugin is marked ''EXPERIMENTAL'' in ''Control Panel'' ➡ ''Plugins'', and some of the workflow is still being built and tested.
+
+Expect rough edges. Data formats, field names and settings may change between releases. Keep regular backups of your wiki — cards are stored in ordinary tiddlers, so a backup of the wiki is all you need to recover them.
+
+!! 2. Roadmap
+
+The features below are planned or under exploration. They are listed in rough order of importance, not of delivery.
+
+| !Work | !Status | !Notes |
+|Insert images into cards and sync them to Anki |Planned |Images need to survive the trip to Anki. |
+|Image occlusion cards |Planned |Depends on image support. |
+|Navigate from an Anki card back to its tiddler |Planned |The `Source` field already carries the tiddler title. |
+|Cloze deletions inside LaTeX formulas |Planned |Keeps formulas readable instead of showing raw markers. |
+|Find and clean up orphaned data tiddlers |Planned |Deleted or renamed notes can leave card data behind. |
+|MCP integration and AI-assisted card creation |Exploring |See section 4. |
+
+There are no dates attached to these items. Base functionality comes first.
+
+!! 3. How Cards Are Stored
+
+Each note type is stored as plain JSON, in one data tiddler per source tiddler:
+
+```
+$:/Storage/TiddlyFlashcards/DataTiddlers/<identifier>
+```
+
+The JSON lives in the data tiddler's `text` field. Each card carries the note type (`modelName`), its version (`modelVersion`), its `fields`, and its suspended state (`status`). The owning tiddler is recorded in the data tiddler's `source` field, which is why relink has to know that `source` holds a title (see 👉 <<readme-link index:"2">>).
+
+To inspect it, use the open-window button in the card list header. It jumps straight to the data tiddler, so you can see exactly what will be exported.
+
+Because the data is JSON and not hidden inside the UI, other tools can read and write it. That is what makes the next section possible.
+
+!! 4. Why AI and MCP Are Feasible
+
+Card data is already structured: a note type, named fields, and a link back to the source tiddler. An MCP server only has to read those tiddlers to know what exists, and write them to propose new cards.
+
+That opens a workflow of its own:
+
+# Read a note in TiddlyWiki.
+# Propose candidate question-and-answer pairs.
+# Let you review and edit them as normal cards.
+# Sync to Anki as usual.
+
+Nothing about this requires changing the storage format or the sync path. It is a matter of building the integration on top of a stable base, once the basic features are finished and tested.
+
+!! 5. Source Layout
+
+For anyone reading or extending the code, the plugin is organised like this:
+
+| !Path | !Contents |
+|`models/` |The note types: `TFBasic`, `TFCloze`, `TFType`, `TFPair`, `TFOptionalPair`. |
+|`transformers/to_anki/` |TiddlyWiki markup to Anki markup: cloze and LaTeX. |
+|`transformers/to_tw/` |The reverse direction, used when reading cards back. |
+|`procedures/` |Card editor, preview, notifier and editor tabs. |
+|`buttons/` |Card actions: save, discard, edit, delete, suspend, unsuspend. |
+|`templates/` |Editor, preview, notes export and notifications. |
+|`languages/en-GB/docs/` |The guide you are reading. |
+
+Start with a `models/` tiddler if you want to understand what a card is, and with `transformers/to_anki/` if you want to understand what Anki receives.
+
+!! 6. Feedback and Contributions
+
+The source lives at [[uzvg/TiddlyCrafts|https://github.com/uzvg/TiddlyCrafts]], and issues are welcome at [[uzvg/TiddlyCrafts/issues|https://github.com/uzvg/TiddlyCrafts/issues]].
+
+During beta, the most useful reports are the ones that can be reproduced: what you did, what you expected, and what happened instead. If a card exported incorrectly, include the source tiddler and the data tiddler.
+
+<<page-navigator>>

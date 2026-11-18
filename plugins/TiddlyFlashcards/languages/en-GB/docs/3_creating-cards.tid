@@ -1,5 +1,5 @@
 title: $:/languages/en-GB/plugins/uzvg/TiddlyFlashcards/Docs/CreatingCards
-caption: 3. CreatingCards
+caption: 3. Creating Cards
 tags: $:/tags/TFDoc
 order: 3
 
@@ -7,21 +7,80 @@ order: 3
 
 <<page-navigator>>
 
+!! 1. Keyboard shortcuts
 
-!! Keyboard shortcuts:
+You can create cards without touching the mouse. TiddlyFlashcards ships with these shortcuts:
 
-Before creating cards, let's talk about keyboard shortcuts in TiddlyFlashcards when you create cards, because we do not 
-!! Creating Cards:
+| !Action | !Shortcut |
+|Switch to the next (right) tab |<kbd>alt+L</kbd> |
+|Switch to the previous (left) tab |<kbd>alt+H</kbd> |
+|Focus the next (lower) field |<kbd>alt+J</kbd> |
+|Focus the previous (upper) field |<kbd>alt+K</kbd> |
+|Save the card |<kbd>alt+N</kbd> |
+|Discard the draft |<kbd>alt+Delete</kbd> |
 
+The editor tabs follow the note type order in the table below. You can rebind every shortcut in <kbd>~$:/Control Panel</kbd> ➡  <kbd>Keyboard Shortcuts</kbd>.
 
+!! 2. Creating Cards
 
+Each note type maps to a built-in Anki note type, so there is little to learn:
 
-!! cloze
+| !TiddlyFlashcards note type | !Anki note type | !Fields | !Notes |
+|TFBasic |Basic |Front, Back |A plain question and answer. |
+|TFCloze |Cloze |Text (required), Back Extra |The answer is hidden inside the text with cloze markers, so one note can produce several cards. See below. |
+|TFType |type in the answer |Front, Back |In Anki you type the answer and it is checked against `Back`. |
+|TFPair |Basic (and reversed card) |Front, Back |Produces two cards: Front → Back and Back → Front. |
+|TFOptionalPair |Basic (optional reversed card) |Front, Back, Add Reverse |Produces the reverse card only when `Add Reverse` is non-empty, for example `yes`. |
 
-!! Latex
+Pick a tab, fill in the fields, then press <kbd>alt+N</kbd>. Every field is required except `Back Extra` on `TFCloze` and `Add Reverse` on `TFOptionalPair`.
 
-!! Navigating:
+!! 3. Making Cloze Cards
 
-!! Reverse:
+For a cloze note, `Text` is required and `Back Extra` is optional. `Back Extra` is shown on the answer side, so use it for an explanation or a source.
 
+`Text` must contain at least one valid cloze marker. The shortest form is `<<clz answer>>`:
 
+```
+The capital of China is <<clz Beijing>>.
+```
+
+This exports to Anki as:
+
+```
+The capital of China is {{c1::Beijing}}.
+```
+
+`<<clz>>` always uses `c1`. To control the number, use `<<c1>>` through `<<c9>>`:
+
+```
+The capital of <<c1 China>> is <<c2 Beijing>>.
+```
+
+Each number produces its own card in Anki, while markers that share a number are revealed together on the same card. With the example above, Anki gets two cards: one asking for the country, one asking for the capital.
+
+Quote answers that contain spaces:
+
+```
+<<clz "New York">>
+<<c2 "New York">>
+```
+
+In the card preview, cloze answers are blurred until you hover over the card.
+
+!! 4. LaTeX
+
+Install the [[LaTeX plugin|https://tiddlywiki.com/plugins/tiddlywiki/latex/]] first; the preview renders formulas with it, and Anki renders the exported formulas with MathJax.
+
+Use `<<ltx>>` in any field. By default it inserts a block formula:
+
+```
+<<ltx "\sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n">>
+```
+
+Add `inline` as the second argument for a formula inside a sentence:
+
+```
+The mass-energy equivalence is <<ltx "E = mc^2" inline>>.
+```
+
+<<page-navigator>>

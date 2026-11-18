@@ -6,3 +6,9 @@ order: 5
 \import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
 
 <<page-navigator>>
+
+This page is intentionally empty for now.
+
+TiddlyFlashcards is still in beta. As the plugin gets tested and used, this guide will grow with the problems people actually run into. Check back after later releases.
+
+<<page-navigator>>

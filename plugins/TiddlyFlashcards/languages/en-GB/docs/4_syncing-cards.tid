@@ -1,8 +1,53 @@
 title: $:/languages/en-GB/plugins/uzvg/TiddlyFlashcards/Docs/SyncingCards
-caption: 4. SyncingCards
+caption: 4. Syncing Cards
 tags: $:/tags/TFDoc
 order: 4
 
 \import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
+
+<<page-navigator>>
+
+Once your cards are ready, it's time to bring them to Anki.
+
+!! 1. Running a Sync
+
+# Open Anki.
+# Open ''Tools'' ➡ ''TiddlyFlashcards Sync''.
+
+<<readme-img img:"$:/plugins/uzvg/TiddlyFlashcards/images/TiddlyFlashcardsSync.png" caption:"TiddlyFlashcards Sync">>
+
+Or press <kbd>alt+S</kbd>.
+
+!! 2. What a Sync Does
+
+A sync creates notes in Anki for new cards, updates the content of notes that already exist, and applies their suspended state.
+
+Deck and tags are not set in Anki: they come from the tiddler each card belongs to. To change them, change the tiddler and sync again.
+
+Scheduling stays on the Anki side. Cards you have already reviewed keep their review history when their content is updated in place.
+
+!! 3. Sync Is One-way
+
+TiddlyFlashcards syncs from TiddlyWiki to Anki, never the other way around.
+
+TiddlyWiki remains the place where cards are written and managed. Make every change there — edit, delete, suspend or unsuspend — through TiddlyFlashcards. Anki is left to do what it does best: spaced repetition and review.
+
+!! 4. Changes Made in Anki
+
+Everything you do to a managed card in Anki is overwritten at the next sync, including but not limited to:
+
+* Adding cards of the same note types that TiddlyFlashcards uses.
+* Editing a card that TiddlyFlashcards manages.
+* Deleting a managed card. It is restored at the next sync, but its previous scheduling information is lost.
+
+Deck and tag changes made in Anki are also reset, because both come from the owning tiddler.
+
+!! 5. Checklist
+
+* Save the card in TiddlyWiki before syncing (<kbd>alt+N</kbd>). Unsaved drafts are not synced.
+* Make later changes in TiddlyWiki, not in Anki.
+* To correct something changed in Anki, make the same correction in TiddlyWiki and sync again.
+
+Next, see what to do when something goes wrong: 👉 <<readme-link index:"5">>.
 
 <<page-navigator>>

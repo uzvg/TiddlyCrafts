@@ -7,6 +7,6 @@
   "plugin-type": "plugin",
   "version": "0.1.2",
   "source": "https://github.com/uzvg/TiddlyCrafts/tree/main/plugins/twks-music",
-  "stability": "STABILITY_2_STABLE",
+  "stability": "STABILITY_0_DEPRECATED",
   "list": "readme demo tree"
 }

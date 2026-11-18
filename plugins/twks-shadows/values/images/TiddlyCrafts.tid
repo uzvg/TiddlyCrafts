@@ -2,7 +2,7 @@ title: $:/uzvg/FieldValues/images/TiddlyCrafts
 tags: FieldValues
 
 \procedure tiddlers-prefix() https://images.uzvg.site/TiddlyCrafts/tiddlers/images/
-\procedure plugins-prefix() https://images.uzvg.site/TiddlyCrafts/plugins/images/
+\procedure plugins-prefix() https://images.uzvg.site/TiddlyCrafts/plugins
 
 \function get-image-url()
   [<currentTiddler>prefix[$:/plugins/uzvg/]]

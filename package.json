@@ -7,7 +7,7 @@
   "scripts": {
     "start": "tiddlywiki --listen port=9100",
     "build-tiddlycrafts": "tiddlywiki --build prune --build images --build fields --build index",
-    "build-library": "tiddlywiki --build images --build library",
+    "build-library": "TIDDLYWIKI_PLUGIN_PATH=. tiddlywiki --build images --build library",
     "sync-images": "rclone sync . CloudFlare:images/TiddlyCrafts/ --include \"*.{png,jpg,jpeg,gif,webp,avif,bmp,tif,tiff,ico}\" --progress"
   }
 }

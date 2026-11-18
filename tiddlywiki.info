@@ -100,7 +100,7 @@
       "$:/UpgradeLibrary",
       "--savelibrarytiddlers",
       "$:/UpgradeLibrary",
-      "[prefix[$:/plugins/]]",
+      "[prefix[$:/plugins/]author[uzvg]]",
       "recipes/library/tiddlers/",
       "$:/UpgradeLibrary/List",
       "--savetiddler",

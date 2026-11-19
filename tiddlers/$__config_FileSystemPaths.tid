@@ -1,7 +1,9 @@
 created: 20261115101845995
-modified: 20261115101918281
+modified: 20261119101258850
 tags: 
 title: $:/config/FileSystemPaths
 type: text/vnd.tiddlywiki
 
+[match[$:/favicon.ico]is[image]!type[image/svg+xml]removeprefix[$:/]addprefix[images/_system/]addsuffix[.png]]
+[is[image]!type[image/svg+xml]is[system]removeprefix[$:/]addprefix[images/_system/]]
 [is[image]!type[image/svg+xml]addprefix[images/]]

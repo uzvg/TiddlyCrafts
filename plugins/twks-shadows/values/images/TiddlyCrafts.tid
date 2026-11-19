@@ -1,13 +1,20 @@
 title: $:/uzvg/FieldValues/images/TiddlyCrafts
 tags: FieldValues
 
-\procedure tiddlers-prefix() https://images.uzvg.site/TiddlyCrafts/tiddlers/images/
-\procedure plugins-prefix() https://images.uzvg.site/TiddlyCrafts/plugins
+\procedure base-url() https://images.uzvg.site/TiddlyCrafts/
+\function tiddlers-prefix() [<base-url>addsuffix[tiddlers/]]
+\function plugins-prefix() [<base-url>addsuffix[plugins]]
+
+\function tiddlers-image-url()
+  [<currentTiddler>]
+  :cascade[[$:/config/FileSystemPaths]get[text]]
+  +[addprefix<tiddlers-prefix>]
+\end tiddlers-image-url
 
 \function get-image-url()
   [<currentTiddler>prefix[$:/plugins/uzvg/]]
   :then[<currentTiddler>search-replace[$:/plugins/uzvg],<plugins-prefix>]
-  :else[<tiddlers-prefix>addsuffix<currentTiddler>]
+  :else[<tiddlers-image-url>]
   :and[encodeuri[]]
 \end
 <<get-image-url>>

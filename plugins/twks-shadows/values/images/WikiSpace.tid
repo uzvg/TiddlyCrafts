@@ -1,0 +1,12 @@
+title: $:/uzvg/FieldValues/images/WikiSpace
+tags: FieldValues
+
+\procedure base-url() https://images.uzvg.site/WikiSpace/tiddlers/
+\function get-image-url()
+  [<currentTiddler>]
+  :cascade[[$:/config/FileSystemPaths]get[text]]
+  +[encodeuri[]]
+  +[addprefix<base-url>]
+\end get-image-url
+
+<<get-image-url>>

@@ -5,7 +5,7 @@
   "source": "https://github.com/uzvg/TiddlyCrafts/tree/main/plugins/twks-shadows",
   "description": "Some customized shadows tiddlers that apply to my own tiddlywikis, Not for users",
   "plugin-type": "plugin",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "core-version": ">=5.3.8",
   "stability":"STABILITY_0_DEPRECATED",
   "list": "tree contents"

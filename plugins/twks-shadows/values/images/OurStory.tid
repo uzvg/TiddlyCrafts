@@ -1,0 +1,9 @@
+title: $:/uzvg/FieldValues/images/OurStory
+tags: FieldValues
+
+\procedure base-url() https://images.uzvg.site/OurStory/tiddlers/
+\function get-image-url()
+  [<currentTiddler>encodeuri[]]
+  +[addprefix<base-url>]
+\end get-image-url
+<<get-image-url>>

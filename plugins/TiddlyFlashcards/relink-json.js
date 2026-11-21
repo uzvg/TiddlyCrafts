@@ -102,17 +102,24 @@ function parse(text) {
 	}
 }
 
-function canRelink(data, options) {
-	return data !== undefined
-		&& options && options.wiki
+function isSelected(options) {
+	return options && options.wiki
 		&& options.settings && typeof options.settings.title === "string"
-		&& !isPluginBundle(data)
 		&& selectedTiddlers(options.wiki)[options.settings.title];
 }
 
-exports.report = function(text, callback, options) {
+// Check the cheap title gate before parsing; plugin bundles are still JSON.
+function cardData(text, options) {
+	if (!isSelected(options)) {
+		return undefined;
+	}
 	var data = parse(text);
-	if (!canRelink(data, options)) {
+	return data !== undefined && !isPluginBundle(data) ? data : undefined;
+}
+
+exports.report = function(text, callback, options) {
+	var data = cardData(text, options);
+	if (data === undefined) {
 		return;
 	}
 	var patterns = fieldPatterns(options.wiki);
@@ -125,8 +132,8 @@ exports.report = function(text, callback, options) {
 };
 
 exports.relink = function(text, fromTitle, toTitle, options) {
-	var data = parse(text);
-	if (!canRelink(data, options)) {
+	var data = cardData(text, options);
+	if (data === undefined) {
 		return undefined;
 	}
 

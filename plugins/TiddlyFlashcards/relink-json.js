@@ -40,7 +40,7 @@ function selectedTiddlers(wiki) {
 function fieldPatterns(wiki) {
 	return wiki.getGlobalCache("TiddlyFlashcards/relinkJSON/fields", function() {
 		var patterns = $tw.utils.parseStringArray(wiki.getTiddlerText(FIELDS_CONFIG) || DEFAULT_FIELDS);
-		return patterns && patterns.length ? patterns : ["*"];
+		return patterns && patterns.length ? patterns : $tw.utils.parseStringArray(DEFAULT_FIELDS);
 	});
 }
 

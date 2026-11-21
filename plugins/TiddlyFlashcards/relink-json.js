@@ -102,6 +102,8 @@ function parse(text) {
 	}
 }
 
+// Relink 2.6.x passes a TiddlerContext; its `title` is not part of the
+// documented relinktext interface, so keep the check defensive.
 function isSelected(options) {
 	return options && options.wiki
 		&& options.settings && typeof options.settings.title === "string"

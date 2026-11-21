@@ -115,6 +115,8 @@ fields/Front [[fields/Back Extra]]
 
 Use `*` to check every string value. The default deliberately leaves `modelName` and `modelVersion` alone, so renaming a tiddler that happens to share a note type's name does not rewrite the card.
 
+Relink builds its reference index the first time it is used, so reload the wiki after changing either setting.
+
 !! 3. Settings in Anki
 
 With the add-on installed, open its config: ''Tools'' ➡ ''Add-ons'' ➡ ''TiddlyFlashcards'' ➡ ''config''.

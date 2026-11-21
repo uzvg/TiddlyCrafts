@@ -14,24 +14,80 @@ stored by TiddlyFlashcards.
 
 var wikitext = require("$:/plugins/flibbles/relink/js/fieldtypes/wikitext.js");
 
+var FILTER_CONFIG = "$:/config/TiddlyFlashcards/Relink/Filter",
+	FIELDS_CONFIG = "$:/config/TiddlyFlashcards/Relink/Fields",
+	DEFAULT_FILTER = "[prefix[$:/Storage/TiddlyFlashcards/DataTiddlers/]]",
+	DEFAULT_FIELDS = "fields/*";
+
 exports.type = "application/json";
 
-function walkStrings(value, fn) {
+// The cache is cleared by TiddlyWiki whenever any tiddler changes.
+function selectedTiddlers(wiki) {
+	return wiki.getGlobalCache("TiddlyFlashcards/relinkJSON/selected", function() {
+		var selected = Object.create(null),
+			filter = wiki.getTiddlerText(FILTER_CONFIG) || DEFAULT_FILTER;
+		try {
+			$tw.utils.each(wiki.filterTiddlers(filter), function(title) {
+				selected[title] = true;
+			});
+		} catch (e) {
+			// A broken filter must not break renaming.
+		}
+		return selected;
+	});
+}
+
+function fieldPatterns(wiki) {
+	return wiki.getGlobalCache("TiddlyFlashcards/relinkJSON/fields", function() {
+		var patterns = $tw.utils.parseStringArray(wiki.getTiddlerText(FIELDS_CONFIG) || DEFAULT_FIELDS);
+		return patterns && patterns.length ? patterns : ["*"];
+	});
+}
+
+function matches(path, pattern) {
+	var parts = pattern.split("/");
+	if (parts.length > path.length) {
+		return false;
+	}
+	var offset = path.length - parts.length;
+	for (var i = 0; i < parts.length; i++) {
+		if (parts[i] !== "*" && parts[i] !== path[offset + i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+function shouldRelink(path, patterns) {
+	for (var i = 0; i < patterns.length; i++) {
+		if (patterns[i] === "*" || matches(path, patterns[i])) {
+			return true;
+		}
+	}
+	return false;
+}
+
+// A plugin tiddler also has type application/json, but its text is a bundle of
+// tiddlers rather than card data. Never treat it as card data.
+function isPluginBundle(data) {
+	return data && typeof data === "object" && !Array.isArray(data)
+		&& data.tiddlers && typeof data.tiddlers === "object"
+		&& !Array.isArray(data.tiddlers);
+}
+
+function walk(value, path, fn) {
 	if (typeof value === "string") {
-		return fn(value);
+		return fn(value, path);
 	}
 	if (Array.isArray(value)) {
+		// Array indices are not part of the path, so fields/* covers arrays too.
 		for (var i = 0; i < value.length; i++) {
-			var item = walkStrings(value[i], fn);
-			if (item !== value[i]) {
-				value[i] = item;
-			}
+			value[i] = walk(value[i], path, fn);
 		}
 	} else if (value && typeof value === "object") {
 		for (var key in value) {
-			var field = walkStrings(value[key], fn);
-			if (field !== value[key]) {
-				value[key] = field;
+			if (Object.prototype.hasOwnProperty.call(value, key)) {
+				value[key] = walk(value[key], path.concat(key), fn);
 			}
 		}
 	}
@@ -46,25 +102,41 @@ function parse(text) {
 	}
 }
 
+function canRelink(data, options) {
+	return data !== undefined
+		&& options && options.wiki
+		&& options.settings && typeof options.settings.title === "string"
+		&& !isPluginBundle(data)
+		&& selectedTiddlers(options.wiki)[options.settings.title];
+}
+
 exports.report = function(text, callback, options) {
 	var data = parse(text);
-	if (data === undefined) {
+	if (!canRelink(data, options)) {
 		return;
 	}
-	walkStrings(data, function(value) {
-		wikitext.report(value, callback, options);
+	var patterns = fieldPatterns(options.wiki);
+	walk(data, [], function(value, path) {
+		if (shouldRelink(path, patterns)) {
+			wikitext.report(value, callback, options);
+		}
+		return value;
 	});
 };
 
 exports.relink = function(text, fromTitle, toTitle, options) {
 	var data = parse(text);
-	if (data === undefined) {
+	if (!canRelink(data, options)) {
 		return undefined;
 	}
 
-	var changed = false,
+	var patterns = fieldPatterns(options.wiki),
+		changed = false,
 		impossible = false;
-	walkStrings(data, function(value) {
+	walk(data, [], function(value, path) {
+		if (!shouldRelink(path, patterns)) {
+			return value;
+		}
 		var entry = wikitext.relink(value, fromTitle, toTitle, options);
 		if (entry) {
 			if (entry.impossible) {

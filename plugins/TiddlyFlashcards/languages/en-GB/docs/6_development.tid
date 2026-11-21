@@ -37,6 +37,8 @@ $:/Storage/TiddlyFlashcards/DataTiddlers/<identifier>
 
 The JSON lives in the data tiddler's `text` field. Each card carries the note type (`modelName`), its version (`modelVersion`), its `fields`, and its suspended state (`status`). The owning tiddler is recorded in the data tiddler's `source` field, which is why relink has to know that `source` holds a title (see 👉 <<readme-link index:"2">>).
 
+Titles inside the JSON itself are updated by `relink-json.js`, a Relink `relinktext` module. It is limited to the tiddlers and key paths configured under `$:/config/TiddlyFlashcards/Relink/` (see 👉 <<readme-link index:"2">>).
+
 To inspect it, use the open-window button in the card list header. It jumps straight to the data tiddler, so you can see exactly what will be exported.
 
 Because the data is JSON and not hidden inside the UI, other tools can read and write it. That is what makes the next section possible.

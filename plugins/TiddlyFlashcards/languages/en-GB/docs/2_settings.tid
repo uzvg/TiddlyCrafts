@@ -87,6 +87,34 @@ How many preview cards appear on each page of the card list. Six works well for 
 
 For a single tiddler, set its `tf-list-size` field instead.
 
+!!! 5. Relink inside card JSON
+
+Relink updates titles in ordinary wikitext, but the card text lives inside JSON. TiddlyFlashcards adds an `application/json` handler so renaming a tiddler also updates the links in its cards. Two settings control it; both are shadow tiddlers, so create a real tiddler with the same title to override them.
+
+''`$:/config/TiddlyFlashcards/Relink/Filter`'' selects the JSON tiddlers that are checked. The default only covers card data:
+
+```
+[prefix[$:/Storage/TiddlyFlashcards/DataTiddlers/]]
+```
+
+''`$:/config/TiddlyFlashcards/Relink/Fields`'' selects the strings inside the JSON that are checked. Patterns are matched against the end of the key path, and `*` matches one path segment. The default only covers the cards' own fields:
+
+```
+fields/*
+```
+
+To check just the front and back, or to include a field name with a space:
+
+```
+fields/Front fields/Back
+```
+
+```
+fields/Front [[fields/Back Extra]]
+```
+
+Use `*` to check every string value. The default deliberately leaves `modelName` and `modelVersion` alone, so renaming a tiddler that happens to share a note type's name does not rewrite the card.
+
 !! 3. Settings in Anki
 
 With the add-on installed, open its config: ''Tools'' ➡ ''Add-ons'' ➡ ''TiddlyFlashcards'' ➡ ''config''.

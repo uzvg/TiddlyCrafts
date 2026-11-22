@@ -55,7 +55,7 @@
       "--setfield",
       "[all[tiddlers+shadows]is[image]!type[image/svg+xml]!has[_canonical_uri]]",
       "_canonical_uri",
-      "$:/uzvg/FieldValues/images/TiddlyCrafts",
+      "$:/uzvg/FieldValues/image-urls/TiddlyCrafts",
       "text/plain"
     ],
     "fields": [
@@ -87,12 +87,12 @@
       "--setfield",
       "[[$:/config/Navigation/UpdateHistory]]",
       "text",
-      "$:/uzvg/values/yes",
+      "$:/uzvg/FieldValues/values/yes",
       "text/plain",
       "--setfield",
       "[[$:/DefaultTiddlers]]",
       "text",
-      "$:/uzvg/values/Home",
+      "$:/uzvg/FieldValues/values/home",
       "text/plain"
     ],
     "library": [

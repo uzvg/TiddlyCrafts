@@ -1,5 +1,10 @@
-title: $:/uzvg/FieldValues/images/TiddlyCrafts
-tags: FieldValues
+created: 20261122162049350
+creator: uzvg
+modified: 20261122162049350
+modifier: uzvg
+tags: 
+title: $:/uzvg/FieldValues/image-urls/TiddlyCrafts
+type: text/vnd.tiddlywiki
 
 \procedure base-url() https://images.uzvg.site/TiddlyCrafts/
 \function tiddlers-prefix() [<base-url>addsuffix[tiddlers/]]

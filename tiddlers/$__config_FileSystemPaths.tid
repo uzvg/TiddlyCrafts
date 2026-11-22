@@ -7,3 +7,4 @@ type: text/vnd.tiddlywiki
 [match[$:/favicon.ico]is[image]!type[image/svg+xml]removeprefix[$:/]addprefix[images/_system/]addsuffix[.png]]
 [is[image]!type[image/svg+xml]is[system]removeprefix[$:/]addprefix[images/_system/]]
 [is[image]!type[image/svg+xml]addprefix[images/]]
+[prefix[$:/uzvg/FieldValues/]removeprefix[$:/uzvg/FieldValues/]addprefix[field-values/]]

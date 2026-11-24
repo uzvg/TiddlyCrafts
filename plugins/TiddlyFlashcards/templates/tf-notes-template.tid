@@ -4,7 +4,7 @@ code-body: yes
 \rules only import fnprocdef macrocallinline html conditional commentblock commentinline
 
 <!-- Import ToAnki transformer -->
-\import [all[tiddlers+shadows]tag[$:/tags/TFTransformer]prefix[$:/plugins/uzvg/TiddlyFlashcards/Transformers/ToAnki/]!is[draft]]
+\import [all[tiddlers+shadows]tag[$:/tags/TFTransformer]tag[ToAnki]!is[draft]]
 
 \function array-reduce-step()
 	[<index>compare:number:eq[0]]

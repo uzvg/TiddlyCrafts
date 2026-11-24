@@ -16,12 +16,16 @@ code-body: yes
 * Turning tiddlywiki titleList into json array.
 * Anki don't allow space in the tags, so replace it with "_" here. 
 -->
+<!-- "[]" cannot be written as a filter literal, so expose it as a variable -->
+\procedure empty-json-array() []
 \function get-tags-array(sourceTiddler)
 	[<TagMappingRules>is[blank]]
 	:then[<sourceTiddler>tags[]]
-	:else[<sourceTiddler>tags[]subfilter<TagMappingRules>]
+	:else[<sourceTiddler>tags!is[blank]subfilter<TagMappingRules>]
 	:map[search-replace:g:regexp[\s],[_]]
+	+[!is[blank]]
 	:reduce[function[array-reduce-step]]
+	+[!is[blank]else<empty-json-array>]
 \end get-tags-array
 
 \function get-target-deck(sourceTiddler)

@@ -1,15 +1,21 @@
 title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/ToAnki/cloze
 code-body: yes
-tags: $:/tags/TFTransformer
+tags: $:/tags/TFTransformer ToAnki
 
-\function cloze(id,text) [[{{]addsuffix<id>addsuffix[::]addsuffix<text>addsuffix[}}]]
-\function clz(text,id:c1) [[{{]addsuffix<id>addsuffix[::]addsuffix<text>addsuffix[}}]]
-\function c1(text) [[{{]addsuffix[c1::]addsuffix<text>addsuffix[}}]]
-\function c2(text) [[{{]addsuffix[c2::]addsuffix<text>addsuffix[}}]]
-\function c3(text) [[{{]addsuffix[c3::]addsuffix<text>addsuffix[}}]]
-\function c4(text) [[{{]addsuffix[c4::]addsuffix<text>addsuffix[}}]]
-\function c5(text) [[{{]addsuffix[c5::]addsuffix<text>addsuffix[}}]]
-\function c6(text) [[{{]addsuffix[c6::]addsuffix<text>addsuffix[}}]]
-\function c7(text) [[{{]addsuffix[c7::]addsuffix<text>addsuffix[}}]]
-\function c8(text) [[{{]addsuffix[c8::]addsuffix<text>addsuffix[}}]]
-\function c9(text) [[{{]addsuffix[c9::]addsuffix<text>addsuffix[}}]]
+\procedure clz(id,text)
+\whitespace trim
+\rules except transcludeinline transcludeblock
+<$wikify name="wikifiedText" text=<<text>> output="html" mode="inline">
+  {{<<id>>::<<wikifiedText>>}}
+</$wikify>
+\end clz
+
+\procedure c1(text) <<clz id:"c1" text=<<text>>>>
+\procedure c2(text) <<clz id:"c2" text=<<text>>>>
+\procedure c3(text) <<clz id:"c3" text=<<text>>>>
+\procedure c4(text) <<clz id:"c4" text=<<text>>>>
+\procedure c5(text) <<clz id:"c5" text=<<text>>>>
+\procedure c6(text) <<clz id:"c6" text=<<text>>>>
+\procedure c7(text) <<clz id:"c7" text=<<text>>>>
+\procedure c8(text) <<clz id:"c8" text=<<text>>>>
+\procedure c9(text) <<clz id:"c9" text=<<text>>>>

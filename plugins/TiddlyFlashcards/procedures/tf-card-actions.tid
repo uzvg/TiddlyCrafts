@@ -1,28 +1,6 @@
 title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions
 code-body: yes
 
-<!-- ---------------- focus on nth input ---------------- -->
-\procedure action.focus-nth-input(nth)
-<!-- If in the edit mode -->
-<%if [<stateTiddler>get[card-index]!is[blank]] %>
-	<$action-sendmessage
-		$message="tm-focus-selector"
-		$param=`.tf-card-container[data-card-index="$(condition)$"] [data-input-index="$(nth)$"] textarea`
-		focusVisible="true"
-		preventScroll="true"/>
-<!-- Else in the create mode -->
-<% else %>
-	<$action-sendmessage
-		$message="tm-focus-selector"
-		$param=`[data-tiddler-title="$(storyTiddler)$"] .tf-fields-container[data-tf-mode="create"] [data-input-index="$(nth)$"] textarea`
-		focusVisible="true"
-		preventScroll="true"/>
-	<$action-log
-		$$message="Debug info:"
-		selector=`[data-tiddler-title="$(storyTiddler)$"] .tf-fields-container[data-tf-mode="create"] [data-input-index=$(nth)$] textarea`/>
-<% endif %>
-\end action.focus-nth-input
-
 <!-- Save input index when click on the textarea  -->
 \procedure action.click-input()
 <%if [<stateTiddler>!is[tiddler]] %>
@@ -34,6 +12,7 @@ code-body: yes
 
 <!-- ---------------- switch to next tab ---------------- -->
 \procedure action.switch-next-tab()
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-store-actions]]
 <%if [<mode>match[create]] %>
 	<$let
 		get-tabs-list="[all[tiddlers+shadows]tag[$:/tags/TFModels]!is[draft]sort[order]]"
@@ -50,6 +29,7 @@ code-body: yes
 
 <!-- ---------------- switch to previous tab ---------------- -->
 \procedure action.switch-previous-tab()
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-store-actions]]
 <%if [<mode>match[create]] %>
 	<$let
 		get-tabs-list="[all[tiddlers+shadows]tag[$:/tags/TFModels]!is[draft]sort[order]]"
@@ -65,6 +45,7 @@ code-body: yes
 
 <!-- ---------------- focus on next input ---------------- -->
 \procedure action.focus-next-input()
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-store-actions]]
 <$let
 	inputCount={{{ [<modelTiddler>get[fields-list]enlist-input[]count[]] }}}
 	currentIndex={{{ [<stateTiddler>get[focus-index]else[1]] }}}
@@ -88,6 +69,7 @@ code-body: yes
 
 <!-- ---------------- focus on previous input ---------------- -->
 \procedure action.focus-previous-input()
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-store-actions]]
 <$let
     inputCount={{{ [<modelTiddler>get[fields-list]enlist-input[]count[]] }}}
 	currentIndex={{{ [<stateTiddler>get[focus-index]] }}}
@@ -101,9 +83,3 @@ code-body: yes
 	<<action.focus-nth-input nth=<<previousIndex>>>>
 </$let>
 \end action.focus-previous-input
-
-<!-- action to delete storeTiddler -->
-\procedure action.delete-store()
-<$action-deletetiddler $tiddler=<<storeTiddler>>/>
-<<action.focus-nth-input nth="1">>
-\end action.delete-store

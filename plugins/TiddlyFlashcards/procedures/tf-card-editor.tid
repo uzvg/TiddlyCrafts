@@ -4,6 +4,7 @@ code-body: yes
 \procedure tf-card-editor(modelTiddler,storeTiddler,stateTiddler,dataTiddler,mode)
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions]]
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-save-actions]]
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-store-actions]]
 
 \function get-editor-placeholder() [<modelTiddler>get[placeholders-list]enlist-input[]nth<nth>else[]]
 \function get-editor-class() [<modelTiddler>get[editor-classes-list]enlist-input[]nth<nth>else[tc-edit-texteditor]]
@@ -33,7 +34,7 @@ code-body: yes
                             field=<<currentField>>
                             placeholder=<<placeHolder>>
                             focus=<<focusStatus>>
-                            refreshTitle=<<dataTiddler>>
+                            refreshTitle=<<refreshTiddler>>
                             class=<<editClass>>/>
                     </div>
             </$let>

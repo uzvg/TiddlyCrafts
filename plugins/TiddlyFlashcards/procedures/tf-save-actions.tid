@@ -15,6 +15,7 @@ code-body: yes
 \procedure action.save-card()
 
 \import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-notifier]]
+\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-store-actions]]
 
 \function get-model-name() [<modelTiddler>get[model-name]]
 \function get-model-version() [<modelTiddler>get[model-version]]
@@ -45,12 +46,6 @@ code-body: yes
 	[<mode>match[edit]then<cardId>]
 	:else[<storeTiddler>get[created]format:date[YYYY0MM0DD0hh0mm0ss0XXX]]
 \end get-note-id
-
-<!-- action to delete storeTiddler -->
-\procedure action.delete-store()
-<$action-deletetiddler $tiddler=<<storeTiddler>>/>
-<<action.focus-nth-input nth="1">>
-\end action.delete-store
 
 <!-- ------------------------------If reqired fields are all non-empty------------------------------ -->
 <% if [function[get-invalid-fields]] %>

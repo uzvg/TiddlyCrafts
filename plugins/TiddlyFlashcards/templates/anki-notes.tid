@@ -34,6 +34,23 @@ code-body: yes
 	+[!is[blank]else[TFDefault]]
 \end get-target-deck
 
+<!-- Every note shares this envelope; only its fields differ. -->
+\procedure note-json-head()
+"<<noteId>>": {
+	"fields": {
+\end note-json-head
+
+\procedure note-json-tail()
+		"Source": "<$text text=<<sourceTiddler>>/>"
+	},
+	"modelName": "<<modelName>>",
+	"modelVersion": "<<modelVersion>>",
+	"deck": "<<deckName>>",
+	"tags": <<tagsArray>>,
+	"status": "<<noteStatus>>"
+}
+\end note-json-tail
+
 <$let
 	storageFolder="$:/Storage/TiddlyFlashcards/DataTiddlers/"
 	DeckMappingRules={{{ [[$:/config/TiddlyFlashcards/DeckMappingRules]get[text]] }}}
@@ -41,104 +58,74 @@ code-body: yes
 	<!-- ------------------------------Wikify All Flashcards of model-version 1.0------------------------------ -->
 	{
 		<$list filter="[all[tiddlers]prefix<storageFolder>]" variable="dataTiddler" join=",">
-			<$list filter="[<dataTiddler>get[text]jsonindexes[]]" variable="noteId" join=",">
-				<$let
-					sourceData={{{ [<dataTiddler>get[text]] }}}
-					sourceTiddler={{{ [<dataTiddler>get[source]] }}}
-					modelName={{{ [<sourceData>jsonget<noteId>,[modelName]] }}}
-					modelVersion={{{ [<sourceData>jsonget<noteId>,[modelVersion]] }}}
-					deckName={{{ [function[get-target-deck],<sourceTiddler>] }}}
-					tagsArray={{{ [function[get-tags-array],<sourceTiddler>] }}}
-					noteStatus={{{ [<sourceData>jsonget<noteId>,[status]else[unsuspend]] }}}>
-					<!-- Wikify TFCloze Flashcards -->
-					<% if [<modelName>match[TFCloze]] %>
-						<$wikify name="wikifiedText" text={{{ [<sourceData>jsonget<noteId>,[fields],[Text]] }}} output="html">
-						<$wikify name="wikifiedExtra" text={{{ [<sourceData>jsonget<noteId>,[fields],[Back Extra]] }}} output="html">
-							<$let
-								textValue={{{ [<wikifiedText>jsonstringify:rawunicode[]] }}}
-								extraValue={{{ [<wikifiedExtra>jsonstringify:rawunicode[]] }}}>
-								"<<noteId>>": {
-									"fields": {
+			<$let
+				sourceData={{{ [<dataTiddler>get[text]] }}}
+				sourceTiddler={{{ [<dataTiddler>get[source]] }}}
+				deckName={{{ [function[get-target-deck],<sourceTiddler>] }}}
+				tagsArray={{{ [function[get-tags-array],<sourceTiddler>] }}}>
+				<$list filter="[<dataTiddler>get[text]jsonindexes[]]" variable="noteId" join=",">
+					<$let
+						modelName={{{ [<sourceData>jsonget<noteId>,[modelName]] }}}
+						modelVersion={{{ [<sourceData>jsonget<noteId>,[modelVersion]] }}}
+						noteStatus={{{ [<sourceData>jsonget<noteId>,[status]else[unsuspend]] }}}>
+						<!-- Wikify TFCloze Flashcards -->
+						<% if [<modelName>match[TFCloze]] %>
+							<$wikify name="wikifiedText" text={{{ [<sourceData>jsonget<noteId>,[fields],[Text]] }}} output="html">
+							<$wikify name="wikifiedExtra" text={{{ [<sourceData>jsonget<noteId>,[fields],[Back Extra]] }}} output="html">
+								<$let
+									textValue={{{ [<wikifiedText>jsonstringify:rawunicode[]] }}}
+									extraValue={{{ [<wikifiedExtra>jsonstringify:rawunicode[]] }}}>
+									<<note-json-head>>
 										"Text": "<$text text=<<textValue>>/>",
 										"Back Extra": "<$text text=<<extraValue>>/>",
-										"Source": "<$text text=<<sourceTiddler>>/>"
-									},
-									"modelName": "<<modelName>>",
-									"modelVersion": "<<modelVersion>>",
-									"deck": "<<deckName>>",
-									"tags": <<tagsArray>>,
-                  "status": "<<noteStatus>>"
-								}
-							</$let>
-						</$wikify>
-						</$wikify>
-					<!-- Wikify TFBasic Flashcards -->
-					<% elseif [<modelName>match[TFBasic]] [<modelName>match[TFPair]] %>
-						<$wikify name="wikifiedFront" text={{{ [<sourceData>jsonget<noteId>,[fields],[Front]] }}} output="html">
-						<$wikify name="wikifiedBack" text={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}} output="html">
-							<$let
-								frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
-								backValue={{{ [<wikifiedBack>jsonstringify:rawunicode[]] }}}>
-								"<<noteId>>": {
-									"fields": {
+									<<note-json-tail>>
+								</$let>
+							</$wikify>
+							</$wikify>
+						<!-- Wikify TFBasic Flashcards -->
+						<% elseif [<modelName>match[TFBasic]] [<modelName>match[TFPair]] %>
+							<$wikify name="wikifiedFront" text={{{ [<sourceData>jsonget<noteId>,[fields],[Front]] }}} output="html">
+							<$wikify name="wikifiedBack" text={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}} output="html">
+								<$let
+									frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
+									backValue={{{ [<wikifiedBack>jsonstringify:rawunicode[]] }}}>
+									<<note-json-head>>
 										"Front": "<$text text=<<frontValue>>/>",
 										"Back": "<$text text=<<backValue>>/>",
-										"Source": "<$text text=<<sourceTiddler>>/>"
-									},
-									"modelName": "<<modelName>>",
-									"modelVersion": "<<modelVersion>>",
-									"deck": "<<deckName>>",
-									"tags": <<tagsArray>>,
-                  "status": "<<noteStatus>>"
-								}
-							</$let>
-						</$wikify>
-						</$wikify>
-					<% elseif [<modelName>match[TFType]] %>
-						<$wikify name="wikifiedFront" text={{{ [<sourceData>jsonget<noteId>,[fields],[Front]] }}} output="html">
-							<$let
-								frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
-								backValue={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}}>
-								"<<noteId>>": {
-									"fields": {
+									<<note-json-tail>>
+								</$let>
+							</$wikify>
+							</$wikify>
+						<% elseif [<modelName>match[TFType]] %>
+							<$wikify name="wikifiedFront" text={{{ [<sourceData>jsonget<noteId>,[fields],[Front]] }}} output="html">
+								<$let
+									frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
+									backValue={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}}>
+									<<note-json-head>>
 										"Front": "<$text text=<<frontValue>>/>",
 										"Back": "<$text text=<<backValue>>/>",
-										"Source": "<$text text=<<sourceTiddler>>/>"
-									},
-									"modelName": "<<modelName>>",
-									"modelVersion": "<<modelVersion>>",
-									"deck": "<<deckName>>",
-									"tags": <<tagsArray>>,
-                  "status": "<<noteStatus>>"
-								}
-							</$let>
-						</$wikify>
-					<% elseif [<modelName>match[TFOptionalPair]] %>
-						<$wikify name="wikifiedFront" text={{{ [<sourceData>jsonget<noteId>,[fields],[Front]] }}} output="html">
-						<$wikify name="wikifiedBack" text={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}} output="html">
-							<$let
-								frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
-								backValue={{{ [<wikifiedBack>jsonstringify:rawunicode[]] }}}
-								reverseValue={{{ [<sourceData>jsonget<noteId>,[fields],[Add Reverse]] }}}>
-								"<<noteId>>": {
-									"fields": {
+									<<note-json-tail>>
+								</$let>
+							</$wikify>
+						<% elseif [<modelName>match[TFOptionalPair]] %>
+							<$wikify name="wikifiedFront" text={{{ [<sourceData>jsonget<noteId>,[fields],[Front]] }}} output="html">
+							<$wikify name="wikifiedBack" text={{{ [<sourceData>jsonget<noteId>,[fields],[Back]] }}} output="html">
+								<$let
+									frontValue={{{ [<wikifiedFront>jsonstringify:rawunicode[]] }}}
+									backValue={{{ [<wikifiedBack>jsonstringify:rawunicode[]] }}}
+									reverseValue={{{ [<sourceData>jsonget<noteId>,[fields],[Add Reverse]] }}}>
+									<<note-json-head>>
 										"Front": "<$text text=<<frontValue>>/>",
 										"Back": "<$text text=<<backValue>>/>",
 										"Add Reverse": "<$text text=<<reverseValue>>/>",
-										"Source": "<$text text=<<sourceTiddler>>/>"
-									},
-									"modelName": "<<modelName>>",
-									"modelVersion": "<<modelVersion>>",
-									"deck": "<<deckName>>",
-									"tags": <<tagsArray>>,
-                  "status": "<<noteStatus>>"
-								}
-							</$let>
-						</$wikify>
-						</$wikify>
-					<% endif %>
-				</$let>
-			</$list>
+									<<note-json-tail>>
+								</$let>
+							</$wikify>
+							</$wikify>
+						<% endif %>
+					</$let>
+				</$list>
+			</$let>
 		</$list>
 	}
 </$let>

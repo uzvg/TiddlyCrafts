@@ -1,12 +1,12 @@
 {
-  "name": "tiddlycrafts",
+  "name": "TiddlyCrafts",
   "devDependencies": {
     "tiddlywiki": "latest"
   },
   "scripts": {
     "start": "tiddlywiki --listen port=9100 root-tiddler=$:/core/save/lazy-images",
     "start-uzvg": "tiddlywiki --listen port=9100 anon-username=uzvg root-tiddler=$:/core/save/lazy-images",
-    "build-tiddlycrafts": "tiddlywiki --build prune --build images --build fields --build index",
+    "build-site": "tiddlywiki --build prune --build images --build fields --build index",
     "build-library": "TIDDLYWIKI_PLUGIN_PATH=. tiddlywiki --build images --build library",
     "sync-images": "rclone sync . CloudFlare:images/TiddlyCrafts/ --include \"*.{png,jpg,jpeg,gif,webp,avif,bmp,tif,tiff,ico}\" --progress"
   }

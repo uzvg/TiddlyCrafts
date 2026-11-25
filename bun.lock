@@ -1,0 +1,24 @@
+{
+  "lockfileVersion": 2,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "TiddlyCrafts",
+      "devDependencies": {
+        "tiddlywiki": "latest",
+      },
+    },
+  },
+  "packages": {
+    "tiddlywiki": [
+      "tiddlywiki@5.4.1",
+      "",
+      {
+        "bin": {
+          "tiddlywiki": "tiddlywiki.js"
+        }
+      },
+      "sha512-5Pnk7j8cUMoQHD0CarOWd4ixITURsN4DJxLfg8AGYSMiQoOHH6bp8JDCAgSdvZHRCQmvXtbm5FRxBFBT6WG24A=="
+    ],
+  }
+}

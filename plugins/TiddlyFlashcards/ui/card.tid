@@ -1,7 +1,7 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-reveal-editor
+title: $:/plugins/uzvg/TiddlyFlashcards/ui/card
 code-body: yes
 
-\procedure tf-card-btns()
+\procedure tf-card-buttons()
 <div class="tf-card-btns">
   <% if [<storeTiddler>is[tiddler]] %>
     <$list filter="[all[tiddlers+shadows]tag[$:/tags/TFBtns]tf-mode[edit]sort[order]]">
@@ -13,7 +13,7 @@ code-body: yes
     </$list>
   <% endif %>
 </div>
-\end tf-card-btns
+\end tf-card-buttons
 
 \procedure tf-card-display(cardId)
 \import [all[tiddlers+shadows]tag[$:/tags/TFTransformer]tag[ToTw]!is[draft]]
@@ -34,10 +34,10 @@ code-body: yes
 </div>
 \end tf-card-display
 
-\procedure tf-reveal-editor(cardId)
+\procedure tf-card(cardId)
 \whitespace trim
 
-\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-editor]]
+\import [[$:/plugins/uzvg/TiddlyFlashcards/ui/card-editor]]
 
 <div
   class="tf-card-container"
@@ -48,7 +48,7 @@ code-body: yes
     <<cardId>>
   </div>
 
-  <<tf-card-btns>>
+  <<tf-card-buttons>>
 
   <%if [<storeTiddler>is[tiddler]] %>
     <<tf-card-editor
@@ -61,4 +61,4 @@ code-body: yes
     <<tf-card-display cardId=<<cardId>>>>
   <% endif %>
 </div>
-\end tf-reveal-editor
+\end tf-card

@@ -1,0 +1,14 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/ui/buttons/tf-suspend-btn
+tf-mode: display
+code-body: yes
+tags: $:/tags/TFBtns
+
+\import [[$:/plugins/uzvg/TiddlyFlashcards/actions/card]]
+
+<$let
+    cardStatus=<<card-status>>
+    btnIcon={{{ [<cardStatus>match[suspend]then[$:/core/images/timestamp-off]else[$:/core/images/timestamp-on]] }}}>
+    <$button actions=<<action.suspend-card>> class="tc-btn-invisible">
+        <$transclude $tiddler=<<btnIcon>>/>
+    </$button>
+</$let>

@@ -1,0 +1,22 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/actions/notify
+code-body: yes
+
+<!-- Notifications. -->
+
+\procedure notify.invalid-fields()
+<$action-sendmessage
+	$message="tm-notify"
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/invalid-field-notify"/>
+\end notify.invalid-fields
+
+\procedure notify.card-saved()
+<$action-sendmessage
+	$message="tm-notify"
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/save-card-notify"/>
+\end notify.card-saved
+
+\procedure notify.config-saved()
+<$action-sendmessage
+	$message="tm-notify"
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/save-config-notify"/>
+\end notify.config-saved

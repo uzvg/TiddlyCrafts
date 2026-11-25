@@ -1,7 +1,7 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-cards-previewer
+title: $:/plugins/uzvg/TiddlyFlashcards/ui/card-list
 code-body: yes
 
-\procedure tf-list-header()
+\procedure tf-card-list-header()
 <div class="tf-list-header">
     <div class="tf-page-indicator">
         <span class="tf-current-page"><<currentIndicatorCount>></span>
@@ -14,10 +14,10 @@ code-body: yes
         </$list>
     </div>
 </div>
-\end
+\end tf-card-list-header
 
 \procedure tf-card-list()
-\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-reveal-editor]]
+\import [[$:/plugins/uzvg/TiddlyFlashcards/ui/card]]
 
 \function list-filter()
     [<previewerStateTiddler>get[reverse-status]] =>reverseStatus
@@ -38,13 +38,13 @@ code-body: yes
             storeTiddler={{{ [<storePrefix>addsuffix<cardId>] }}}
             stateTiddler={{{ [<statePrefix>addsuffix<cardId>] }}}
             cardStatus={{{ [<dataTiddler>get[text]jsonget<cardId>,[status]match[suspend]else[unsuspend]] }}}>
-            <<tf-reveal-editor cardId=<<cardId>>>>
+            <<tf-card cardId=<<cardId>>>>
         </$let>
     </$list>
 </div>
-\end
+\end tf-card-list
 
-\procedure tf-list-paginator()
+\procedure tf-card-list-paginator()
 \procedure next-page-btn()
 <$button
     setTitle=<<previewerStateTiddler>>
@@ -89,9 +89,9 @@ code-body: yes
     <<display-all-btn>>
     <<next-page-btn>>
 </div>
-\end
+\end tf-card-list-paginator
 
-\procedure tf-cards-previewer()
+\procedure tf-card-list-panel()
 <$let
     dataPrefix="$:/Storage/TiddlyFlashcards/DataTiddlers/"
     identifier={{{ [<storyTiddler>get[created]] }}}
@@ -114,14 +114,14 @@ code-body: yes
         currentIndicatorCount={{{ [<displayStatus>match[yes]then[1]else<currentPage>] }}}
         pageIndicatorCount={{{ [<displayStatus>match[yes]then[1]else<pageCount>] }}}>
         <%if [<dataTiddler>is[tiddler]] %>
-            <<tf-list-header>>
+            <<tf-card-list-header>>
             <%if [<previewerStateTiddler>!has[hide-all]] %>
                 <<tf-card-list>>
                 <%if [<pageCount>compare:number:gt[1]] %>
-                    <<tf-list-paginator>>
+                    <<tf-card-list-paginator>>
                 <% endif %>
             <% endif %>
         <% endif %>
     </$let>
 </$let>
-\end
+\end tf-card-list-panel

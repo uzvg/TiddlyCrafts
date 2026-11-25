@@ -1,0 +1,10 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/ui/buttons/tf-save-btn
+tf-mode: edit
+code-body: yes
+tags: $:/tags/TFBtns
+
+\import [[$:/plugins/uzvg/TiddlyFlashcards/actions/editor-draft]]
+
+<$button actions=<<action.save-card>> class="tc-btn-invisible">
+    <$transclude $tiddler="$:/core/images/done-button"/>
+</$button>

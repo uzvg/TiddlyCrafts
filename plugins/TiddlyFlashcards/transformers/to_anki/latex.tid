@@ -1,6 +1,6 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Transformers/ToAnki/latex
+title: $:/plugins/uzvg/TiddlyFlashcards/transformers/to_anki/latex
 code-body: yes
-tags: $:/tags/TFTransformer
+tags: $:/tags/TFTransformer ToAnki
 
 <!--
     <anki-mathjax>f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi</anki-mathjax>

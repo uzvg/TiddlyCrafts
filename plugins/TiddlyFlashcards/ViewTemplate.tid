@@ -2,9 +2,9 @@ title: $:/plugins/uzvg/TiddlyFlashcards/ViewTemplate
 tags: $:/tags/ViewTemplate
 code-body: yes
 
-\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-editor-tabs]]
+\import [[$:/plugins/uzvg/TiddlyFlashcards/ui/editor-tabs]]
 
-\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-cards-previewer]]
+\import [[$:/plugins/uzvg/TiddlyFlashcards/ui/card-list]]
 
 <$let
     configTiddler="$:/config/TiddlyFlashcards/DisplayFilter"
@@ -12,7 +12,7 @@ code-body: yes
 
     <% if [<storyTiddler>!has[tf-hide]subfilter<displaySubfilter>] %>
         <<tf-editor-tabs>>
-        <<tf-cards-previewer>>
+        <<tf-card-list-panel>>
     <% endif %>
 
 </$let>

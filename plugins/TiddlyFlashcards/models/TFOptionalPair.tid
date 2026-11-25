@@ -1,4 +1,4 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Models/TFOptionalPair
+title: $:/plugins/uzvg/TiddlyFlashcards/models/TFOptionalPair
 caption: TFOptionalPair
 tags: $:/tags/TFModels
 fields-list: Front Back [[Add Reverse]]

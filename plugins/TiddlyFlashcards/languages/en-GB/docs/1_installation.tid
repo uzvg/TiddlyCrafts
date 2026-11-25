@@ -3,7 +3,7 @@ caption: 1. Installation
 tags: $:/tags/TFDoc
 order: 1
 
-\import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
+\import $:/plugins/uzvg/TiddlyFlashcards/ui/readme-nav
 
 <<page-navigator>>
 

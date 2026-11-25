@@ -1,4 +1,4 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-editor-tabs
+title: $:/plugins/uzvg/TiddlyFlashcards/ui/editor-tabs
 code-body: yes
 
 \procedure tf-editor-tabs()

@@ -1,0 +1,69 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/actions/card
+code-body: yes
+
+<!-- Card actions shared by the card buttons and the card list header buttons. -->
+
+\function card-status() [<dataTiddler>get[text]jsonget<cardId>,[status]]
+
+<!-- ---------------- edit a card ---------------- -->
+\procedure action.edit-card()
+\function get-field-value() [<dataTiddler>get[text]jsonget<cardId>,[fields],<currentTiddler>]
+
+<$action-setmultiplefields
+	$tiddler=<<storeTiddler>>
+	$fields="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]]"
+	$values="[<dataTiddler>get[text]jsonindexes<cardId>,[fields]] :map[function[get-field-value]]"
+	$timestamp="no"/>
+
+<!-- Remember which card is being edited so that save and focus know the mode -->
+<$action-setfield $tiddler=<<stateTiddler>> card-index=<<cardId>>/>
+\end action.edit-card
+
+<!-- ---------------- delete a card ---------------- -->
+\procedure action.delete-card()
+\function get-target-data() [<dataTiddler>get[text]jsondelete<cardId>format:json[2]]
+
+<$action-setfield $tiddler=<<dataTiddler>> text=<<get-target-data>>/>
+\end action.delete-card
+
+<!-- ---------------- suspend / unsuspend a card ---------------- -->
+\procedure action.suspend-card()
+\function get-note-data()
+	[<card-status>match[suspend]]
+	:then[<dataTiddler>get[text]jsondelete<cardId>,[status]]
+	:else[<dataTiddler>get[text]jsonset<cardId>,[status],[suspend]]
+	+[format:json[2]]
+\end get-note-data
+
+<$action-setfield $tiddler=<<dataTiddler>> text=<<get-note-data>>/>
+\end action.suspend-card
+
+<!-- ---------------- delete all cards ---------------- -->
+\procedure action.delete-all-cards()
+<$action-confirm $message="Do you wish to delete all flashcards of the currentTiddler?">
+	<$action-deletetiddler $tiddler=<<dataTiddler>>/>
+</$action-confirm>
+\end action.delete-all-cards
+
+<!-- ---------------- suspend / unsuspend all cards ---------------- -->
+\procedure action.suspend-all-cards()
+\function get-target-data()
+	[<dataTiddler>get[text]] =>sourceData
+	[<sourceData>jsonindexes[]]
+	:reduce[<index>compare:number:eq[0]then<sourceData>else<accumulator>jsonset<currentTiddler>,[status],[suspend]]
+	+[format:json[2]]
+\end get-target-data
+
+<$action-setfield $tiddler=<<dataTiddler>> text=<<get-target-data>>/>
+\end action.suspend-all-cards
+
+\procedure action.unsuspend-all-cards()
+\function get-target-data()
+	[<dataTiddler>get[text]] =>sourceData
+	[<sourceData>jsonindexes[]]
+	:reduce[<index>compare:number:eq[0]then<sourceData>else<accumulator>jsondelete<currentTiddler>,[status]]
+	+[format:json[2]]
+\end get-target-data
+
+<$action-setfield $tiddler=<<dataTiddler>> text=<<get-target-data>>/>
+\end action.unsuspend-all-cards

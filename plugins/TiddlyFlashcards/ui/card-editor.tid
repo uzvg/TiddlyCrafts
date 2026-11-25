@@ -1,24 +1,23 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-editor
+title: $:/plugins/uzvg/TiddlyFlashcards/ui/card-editor
 code-body: yes
 
 \procedure tf-card-editor(modelTiddler,storeTiddler,stateTiddler,dataTiddler,mode)
-\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-actions]]
-\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-save-actions]]
-\import [[$:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-store-actions]]
+\import [[$:/plugins/uzvg/TiddlyFlashcards/actions/editor-input]]
+\import [[$:/plugins/uzvg/TiddlyFlashcards/actions/editor-draft]]
 
 \function get-editor-placeholder() [<modelTiddler>get[placeholders-list]enlist-input[]nth<nth>else[]]
 \function get-editor-class() [<modelTiddler>get[editor-classes-list]enlist-input[]nth<nth>else[tc-edit-texteditor]]
 \function get-focus-status() [<index>compare:number:eq[1]then[yes]]
-                                         
+
 <$keyboard key="((tf-switch-previous-tab))" actions=<<action.switch-previous-tab>>>
 <$keyboard key="((tf-switch-next-tab))" actions=<<action.switch-next-tab>>>
 <$keyboard key="((tf-focus-previous-input))" actions=<<action.focus-previous-input>>>
 <$keyboard key="((tf-focus-next-input))" actions=<<action.focus-next-input>>>
 <$keyboard key="((tf-save-card))" actions=<<action.save-card>>>
-<$keyboard key="((tf-discard))" actions=<<action.delete-store>>>
+<$keyboard key="((tf-discard))" actions=<<action.clear-draft>>>
   <$eventcatcher
       selector="[data-input-index]"
-      $click=<<action.click-input>>>
+      $click=<<action.on-input-click>>>
     <div class="tf-fields-container" data-tf-mode=`$(mode)$`>
         <$list filter="[<modelTiddler>get[fields-list]enlist-input[]]" variable="currentField" counter="index">
             <$let
@@ -34,7 +33,7 @@ code-body: yes
                             field=<<currentField>>
                             placeholder=<<placeHolder>>
                             focus=<<focusStatus>>
-                            refreshTitle=<<refreshTiddler>>
+                            refreshTitle=<<refresh-tiddler>>
                             class=<<editClass>>/>
                     </div>
             </$let>
@@ -48,22 +47,3 @@ code-body: yes
 </$keyboard>
 </$keyboard>
 \end tf-card-editor
-
-<!-- Debug actions
-<div>
-
-* <$link to=<<explicitStateTiddler>>> explicitStateTiddler:<<explicitStateTiddler>> </$link>: <$text text={{{ [<stateTiddler>get[text]] }}}/>
-* <$link to=<<storeTiddler>>> <<storeTiddler>> </$link>
-* <$link to=<<dataTiddler>>/>
-* <$link to=<<stateTiddler>>/>
-* dataTiddler: <$link to=<<dataTiddler>>/>
-* <$button actions=<<action.delete-store>>> delete store </$button>
-* <$button actions=<<action.switch-previous-tab>>> switch previous tab </$button>
-* <$button actions=<<action.switch-next-tab>>> switch next tab </$button>
-* <$button actions=<<action.focus-previous-input>>> focus previous input </$button>
-* <$button actions=<<action.focus-next-input>>> focus next input </$button>
-* <$button actions=<<action.save-card>>> new card </$button>
-* <$button actions="""<<action.focus-nth-input 2>>"""> focus on  second input </$button>
-</div>
-* current mode: <code> <$text text=<<mode>>/>  </code>
- -->

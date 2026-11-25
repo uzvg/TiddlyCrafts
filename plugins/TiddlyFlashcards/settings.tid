@@ -8,20 +8,13 @@ caption: TiddlyFlashcards
     3. TagMapping rules
  -->
 
-\import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-card-notifier
+\import $:/plugins/uzvg/TiddlyFlashcards/actions/config
 \function tf-config(suffix) [[$:/config/TiddlyFlashcards/]addsuffix<suffix>]
 \function configTiddler() [[$:/config/TiddlyFlashcards/]addsuffix<suffix>]
 \function storeTiddler() [<configTiddler>addsuffix[-store]]
 
 \procedure save-config-btn()
-\procedure save-config-actions()
-<$action-setfield
-  $tiddler=<<configTiddler>>
-  text={{{ [<storeTiddler>get[text]] }}}/>
-<<notifier.save-config>>
-\end save-config-actions
-
-<$button actions=<<save-config-actions>>>
+<$button actions=<<action.save-config>>>
   save
 </$button>
 \end save-config-btn

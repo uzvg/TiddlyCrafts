@@ -3,7 +3,7 @@ caption: 6. Developments
 tags: $:/tags/TFDoc
 order: 6
 
-\import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
+\import $:/plugins/uzvg/TiddlyFlashcards/ui/readme-nav
 
 <<page-navigator>>
 
@@ -64,8 +64,9 @@ For anyone reading or extending the code, the plugin is organised like this:
 |`models/` |The note types: `TFBasic`, `TFCloze`, `TFType`, `TFPair`, `TFOptionalPair`. |
 |`transformers/to_anki/` |TiddlyWiki markup to Anki markup: cloze and LaTeX. |
 |`transformers/to_tw/` |The reverse direction, used when reading cards back. |
-|`procedures/` |Card editor, preview, notifier and editor tabs. |
-|`buttons/` |Card actions: save, discard, edit, delete, suspend, unsuspend. |
+|`actions/` |State changes: editor input, draft save and discard, card edit/delete/suspend, config save, notifications. |
+|`ui/` |Views: card editor, card view, card list, editor tabs and readme navigation. |
+|`ui/buttons/` |Buttons transcluded by tag: card buttons and card list header buttons. |
 |`templates/` |Editor, preview, notes export and notifications. |
 |`languages/en-GB/docs/` |The guide you are reading. |
 

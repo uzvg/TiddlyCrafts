@@ -1,0 +1,13 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/ui/buttons/tf-unsuspend-all-btn
+code-body: yes
+tags: $:/tags/TFListHeaderBtns
+order: 2
+
+\import [[$:/plugins/uzvg/TiddlyFlashcards/actions/card]]
+
+<$button
+    actions=<<action.unsuspend-all-cards>>
+    class="tc-btn-invisible"
+    tooltip="Unsuspend all flashcards">
+    <$transclude $tiddler="$:/core/images/unlocked-padlock"/>
+</$button>

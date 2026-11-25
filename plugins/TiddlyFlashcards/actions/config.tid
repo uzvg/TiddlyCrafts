@@ -1,0 +1,13 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/actions/config
+code-body: yes
+
+<!-- Copy the edited config value from its store tiddler into the config tiddler. -->
+
+\procedure action.save-config()
+\import [[$:/plugins/uzvg/TiddlyFlashcards/actions/notify]]
+
+<$action-setfield
+	$tiddler=<<configTiddler>>
+	text={{{ [<storeTiddler>get[text]] }}}/>
+<<notify.config-saved>>
+\end action.save-config

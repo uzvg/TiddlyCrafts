@@ -1,4 +1,4 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
+title: $:/plugins/uzvg/TiddlyFlashcards/ui/readme-nav
 code-body: yes
 
 \procedure explicitStateTiddler() $:/state/TiddlyFlashcards/Readme-index

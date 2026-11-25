@@ -7,7 +7,7 @@ type: text/css
     TiddlyFlashcards
     ==========================================================================
 
-    HTML structure of tf-reveal-editor
+    HTML structure of tf-card (ui/card.tid)
 
     .tf-card-container[tf-card-index]
       .tf-card-id

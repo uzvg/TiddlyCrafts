@@ -3,7 +3,7 @@ caption: 5. TroubleShootings
 tags: $:/tags/TFDoc
 order: 5
 
-\import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
+\import $:/plugins/uzvg/TiddlyFlashcards/ui/readme-nav
 
 <<page-navigator>>
 

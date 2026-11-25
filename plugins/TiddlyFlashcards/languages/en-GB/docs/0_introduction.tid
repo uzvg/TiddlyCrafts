@@ -3,7 +3,7 @@ caption: 0. Introduction
 tags: $:/tags/TFDoc
 order: 0
 
-\import $:/plugins/uzvg/TiddlyFlashcards/Procedures/tf-readme-procedures
+\import $:/plugins/uzvg/TiddlyFlashcards/ui/readme-nav
 
 <<page-navigator>>
 

@@ -113,7 +113,7 @@
     ],
     "flashcards": [
       "--render",
-      "$:/plugins/uzvg/TiddlyFlashcards/templates/tf-render-template",
+      "$:/plugins/uzvg/TiddlyFlashcards/templates/anki-export",
       "flashcards.json",
       "text/plain"
     ],

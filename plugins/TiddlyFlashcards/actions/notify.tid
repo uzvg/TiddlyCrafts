@@ -6,17 +6,17 @@ code-body: yes
 \procedure notify.invalid-fields()
 <$action-sendmessage
 	$message="tm-notify"
-	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/invalid-field-notify"/>
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/notify-invalid-fields"/>
 \end notify.invalid-fields
 
 \procedure notify.card-saved()
 <$action-sendmessage
 	$message="tm-notify"
-	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/save-card-notify"/>
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/notify-card-saved"/>
 \end notify.card-saved
 
 \procedure notify.config-saved()
 <$action-sendmessage
 	$message="tm-notify"
-	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/save-config-notify"/>
+	$param="$:/plugins/uzvg/TiddlyFlashcards/templates/notify-config-saved"/>
 \end notify.config-saved

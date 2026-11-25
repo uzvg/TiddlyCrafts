@@ -1,4 +1,4 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/templates/tf-editor-template
+title: $:/plugins/uzvg/TiddlyFlashcards/ui/create-editor
 code-body: yes
 
 \import [[$:/plugins/uzvg/TiddlyFlashcards/ui/card-editor]]

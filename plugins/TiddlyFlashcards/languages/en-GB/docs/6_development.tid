@@ -65,9 +65,9 @@ For anyone reading or extending the code, the plugin is organised like this:
 |`transformers/to_anki/` |TiddlyWiki markup to Anki markup: cloze and LaTeX. |
 |`transformers/to_tw/` |The reverse direction, used when reading cards back. |
 |`actions/` |State changes: editor input, draft save and discard, card edit/delete/suspend, config save, notifications. |
-|`ui/` |Views: card editor, card view, card list, editor tabs and readme navigation. |
+|`ui/` |Views: card editor, create editor, card view, card list, editor tabs and readme navigation. |
 |`ui/buttons/` |Buttons transcluded by tag: card buttons and card list header buttons. |
-|`templates/` |Editor, preview, notes export and notifications. |
+|`templates/` |Anki export payloads and notification messages. |
 |`languages/en-GB/docs/` |The guide you are reading. |
 
 Start with a `models/` tiddler if you want to understand what a card is, and with `transformers/to_anki/` if you want to understand what Anki receives.

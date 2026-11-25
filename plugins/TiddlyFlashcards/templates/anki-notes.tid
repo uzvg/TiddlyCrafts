@@ -1,4 +1,4 @@
-title: $:/plugins/uzvg/TiddlyFlashcards/templates/tf-notes-template
+title: $:/plugins/uzvg/TiddlyFlashcards/templates/anki-notes
 code-body: yes
 
 \rules only import fnprocdef macrocallinline html conditional commentblock commentinline

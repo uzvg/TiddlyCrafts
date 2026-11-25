@@ -6,7 +6,7 @@ code-body: yes
     identifier={{{ [<storyTiddler>get[created]] }}}
     tabsList="[all[tiddlers+shadows]tag[$:/tags/TFModels]!is[draft]sort[order]]"
     default={{{ [subfilter<tabsList>first[]] }}}
-    template="$:/plugins/uzvg/TiddlyFlashcards/templates/tf-editor-template"
+    template="$:/plugins/uzvg/TiddlyFlashcards/ui/create-editor"
     explicitStateTiddler={{{ [[$:/state/TiddlyFlashcards/tf-creator-tabs/]addsuffix<identifier>] }}}>
 
     <$transclude $variable="tabs"

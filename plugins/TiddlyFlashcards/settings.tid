@@ -6,61 +6,269 @@ caption: TiddlyFlashcards
     1. Tiddlyflashcards panel display filter
     2. DeckMapping rules
     3. TagMapping rules
+    4. CardListSize
+    5. BatchSuspend/Unsuspend
+    6. Check Orphaned dataTiddlers
  -->
 
 \import $:/plugins/uzvg/TiddlyFlashcards/actions/config
-\function tf-config(suffix) [[$:/config/TiddlyFlashcards/]addsuffix<suffix>]
-\function configTiddler() [[$:/config/TiddlyFlashcards/]addsuffix<suffix>]
-\function storeTiddler() [<configTiddler>addsuffix[-store]]
 
-\procedure save-config-btn()
-<$button actions=<<action.save-config>>>
-  save
+\procedure save-display-filter-btn() <<tf-save-config-btn title:"Save" tooltip:"Save the display filter">>
+\procedure apply-batch-filter-btn()
+<$button actions=<<action.save-config>> tooltip="Apply the batch filter and list matching data tiddlers">
+  {{$:/core/images/advanced-search-button}}
 </$button>
-\end save-config-btn
+\end apply-batch-filter-btn
+
+\procedure clear-batch-filter-btn()
+<$button
+  actions="""<$action-deletefield $tiddler=<<configTiddler>> store-input text/>"""
+  tooltip="Clear the batch filter">
+  {{$:/core/images/erase}}
+</$button>
+\end clear-batch-filter-btn
+
+\procedure delete-orphaned-tiddler-btn()
+<$button
+  actions="""<$action-deletetiddler $tiddler=<<dataTiddler>>/>"""
+  tooltip="Delete this orphaned data tiddler"
+  class="tc-btn-invisible">
+  {{$:/core/images/delete-button}}
+</$button>
+\end delete-orphaned-tiddler-btn
+
+\procedure delete-all-orphaned-tiddlers-btn()
+<$button
+  actions="""<$action-deletetiddler $filter="[(orphanedTiddlers)]"/>"""
+  tooltip="Delete all orphaned data tiddlers">
+  Delete All
+</$button>
+\end delete-all-orphaned-tiddlers-btn
+
+\function get-batch-filtered-tiddlers()
+  [<get-config-tiddler BatchSuspend>get[text]] =>CheckFilter
+  +[<CheckFilter>!is[blank]]
+  :then[all[tiddlers]prefix[$:/Storage/TiddlyFlashcards/DataTiddlers/]]
+  :filter[get[source]is[tiddler]filter<CheckFilter>]
+\end get-batch-filtered-tiddlers
+
+\function get-orphaned-tiddlers()
+  [all[tiddlers]prefix[$:/Storage/TiddlyFlashcards/DataTiddlers/]]
+  :filter[get[source]!is[tiddler]]
+\end get-orphaned-tiddlers
+
+<!------------------------------Batch Suspend Table----------------------------->
+\procedure batch-suspend-table()
+\import $:/plugins/uzvg/TiddlyFlashcards/actions/card
+
+\function is-all-cards-unsuspended()
+  [<dataTiddler>get[text]jsonindexes[]count[]] =>cardCount
+  [<cardCount>compare:integer:eq[0]then[yes]]
+  [<dataTiddler>get[text]!regexp["status":\s"suspend"]then[yes]]
+\end is-all-cards-unsuspended
+
+\function is-all-cards-suspended()
+  [<dataTiddler>get[text]jsonindexes[]count[]] =>cardCount
+  [<dataTiddler>get[text]splitregexp["status":\s"suspend"]count[]subtract[1]] =>suspendedCount
+  [<cardCount>compare:integer:eq[0]then[yes]]
+  [<suspendedCount>compare:integer:gteq<cardCount>then[yes]]
+\end is-all-cards-suspended
+
+\procedure suspend-data-tiddler-btn()
+<$button
+  disabled=<<is-all-cards-suspended>>
+  actions=<<action.suspend-all-cards>>
+  class="tc-btn-invisible"
+  tooltip="Suspend all cards in this data tiddler">
+  {{$:/core/images/timestamp-off}}
+</$button>
+\end suspend-data-tiddler-btn
+
+\procedure unsuspend-data-tiddler-btn()
+<$button
+  disabled=<<is-all-cards-unsuspended>>
+  actions=<<action.unsuspend-all-cards>>
+  class="tc-btn-invisible"
+  tooltip="Unsuspend all cards in this data tiddler">
+  {{$:/core/images/timestamp-on}}
+</$button>
+\end unsuspend-data-tiddler-btn
+
+\procedure action.suspend-checked-tiddlers()
+<$list filter="[title(checkedTiddlers)]" variable="dataTiddler">
+  <<action.suspend-all-cards>>
+</$list>
+\end action.suspend-checked-tiddlers
+
+\procedure action.unsuspend-checked-tiddlers()
+<$list filter="[title(checkedTiddlers)]" variable="dataTiddler">
+  <<action.unsuspend-all-cards>>
+</$list>
+\end action.unsuspend-checked-tiddlers
+
+\procedure suspend-checked-tiddlers-btn()
+<$button actions=<<action.suspend-checked-tiddlers>> tooltip="Suspend all cards in the matched data tiddlers">
+  Suspend All
+</$button>
+\end suspend-checked-tiddlers-btn
+
+\procedure unsuspend-checked-tiddlers-btn()
+<$button actions=<<action.unsuspend-checked-tiddlers>> tooltip="Unsuspend all cards in the matched data tiddlers">
+  Unsuspend All
+</$button>
+\end unsuspend-checked-tiddlers-btn
+
+<table>
+  <tr style="font-family:serif;">
+    <th>SourceTiddler</th>
+    <th>DataTiddler</th>
+    <th>(Un)Suspend</th>
+  </tr>
+  <$list filter="[title(checkedTiddlers)]" variable="dataTiddler">
+    <$let sourceTiddler={{{ [<dataTiddler>get[source]] }}}>
+      <tr>
+        <td> <$link to=<<sourceTiddler>> tooltip="Open the source tiddler"/> </td>
+        <td> <$link to=<<dataTiddler>> tooltip="Open this data tiddler"/> </td>
+        <td class="tc-flex tc-flex-row" style="justify-content:space-evenly;">
+          <<suspend-data-tiddler-btn>>
+          <<unsuspend-data-tiddler-btn>>
+        </td>
+      </tr>
+    </$let>
+  </$list>
+</table>
+<span class="tc-flex tc-flex-row" style="justify-content:space-between;">
+  <<suspend-checked-tiddlers-btn>>
+  <<unsuspend-checked-tiddlers-btn>>
+</span>
+\end batch-suspend-table
+
+\procedure clean-orphan-checkbox()
+<$checkbox tiddler="$:/plugins/uzvg/TiddlyFlashcards/actions/orphans" tag="$:/tags/BackgroundAction">
+  Automatically delete the flashcard data tiddler when its source tiddler is deleted
+</$checkbox>
+\end clean-orphan-checkbox
+
+<!------------------------------Fix Orphaned Table----------------------------->
+\procedure orphaned-tiddlers-table()
+<table>
+  <tr style="font-family:serif;">
+    <th>SourceTiddler</th>
+    <th>DataTiddler</th>
+    <th>Del</th>
+  </tr>
+  <$list filter="[title(orphanedTiddlers)]" variable="dataTiddler">
+    <$let sourceTiddler={{{ [<dataTiddler>get[source]] }}}>
+      <tr>
+        <td> <$link to=<<sourceTiddler>> tooltip="Open the source tiddler"/> </td>
+        <td> <$link to=<<dataTiddler>> tooltip="Open this data tiddler"/> </td>
+        <td style="text-align:center;">
+          <<delete-orphaned-tiddler-btn>>
+        </td>
+      </tr>
+    </$let>
+  </$list>
+</table>
+<span class="tc-flex tc-flex-row" style="justify-content:flex-end;"> 
+  <<delete-all-orphaned-tiddlers-btn>> 
+</span>
+\end orphaned-tiddlers-table
+
+!! Flashcard Settings:
 
 <table class="tc-max-width tc-edit-max-width tc-first-col-min-width">
-    <tr>
-      <$let suffix="DisplayFilter">
-        <td>
-          <$link to=<<configTiddler>> tooltip="Filter expression that determines which tiddlers display the TiddlyFlashcards panel.">
-              Display Filter
-          </$link>
-        </td>
-        <td>
-            <$edit class="tc-edit-texteditor" tiddler=<<storeTiddler>> autoHeight="yes"/>
-            <span class="tc-flex tc-flex-row" style="justify-content:flex-end;"> <<save-config-btn>> </span>
-        </td>
-      </$let>
-    </tr>
-    <tr>
-        <td>
-            <$link to=<<tf-config "DeckMappingRules">> tooltip="Rules that determine which Anki deck the cards from each tiddler are assigned to.">
-                DeckMapping rules
-            </$link>
-        </td>
-        <td>
-            <$edit class="tc-edit-texteditor" tiddler=<<tf-config "DeckMappingRules">> autoHeight="yes"/>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <$link to=<<tf-config "TagMappingRules">> tooltip="Rules that determine which tags are applied to cards from each tiddler.">
-                TagMapping rules
-            </$link>
-        </td>
-        <td>
-            <$edit class="tc-edit-texteditor" tiddler=<<tf-config "TagMappingRules">> autoHeight="yes"/>
-        </td>
-    </tr>
-    <tr>
-    </tr>
-        <td>
-            <$link to=<<tf-config "CardListSize">> tooltip="The cards number of the cards list">
-                CardListSize
-            </$link>
-        </td>
-        <td>
-            <$edit-text tiddler=<<tf-config "CardListSize">> type="number" tag="input"/><p/>
-        </td>
+  <tr>
+    <$let configTiddler=<<get-config-tiddler item="DisplayFilter">>>
+      <td>
+        <$link to=<<configTiddler>> tooltip="Filter expression that determines which tiddlers show the TiddlyFlashcards panel">
+          Display Filter
+        </$link>
+      </td>
+      <td class="tc-flex tc-flex-row" style="align-items:center;gap:1em;">
+        <$edit class="tc-edit-texteditor" tiddler=<<configTiddler>>
+          field=<<storeField>>
+          autoHeight="yes"/>
+          <<save-display-filter-btn>>
+      </td>
+    </$let>
+  </tr>
+  <tr>
+    <$let configTiddler=<<get-config-tiddler item="DeckMappingRules">>>
+      <td>
+        <$link to=<<configTiddler>> tooltip="Rules that determine which Anki deck cards from each tiddler are assigned to">
+          DeckMapping rules
+        </$link>
+      </td>
+      <td>
+        <$edit class="tc-edit-texteditor" tiddler=<<configTiddler>> autoHeight="yes"/>
+      </td>
+    </$let>
+  </tr>
+  <tr>
+    <$let configTiddler=<<get-config-tiddler item="TagMappingRules">>>
+      <td>
+        <$link to=<<configTiddler>> tooltip="Rules that determine which tags are applied to cards from each tiddler">
+          TagMapping rules
+        </$link>
+      </td>
+      <td>
+        <$edit class="tc-edit-texteditor" tiddler=<<configTiddler>> autoHeight="yes"/>
+      </td>
+    </$let>
+  </tr>
+  <tr>
+    <$let configTiddler=<<get-config-tiddler item="CardListSize">>>
+      <td>
+        <$link to=<<configTiddler>> tooltip="Number of cards shown in the card list">
+          CardListSize
+        </$link>
+      </td>
+      <td>
+        <$edit-text tiddler=<<configTiddler>> type="number" tag="input"/>
+      </td>
+    </$let>
+  </tr>
 </table>
+
+!! Bulk Card Suspension:
+
+<div class="tc-flex tc-flex-row" style="align-items:center;gap:1em;">
+  <$let configTiddler=<<get-config-tiddler item="BatchSuspend">>>
+    <span style="flex:0 0 auto;white-space:nowrap;">
+      <$link to=<<configTiddler>> tooltip="Filter that selects which data tiddlers the batch suspend/unsuspend actions apply to">
+        Batch (Un)suspend Filter:
+      </$link>
+    </span>
+    <span style="flex:1 1 0;min-width:0;">
+      <$edit class="tc-edit-texteditor" tiddler=<<configTiddler>> field=<<storeField>> autoHeight="yes" style="box-sizing:border-box;width:100%;"/>
+    </span>
+      <span class="tc-flex tc-flex-row" style="flex:0 0 auto;gap:.5em;white-space:nowrap;">
+        <<apply-batch-filter-btn>>
+        <<clear-batch-filter-btn>>
+      </span>
+  </$let>
+</div>
+
+<$let checkedTiddlers=<<get-batch-filtered-tiddlers>>>
+  <% if [<checkedTiddlers>is[blank]] %>
+ 
+    > ''💡 Tips: No data tiddlers match the batch filter.''
+
+  <% else %>
+    <<batch-suspend-table>> 
+  <% endif %>
+</$let>
+
+!! Orphaned Data Tiddlers:
+
+<!--Find all dataTiddlers whose sourceTiddler is missing-->
+<<clean-orphan-checkbox>>
+<$let orphanedTiddlers=<<get-orphaned-tiddlers>>>
+  <% if [<orphanedTiddlers>is[blank]] %>
+  
+  > ''💡 Tips: No orphaned data tiddlers found.''
+ 
+  <% else %>
+    <<orphaned-tiddlers-table>>
+  <% endif %>
+</$let>

@@ -1,0 +1,11 @@
+title: $:/plugins/uzvg/TiddlyFlashcards/actions/orphans
+tags: $:/tags/BackgroundAction
+code-body: yes
+track-filter: [all[tiddlers]prefix[$:/Storage/TiddlyFlashcards/DataTiddlers/]get[source]is[missing]]
+
+\function get-orphaned-tiddlers()
+  [all[tiddlers]prefix[$:/Storage/TiddlyFlashcards/DataTiddlers/]]
+  :filter[get[source]is[missing]]
+\end get-orphaned-tiddlers
+
+<$action-deletetiddler $filter="[function[get-orphaned-tiddlers]]"/>
